@@ -1,0 +1,17 @@
+.card {
+	position: relative;
+	min-height: 208px;
+	text-align: center;
+}
+
+.wrapper_image img {
+	width: 100%;
+	height: auto;
+}
+
+.info {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+}
