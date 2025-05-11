@@ -23,7 +23,7 @@ export const BurgerIngredientsCategory = ({
 	};
 	return (
 		<div>
-			<h2 className='text text_type_main-large'>{getNameType(type)}</h2>
+			<h2 className='text text_type_main-medium'>{getNameType(type)}</h2>
 			<ul className={`${styles.list} pt-6 pl-4 pr-2 pb-0`}>
 				{ingredientsCategory.map((ingredientCard) => (
 					<BurgerIngredientsCard key={ingredientCard._id} {...ingredientCard} />
