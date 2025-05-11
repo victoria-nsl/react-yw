@@ -18,8 +18,8 @@ export const BurgerConstructor = ({
 		<section className={`${styles.burger_constructor} pb-2`}>
 			<BurgerConstructorOrder ingredients={ingredients} />
 			<div className={`${styles.result} mt-10 mr-4`}>
-				<div className='pt-1 pb-1'>
-					<span className='text text_type_digits-medium pr-2'>610</span>
+				<div className={`${styles.wrapper_price} pt-1 pb-1`}>
+					<span className='text text_type_digits-medium'>610</span>
 					<CurrencyIcon type='primary' />
 				</div>
 				<Button htmlType='button' type='primary' size='medium'>
