@@ -21,7 +21,7 @@ export const BurgerIngredientsCard = ({
 		<li className={styles.card}>
 			<div className={`${styles.wrapper_image} pl-4 pr-4`}>
 				<img src={image} alt='Инградиент' />
-				<div className={`${styles.info} pt-1 pb-1`}>
+				<div className={`${styles.wrapper_price} pt-1 pb-1`}>
 					<span className='text text_type_digits-default'>{price}</span>
 					<CurrencyIcon type='primary' />
 				</div>

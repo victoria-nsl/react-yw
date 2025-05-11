@@ -2,6 +2,12 @@
 	display: flex;
 	flex-direction: column;
 	width: 600px;
-	padding-bottom: 20px;
 	color: var(--text-primary-color);
+}
+
+.result {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+	margin-left: auto;
 }
