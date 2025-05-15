@@ -1,11 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './app.module.css';
-import { ingredients } from '@utils/ingredients.ts';
 import { BurgerIngredients } from '@components/burger-ingredients/burger-ingredients.tsx';
 import { BurgerConstructor } from '@components/burger-contructor/burger-constructor.tsx';
 import { AppHeader } from '@components/app-header/app-header.tsx';
+import { Preloader } from '../preloader/preloader';
 
 export const App = (): React.JSX.Element => {
+	const url = 'https://norma.nomoreparties.space/api/ingredients';
+
+	const [ingredients, setIngredients] = useState({
+		isLoading: false,
+		hasError: false,
+		data: [],
+	});
+
+	useEffect(() => {
+		const getIngredients = async () => {
+			setIngredients({ ...ingredients, isLoading: true });
+
+			try {
+				const res = await fetch(url);
+				const data = await res.json();
+
+				setIngredients({ isLoading: false, hasError: false, data: data.data });
+			} catch (error) {
+				setIngredients({ ...ingredients, hasError: true, isLoading: false });
+			}
+		};
+		getIngredients();
+	}, []);
+
 	return (
 		<div className={styles.app}>
 			<AppHeader />
@@ -15,8 +39,24 @@ export const App = (): React.JSX.Element => {
 					Соберите бургер
 				</h1>
 				<div className={styles.inner_main}>
-					<BurgerIngredients ingredients={ingredients} />
-					<BurgerConstructor ingredients={ingredients} />
+					{ingredients.isLoading && <Preloader />}
+					{ingredients.hasError && (
+						<p
+							style={{
+								color: 'red',
+							}}
+							className='text text_type_main-medium'>
+							Произошла ошибка
+						</p>
+					)}
+					{!ingredients.isLoading &&
+						!ingredients.hasError &&
+						ingredients.data.length && (
+							<div className={styles.wrapper_data}>
+								<BurgerIngredients ingredients={ingredients.data} />
+								<BurgerConstructor ingredients={ingredients.data} />
+							</div>
+						)}
 				</div>
 			</main>
 		</div>

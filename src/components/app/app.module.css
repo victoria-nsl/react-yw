@@ -20,6 +20,11 @@
 }
 
 .inner_main {
+	height: 100%;
+	text-align: center;
+}
+
+.wrapper_data {
 	display: flex;
 	justify-content: space-between;
 }
