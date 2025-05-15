@@ -14,19 +14,20 @@ export const App = (): React.JSX.Element => {
 		data: [],
 	});
 
+	const getIngredients = async (): Promise<void> => {
+		setIngredients({ ...ingredients, isLoading: true });
+
+		try {
+			const res = await fetch(url);
+			const data = await res.json();
+
+			setIngredients({ isLoading: false, hasError: false, data: data.data });
+		} catch (error) {
+			setIngredients({ ...ingredients, hasError: true, isLoading: false });
+		}
+	};
+
 	useEffect(() => {
-		const getIngredients = async () => {
-			setIngredients({ ...ingredients, isLoading: true });
-
-			try {
-				const res = await fetch(url);
-				const data = await res.json();
-
-				setIngredients({ isLoading: false, hasError: false, data: data.data });
-			} catch (error) {
-				setIngredients({ ...ingredients, hasError: true, isLoading: false });
-			}
-		};
 		getIngredients();
 	}, []);
 

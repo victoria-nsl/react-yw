@@ -8,14 +8,12 @@ type TBurgerIngredientsCardProps = {
 	name: string;
 	price: number;
 	image: string;
-	__v: number;
 };
 
 export const BurgerIngredientsCard = ({
 	name,
 	image,
 	price,
-	__v,
 }: TBurgerIngredientsCardProps): React.JSX.Element => {
 	return (
 		<li className={styles.card}>
@@ -27,7 +25,7 @@ export const BurgerIngredientsCard = ({
 				</div>
 			</div>
 			<h3 className='text text_type_main-small'>{name}</h3>
-			{__v > 0 ? <Counter count={__v} size='default' extraClass='m-1' /> : null}
+			<Counter count={1} size='default' extraClass='m-1' />
 		</li>
 	);
 };
