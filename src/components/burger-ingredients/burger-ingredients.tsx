@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from 'react';
+import React, { SetStateAction, useCallback, useMemo, useState } from 'react';
 import styles from './burger-ingredients.module.css';
 import { TIngredient, TIngredientCategories } from '@utils/types.ts';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -16,13 +16,19 @@ export const BurgerIngredients = ({
 	const [currentIngredient, setCurrentIngredient] =
 		useState<TIngredient | null>(null);
 
-	const updateState = (newValue: SetStateAction<null | TIngredient>): void => {
-		setCurrentIngredient(newValue);
-	};
+	const updateState = useCallback(
+		(newValue: SetStateAction<null | TIngredient>): void => {
+			setCurrentIngredient(newValue);
+		},
+		[]
+	);
 
-	const getIngredientsByCategory = (
-		type: TIngredientCategories
-	): TIngredient[] => ingredients.filter((item) => item.type === type);
+	const getIngredientsByCategory = useMemo(
+		() =>
+			(type: TIngredientCategories): TIngredient[] =>
+				ingredients.filter((item) => item.type === type),
+		[ingredients]
+	);
 
 	return (
 		<section className={styles.burger_ingredients}>

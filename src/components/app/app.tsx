@@ -26,7 +26,6 @@ export const App = (): React.JSX.Element => {
 
 			try {
 				const data = await getIngredients();
-
 				setIngredients({ isLoading: false, hasError: false, data: data.data });
 			} catch (error) {
 				setIngredients({ ...ingredients, hasError: true, isLoading: false });
