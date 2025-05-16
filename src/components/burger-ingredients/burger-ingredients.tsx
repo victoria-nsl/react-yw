@@ -1,9 +1,9 @@
 import React, { SetStateAction, useState } from 'react';
 import styles from './burger-ingredients.module.css';
-import { TIngredient, TIngredientTypes } from '@utils/types.ts';
+import { TIngredient, TIngredientCategories } from '@utils/types.ts';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerIngredientsCategory } from './burger-ingredients-category/burger-ingredients-category';
-import { IngredientDetails } from './ingredients-details/ingredients-details';
+import { IngredientDetails } from './ingredient-details/ingredient-details';
 import { Modal } from '../modal-components/modal/modal';
 
 type TBurgerIngredientsProps = {
@@ -20,8 +20,9 @@ export const BurgerIngredients = ({
 		setCurrentIngredient(newValue);
 	};
 
-	const getIngredientsByCategory = (type: TIngredientTypes): TIngredient[] =>
-		ingredients.filter((item) => item.type === type);
+	const getIngredientsByCategory = (
+		type: TIngredientCategories
+	): TIngredient[] => ingredients.filter((item) => item.type === type);
 
 	return (
 		<section className={styles.burger_ingredients}>

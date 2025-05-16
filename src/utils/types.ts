@@ -13,4 +13,4 @@ export type TIngredient = {
 	__v: number;
 };
 
-export type TIngredientTypes = 'bun' | 'main' | 'sauce';
+export type TIngredientCategories = 'bun' | 'main' | 'sauce';

@@ -1,11 +1,11 @@
 import styles from './burger-ingredients-category.module.css';
-import { TIngredient, TIngredientTypes } from '@/utils/types';
+import { TIngredient, TIngredientCategories } from '@/utils/types';
 import { BurgerIngredientsCard } from '../burger-ingredients-card/burger-ingredients-card';
 import { SetStateAction } from 'react';
 
 type TBurgerIngredientsCategoryProps = {
 	ingredientsCategory: TIngredient[];
-	type: TIngredientTypes;
+	type: TIngredientCategories;
 	onValueChange: (newValue: SetStateAction<null | TIngredient>) => void;
 };
 
@@ -14,7 +14,7 @@ export const BurgerIngredientsCategory = ({
 	type,
 	onValueChange,
 }: TBurgerIngredientsCategoryProps): React.JSX.Element => {
-	const getNameType = (type: TIngredientTypes): string => {
+	const getNameType = (type: TIngredientCategories): string => {
 		switch (type) {
 			case 'bun':
 				return 'Булки';
