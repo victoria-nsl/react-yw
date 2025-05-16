@@ -1,11 +1,13 @@
 import { TIngredient } from '@utils/types.ts';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './burger-constructor.module.css';
 import { BurgerConstructorOrder } from './burger-constructor-order/burger-constructor-order';
 import {
 	Button,
 	CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Modal } from '../modal-components/modal/modal';
+import { OrderDetails } from './order-details/order-details';
 
 type TBurgerConstructorProps = {
 	ingredients: TIngredient[];
@@ -14,6 +16,8 @@ type TBurgerConstructorProps = {
 export const BurgerConstructor = ({
 	ingredients,
 }: TBurgerConstructorProps): React.JSX.Element => {
+	const [visible, setVisible] = useState<boolean>(false);
+
 	return (
 		<section className={`${styles.burger_constructor} pb-2`}>
 			<BurgerConstructorOrder ingredients={ingredients} />
@@ -22,10 +26,19 @@ export const BurgerConstructor = ({
 					<span className='text text_type_digits-medium'>610</span>
 					<CurrencyIcon type='primary' />
 				</div>
-				<Button htmlType='button' type='primary' size='medium'>
+				<Button
+					htmlType='button'
+					type='primary'
+					size='medium'
+					onClick={() => setVisible(true)}>
 					Оформить заказ
 				</Button>
 			</div>
+			{visible && (
+				<Modal header='' onClose={() => setVisible(false)}>
+					<OrderDetails></OrderDetails>
+				</Modal>
+			)}
 		</section>
 	);
 };

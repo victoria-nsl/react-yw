@@ -12,7 +12,6 @@
 	z-index: 10;
 	box-sizing: border-box;
 	width: 720px;
-	height: 538px;
 	padding: 40px;
 	background-color: rgb(0 0 0 / 100%);
 	border-radius: 40px;
@@ -23,6 +22,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	min-height: 64px;
 }
 
 .modal_header button {

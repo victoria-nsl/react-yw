@@ -4,11 +4,18 @@ import { BurgerIngredients } from '@components/burger-ingredients/burger-ingredi
 import { BurgerConstructor } from '@components/burger-contructor/burger-constructor.tsx';
 import { AppHeader } from '@components/app-header/app-header.tsx';
 import { Preloader } from '../preloader/preloader';
+import { TIngredient } from '@/utils/types';
+
+type TIngredientsState = {
+	isLoading: boolean;
+	hasError: boolean;
+	data: TIngredient[];
+};
 
 export const App = (): React.JSX.Element => {
 	const url = 'https://norma.nomoreparties.space/api/ingredients';
 
-	const [ingredients, setIngredients] = useState({
+	const [ingredients, setIngredients] = useState<TIngredientsState>({
 		isLoading: false,
 		hasError: false,
 		data: [],
