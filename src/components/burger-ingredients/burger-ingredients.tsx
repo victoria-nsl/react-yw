@@ -16,7 +16,7 @@ export const BurgerIngredients = ({
 	const [currentIngredient, setCurrentIngredient] =
 		useState<TIngredient | null>(null);
 
-	const updateState = useCallback(
+	const updateCurrentIngredient = useCallback(
 		(newValue: SetStateAction<null | TIngredient>): void => {
 			setCurrentIngredient(newValue);
 		},
@@ -29,6 +29,8 @@ export const BurgerIngredients = ({
 				ingredients.filter((item) => item.type === type),
 		[ingredients]
 	);
+
+	const onClose = useCallback(() => setCurrentIngredient(null), []);
 
 	return (
 		<section className={styles.burger_ingredients}>
@@ -50,23 +52,21 @@ export const BurgerIngredients = ({
 				<BurgerIngredientsCategory
 					ingredientsCategory={getIngredientsByCategory('bun')}
 					type='bun'
-					onValueChange={updateState}
+					onValueChange={updateCurrentIngredient}
 				/>
 				<BurgerIngredientsCategory
 					ingredientsCategory={getIngredientsByCategory('main')}
 					type='main'
-					onValueChange={updateState}
+					onValueChange={updateCurrentIngredient}
 				/>
 				<BurgerIngredientsCategory
 					ingredientsCategory={getIngredientsByCategory('sauce')}
 					type='sauce'
-					onValueChange={updateState}
+					onValueChange={updateCurrentIngredient}
 				/>
 			</div>
 			{currentIngredient && (
-				<Modal
-					header='Детали инградиента'
-					onClose={() => setCurrentIngredient(null)}>
+				<Modal header='Детали инградиента' onClose={onClose}>
 					<IngredientDetails
 						currentIngredient={currentIngredient}></IngredientDetails>
 				</Modal>
