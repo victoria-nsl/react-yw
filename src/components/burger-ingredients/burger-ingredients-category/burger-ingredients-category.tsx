@@ -1,15 +1,18 @@
 import styles from './burger-ingredients-category.module.css';
 import { TIngredient, TIngredientTypes } from '@/utils/types';
 import { BurgerIngredientsCard } from '../burger-ingredients-card/burger-ingredients-card';
+import { SetStateAction } from 'react';
 
 type TBurgerIngredientsCategoryProps = {
 	ingredientsCategory: TIngredient[];
 	type: TIngredientTypes;
+	onValueChange: (newValue: SetStateAction<null | TIngredient>) => void;
 };
 
 export const BurgerIngredientsCategory = ({
 	ingredientsCategory,
 	type,
+	onValueChange,
 }: TBurgerIngredientsCategoryProps): React.JSX.Element => {
 	const getNameType = (type: TIngredientTypes): string => {
 		switch (type) {
@@ -26,7 +29,11 @@ export const BurgerIngredientsCategory = ({
 			<h2 className='text text_type_main-medium'>{getNameType(type)}</h2>
 			<ul className={`${styles.list} pt-6 pl-4 pr-2 pb-0`}>
 				{ingredientsCategory.map((ingredientCard) => (
-					<BurgerIngredientsCard key={ingredientCard._id} {...ingredientCard} />
+					<BurgerIngredientsCard
+						key={ingredientCard._id}
+						ingredient={ingredientCard}
+						onValueChange={onValueChange}
+					/>
 				))}
 			</ul>
 		</div>
