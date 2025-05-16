@@ -5,6 +5,7 @@ import { BurgerConstructor } from '@components/burger-contructor/burger-construc
 import { AppHeader } from '@components/app-header/app-header.tsx';
 import { Preloader } from '../preloader/preloader';
 import { TIngredient } from '@/utils/types';
+import { getIngredients } from '@/utils/api';
 
 type TIngredientsState = {
 	isLoading: boolean;
@@ -13,8 +14,6 @@ type TIngredientsState = {
 };
 
 export const App = (): React.JSX.Element => {
-	const url = 'https://norma.nomoreparties.space/api/ingredients';
-
 	const [ingredients, setIngredients] = useState<TIngredientsState>({
 		isLoading: false,
 		hasError: false,
@@ -22,19 +21,18 @@ export const App = (): React.JSX.Element => {
 	});
 
 	useEffect(() => {
-		const getIngredients = async (): Promise<void> => {
+		const getIngredientsBurger = async (): Promise<void> => {
 			setIngredients({ ...ingredients, isLoading: true });
 
 			try {
-				const res = await fetch(url);
-				const data = await res.json();
+				const data = await getIngredients();
 
 				setIngredients({ isLoading: false, hasError: false, data: data.data });
 			} catch (error) {
 				setIngredients({ ...ingredients, hasError: true, isLoading: false });
 			}
 		};
-		getIngredients();
+		getIngredientsBurger();
 	}, []);
 
 	return (
