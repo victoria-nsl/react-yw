@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from './burger-constructor-order.module.css';
 import { TIngredient } from '@utils/types.ts';
 import {
@@ -13,8 +13,14 @@ type TBurgerIngredientsProps = {
 export const BurgerConstructorOrder = ({
 	ingredients,
 }: TBurgerIngredientsProps): React.JSX.Element => {
-	const bun = ingredients.find((item) => item.type === 'bun');
-	const otherIngredients = ingredients.filter((item) => item.type !== 'bun');
+	const bun = useMemo(
+		() => ingredients.find((item) => item.type === 'bun'),
+		[ingredients]
+	);
+	const otherIngredients = useMemo(
+		() => ingredients.filter((item) => item.type !== 'bun'),
+		[ingredients]
+	);
 
 	return (
 		<div className={styles.order}>
