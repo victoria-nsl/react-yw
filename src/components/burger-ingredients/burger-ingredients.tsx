@@ -4,7 +4,7 @@ import { TIngredient, TIngredientCategories } from '@utils/types.ts';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerIngredientsCategory } from './burger-ingredients-category/burger-ingredients-category';
 import { IngredientDetails } from './ingredient-details/ingredient-details';
-import { Modal } from '../modal-components/modal/modal';
+import { Modal } from '../modal/modal';
 
 type TBurgerIngredientsProps = {
 	ingredients: TIngredient[];

@@ -1,9 +1,9 @@
 import { createPortal } from 'react-dom';
-import { ModalOverlay } from '../modal-overlay/modal-overlay';
 import { ReactNode, useEffect } from 'react';
 import styles from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { isEscEvent } from '@/utils/helpers';
+import { ModalOverlay } from './modal-overlay/modal-overlay';
 
 const modalRoot: HTMLElement | null = document.getElementById('react-modals');
 
