@@ -7,8 +7,17 @@ type TIngredientsResponse = {
 	data: TIngredient[];
 };
 
-export const getIngredients = async (): Promise<TIngredientsResponse> => {
-	const res = await fetch(`${BURGER_API_URL}/ingredients`);
-	const data = await res.json();
-	return data;
+const checkResponse = (response: Response): Promise<TIngredientsResponse> => {
+	return response.ok
+		? response.json()
+		: response.json().then((error) => Promise.reject(error));
+};
+
+export const getIngredients = (): Promise<TIngredient[]> => {
+	return fetch(`${BURGER_API_URL}/ingredients`)
+		.then(checkResponse)
+		.then((data) => {
+			if (data?.success) return data.data;
+			return Promise.reject(data);
+		});
 };

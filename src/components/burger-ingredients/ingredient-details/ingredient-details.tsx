@@ -13,7 +13,7 @@ export const IngredientDetails = ({
 			<img
 				className='mb-4'
 				src={currentIngredient.image_large}
-				alt='Инградиент'
+				alt={`${currentIngredient.name}.`}
 			/>
 			<h2 className='text text_type_main-medium mb-8'>
 				{currentIngredient.name}

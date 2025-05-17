@@ -66,7 +66,7 @@ export const BurgerIngredients = ({
 				/>
 			</div>
 			{currentIngredient && (
-				<Modal header='Детали инградиента' onClose={onClose}>
+				<Modal header='Детали ингредиента' onClose={onClose}>
 					<IngredientDetails
 						currentIngredient={currentIngredient}></IngredientDetails>
 				</Modal>

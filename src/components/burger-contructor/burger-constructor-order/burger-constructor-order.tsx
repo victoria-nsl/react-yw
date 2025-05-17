@@ -50,7 +50,7 @@ export const BurgerConstructorOrder = ({
 					type='bottom'
 					isLocked={true}
 					text={`${bun!.name} (низ)`}
-					price={200}
+					price={bun!.price}
 					thumbnail={bun!.image}
 				/>
 			</div>

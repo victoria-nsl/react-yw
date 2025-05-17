@@ -21,7 +21,7 @@ export const BurgerIngredientsCard = ({
 			onClick={() => onValueChange(ingredient)}
 			aria-hidden='true'>
 			<div className={`${styles.wrapper_image} pl-4 pr-4`}>
-				<img src={ingredient.image} alt='Инградиент' />
+				<img src={ingredient.image} alt={`${ingredient.name}.`} />
 				<div className={`${styles.wrapper_price} pt-1 pb-1`}>
 					<span className='text text_type_digits-default'>
 						{ingredient.price}

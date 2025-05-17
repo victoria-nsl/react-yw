@@ -24,12 +24,13 @@ export const App = (): React.JSX.Element => {
 		const getIngredientsBurger = async (): Promise<void> => {
 			setIngredients({ ...ingredients, isLoading: true });
 
-			try {
-				const data = await getIngredients();
-				setIngredients({ isLoading: false, hasError: false, data: data.data });
-			} catch (error) {
-				setIngredients({ ...ingredients, hasError: true, isLoading: false });
-			}
+			getIngredients()
+				.then((data) =>
+					setIngredients({ isLoading: false, hasError: false, data })
+				)
+				.catch(() =>
+					setIngredients({ ...ingredients, hasError: true, isLoading: false })
+				);
 		};
 		getIngredientsBurger();
 	}, []);
@@ -45,11 +46,7 @@ export const App = (): React.JSX.Element => {
 				<div className={styles.inner_main}>
 					{ingredients.isLoading && <Preloader />}
 					{ingredients.hasError && (
-						<p
-							style={{
-								color: 'red',
-							}}
-							className='text text_type_main-medium'>
+						<p className={`${styles.error} text text_type_main-medium`}>
 							Произошла ошибка
 						</p>
 					)}
