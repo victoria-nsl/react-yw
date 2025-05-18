@@ -1,0 +1,42 @@
+.modal {
+	position: fixed;
+	inset: 0;
+	width: 100vw;
+	height: 100vh;
+}
+
+.modal_card {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 10;
+	box-sizing: border-box;
+	width: 720px;
+	padding: 40px;
+	background-color: rgb(28 28 33 / 100%);
+	border: 1px solid rgb(76 76 255 / 20%);
+	border-radius: 40px;
+	box-shadow:
+		0 24px 32px rgb(0 0 0 / 4%),
+		0 16px 24px rgb(0 0 0 / 4%),
+		0 4px 8px rgb(0 0 0 / 4%),
+		0 0 1px rgb(0 0 0 / 4%);
+	transform: translate(-50%, -50%);
+}
+
+.modal_header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 64px;
+}
+
+.modal_header button {
+	background-color: rgb(28 28 33 / 100%);
+	border: none;
+	cursor: pointer;
+}
+
+.modal_header button:hover {
+	opacity: 0.8;
+}

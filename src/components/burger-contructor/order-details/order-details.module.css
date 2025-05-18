@@ -1,0 +1,27 @@
+.card {
+	width: 520px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.card h2 {
+	text-shadow:
+		0 0 16px rgb(51 51 255 / 25%),
+		0 0 8px rgb(51 51 255 / 25%),
+		0 4px 32px rgb(51 51 255 / 50%);
+}
+
+.wrapper_image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+	height: 120px;
+	margin: 0 auto;
+	margin-bottom: 60px;
+}
+
+.wrapper_image img {
+	width: 107px;
+	height: 102px;
+}

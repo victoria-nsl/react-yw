@@ -6,17 +6,29 @@
 	background-color: var(--background-alt);
 }
 
+.main {
+	width: 1240px;
+	height: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
 .title {
 	align-self: center;
 	width: 100%;
 	max-width: 1260px;
 }
 
-.main {
+.inner_main {
+	height: 100%;
+	text-align: center;
+}
+
+.wrapper_data {
 	display: flex;
 	justify-content: space-between;
-	width: 1240px;
-	height: 100%;
-	margin: 0 auto;
-	overflow: hidden;
+}
+
+.error {
+	color: #d02c20;
 }
