@@ -1,38 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './app.module.css';
 import { BurgerIngredients } from '@components/burger-ingredients/burger-ingredients.tsx';
 import { BurgerConstructor } from '@components/burger-contructor/burger-constructor.tsx';
 import { AppHeader } from '@components/app-header/app-header.tsx';
 import { Preloader } from '../preloader/preloader';
-import { TIngredient } from '@/utils/types';
-import { getIngredients } from '@/utils/api';
-
-type TIngredientsState = {
-	isLoading: boolean;
-	hasError: boolean;
-	data: TIngredient[];
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { loadIngredients } from '@/services/ingredients/actions';
+import { getAllIngredients } from '@/services/ingredients/selector';
 
 export const App = (): React.JSX.Element => {
-	const [ingredients, setIngredients] = useState<TIngredientsState>({
-		isLoading: false,
-		hasError: false,
-		data: [],
-	});
+	const { loading, error, items } = useSelector(getAllIngredients);
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dispatch: any = useDispatch();
 
 	useEffect(() => {
-		const getIngredientsBurger = async (): Promise<void> => {
-			setIngredients({ ...ingredients, isLoading: true });
-
-			getIngredients()
-				.then((data) =>
-					setIngredients({ isLoading: false, hasError: false, data })
-				)
-				.catch(() =>
-					setIngredients({ ...ingredients, hasError: true, isLoading: false })
-				);
-		};
-		getIngredientsBurger();
+		dispatch(loadIngredients());
 	}, []);
 
 	return (
@@ -44,20 +27,18 @@ export const App = (): React.JSX.Element => {
 					Соберите бургер
 				</h1>
 				<div className={styles.inner_main}>
-					{ingredients.isLoading && <Preloader />}
-					{ingredients.hasError && (
+					{loading && <Preloader />}
+					{error && (
 						<p className={`${styles.error} text text_type_main-medium`}>
 							Произошла ошибка
 						</p>
 					)}
-					{!ingredients.isLoading &&
-						!ingredients.hasError &&
-						ingredients.data.length && (
-							<div className={styles.wrapper_data}>
-								<BurgerIngredients ingredients={ingredients.data} />
-								<BurgerConstructor ingredients={ingredients.data} />
-							</div>
-						)}
+					{!loading && !error && items.length && (
+						<div className={styles.wrapper_data}>
+							<BurgerIngredients ingredients={items} />
+							<BurgerConstructor ingredients={items} />
+						</div>
+					)}
 				</div>
 			</main>
 		</div>
