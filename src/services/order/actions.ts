@@ -1,0 +1,3 @@
+export const ORDER_LOAD_SUCCESS = 'ORDER_LOAD_SUCCESS';
+export const ORDER_LOADING = 'ORDER_LOADING';
+export const ORDER_ERROR = 'ORDER_ERROR';

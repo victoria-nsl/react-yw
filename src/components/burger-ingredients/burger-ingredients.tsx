@@ -1,36 +1,41 @@
-import React, { SetStateAction, useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styles from './burger-ingredients.module.css';
-import { TIngredient, TIngredientCategories } from '@utils/types.ts';
+import {
+	TIngredient,
+	TIngredientCategories,
+	TIngredientsState,
+} from '@utils/types.ts';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerIngredientsCategory } from './burger-ingredients-category/burger-ingredients-category';
 import { IngredientDetails } from './ingredient-details/ingredient-details';
 import { Modal } from '../modal/modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { DELETE_CURRENT_INGREDIENT } from '@/services/current-ingredient/actions';
 
-type TBurgerIngredientsProps = {
-	ingredients: TIngredient[];
-};
+export const BurgerIngredients = (): React.JSX.Element => {
+	const { items } = useSelector(
+		(state: { ingredients: TIngredientsState }) => state.ingredients
+	);
 
-export const BurgerIngredients = ({
-	ingredients,
-}: TBurgerIngredientsProps): React.JSX.Element => {
-	const [currentIngredient, setCurrentIngredient] =
-		useState<TIngredient | null>(null);
+	const { currentItem } = useSelector(
+		(state: { currentIngredient: { currentItem: TIngredient } }) =>
+			state.currentIngredient
+	);
 
-	const updateCurrentIngredient = useCallback(
-		(newValue: SetStateAction<null | TIngredient>): void => {
-			setCurrentIngredient(newValue);
-		},
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dispatch: any = useDispatch();
+
+	const onClose = useCallback(
+		() => dispatch({ type: DELETE_CURRENT_INGREDIENT }),
 		[]
 	);
 
 	const getIngredientsByCategory = useMemo(
 		() =>
 			(type: TIngredientCategories): TIngredient[] =>
-				ingredients.filter((item) => item.type === type),
-		[ingredients]
+				items.filter((item) => item.type === type),
+		[items]
 	);
-
-	const onClose = useCallback(() => setCurrentIngredient(null), []);
 
 	return (
 		<section className={styles.burger_ingredients}>
@@ -52,23 +57,20 @@ export const BurgerIngredients = ({
 				<BurgerIngredientsCategory
 					ingredientsCategory={getIngredientsByCategory('bun')}
 					type='bun'
-					onValueChange={updateCurrentIngredient}
 				/>
 				<BurgerIngredientsCategory
 					ingredientsCategory={getIngredientsByCategory('main')}
 					type='main'
-					onValueChange={updateCurrentIngredient}
 				/>
 				<BurgerIngredientsCategory
 					ingredientsCategory={getIngredientsByCategory('sauce')}
 					type='sauce'
-					onValueChange={updateCurrentIngredient}
 				/>
 			</div>
-			{currentIngredient && (
+			{currentItem && (
 				<Modal header='Детали ингредиента' onClose={onClose}>
 					<IngredientDetails
-						currentIngredient={currentIngredient}></IngredientDetails>
+						currentIngredient={currentItem}></IngredientDetails>
 				</Modal>
 			)}
 		</section>
