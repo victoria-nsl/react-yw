@@ -6,13 +6,7 @@ import { AppHeader } from '@components/app-header/app-header.tsx';
 import { Preloader } from '../preloader/preloader';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadIngredients } from '@/services/ingredients/actions';
-import { TIngredient } from '@/utils/types';
-
-type TIngredientsState = {
-	loading: boolean;
-	error: boolean;
-	items: TIngredient[];
-};
+import { TIngredientsState } from '@/utils/types';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(
@@ -43,8 +37,8 @@ export const App = (): React.JSX.Element => {
 					)}
 					{!loading && !error && items.length && (
 						<div className={styles.wrapper_data}>
-							<BurgerIngredients ingredients={items} />
-							<BurgerConstructor ingredients={items} />
+							<BurgerIngredients />
+							<BurgerConstructor />
 						</div>
 					)}
 				</div>
