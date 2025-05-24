@@ -6,10 +6,18 @@ import { AppHeader } from '@components/app-header/app-header.tsx';
 import { Preloader } from '../preloader/preloader';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadIngredients } from '@/services/ingredients/actions';
-import { getAllIngredients } from '@/services/ingredients/selector';
+import { TIngredient } from '@/utils/types';
+
+type TIngredientsState = {
+	loading: boolean;
+	error: boolean;
+	items: TIngredient[];
+};
 
 export const App = (): React.JSX.Element => {
-	const { loading, error, items } = useSelector(getAllIngredients);
+	const { loading, error, items } = useSelector(
+		(state: { ingredients: TIngredientsState }) => state.ingredients
+	);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();
