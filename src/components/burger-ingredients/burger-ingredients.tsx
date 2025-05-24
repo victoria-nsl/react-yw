@@ -1,4 +1,4 @@
-import React, { SetStateAction, useCallback, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import styles from './burger-ingredients.module.css';
 import {
 	TIngredient,
@@ -16,14 +16,9 @@ export const BurgerIngredients = (): React.JSX.Element => {
 		(state: { ingredients: TIngredientsState }) => state.ingredients
 	);
 
-	const [currentIngredient, setCurrentIngredient] =
-		useState<TIngredient | null>(null);
-
-	const updateCurrentIngredient = useCallback(
-		(newValue: SetStateAction<null | TIngredient>): void => {
-			setCurrentIngredient(newValue);
-		},
-		[]
+	const { currentItem } = useSelector(
+		(state: { currentIngredient: { currentItem: TIngredient } }) =>
+			state.currentIngredient
 	);
 
 	const getIngredientsByCategory = useMemo(
@@ -32,8 +27,6 @@ export const BurgerIngredients = (): React.JSX.Element => {
 				items.filter((item) => item.type === type),
 		[items]
 	);
-
-	const onClose = useCallback(() => setCurrentIngredient(null), []);
 
 	return (
 		<section className={styles.burger_ingredients}>
@@ -55,23 +48,20 @@ export const BurgerIngredients = (): React.JSX.Element => {
 				<BurgerIngredientsCategory
 					ingredientsCategory={getIngredientsByCategory('bun')}
 					type='bun'
-					onValueChange={updateCurrentIngredient}
 				/>
 				<BurgerIngredientsCategory
 					ingredientsCategory={getIngredientsByCategory('main')}
 					type='main'
-					onValueChange={updateCurrentIngredient}
 				/>
 				<BurgerIngredientsCategory
 					ingredientsCategory={getIngredientsByCategory('sauce')}
 					type='sauce'
-					onValueChange={updateCurrentIngredient}
 				/>
 			</div>
-			{currentIngredient && (
-				<Modal header='Детали ингредиента' onClose={onClose}>
+			{currentItem && (
+				<Modal header='Детали ингредиента'>
 					<IngredientDetails
-						currentIngredient={currentIngredient}></IngredientDetails>
+						currentIngredient={currentItem}></IngredientDetails>
 				</Modal>
 			)}
 		</section>
