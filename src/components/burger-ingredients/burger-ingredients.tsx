@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styles from './burger-ingredients.module.css';
 import {
 	TIngredient,
@@ -9,7 +9,8 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerIngredientsCategory } from './burger-ingredients-category/burger-ingredients-category';
 import { IngredientDetails } from './ingredient-details/ingredient-details';
 import { Modal } from '../modal/modal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { DELETE_CURRENT_INGREDIENT } from '@/services/current-ingredient/actions';
 
 export const BurgerIngredients = (): React.JSX.Element => {
 	const { items } = useSelector(
@@ -19,6 +20,14 @@ export const BurgerIngredients = (): React.JSX.Element => {
 	const { currentItem } = useSelector(
 		(state: { currentIngredient: { currentItem: TIngredient } }) =>
 			state.currentIngredient
+	);
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dispatch: any = useDispatch();
+
+	const onClose = useCallback(
+		() => dispatch({ type: DELETE_CURRENT_INGREDIENT }),
+		[]
 	);
 
 	const getIngredientsByCategory = useMemo(
@@ -59,7 +68,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 				/>
 			</div>
 			{currentItem && (
-				<Modal header='Детали ингредиента'>
+				<Modal header='Детали ингредиента' onClose={onClose}>
 					<IngredientDetails
 						currentIngredient={currentItem}></IngredientDetails>
 				</Modal>
