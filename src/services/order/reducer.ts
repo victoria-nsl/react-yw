@@ -1,14 +1,14 @@
 import { ORDER_LOAD_SUCCESS, ORDER_LOADING, ORDER_ERROR } from './actions';
 
 const initialState = {
-	items: [],
+	orderId: null,
 	loading: false,
 	error: null,
 };
 
 export const orderReducer = (
 	state = initialState,
-	action: { type: string; payload: string[] }
+	action: { type: string; payload: number }
 ) => {
 	switch (action.type) {
 		case ORDER_LOADING:
@@ -26,7 +26,7 @@ export const orderReducer = (
 		case ORDER_LOAD_SUCCESS:
 			return {
 				...state,
-				items: action.payload,
+				orderId: action.payload,
 				loading: false,
 			};
 		default:
