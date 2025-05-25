@@ -1,10 +1,9 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import { composeWithDevTools } from '@redux-devtools/extension';
-import { thunk } from 'redux-thunk';
+import { combineReducers } from 'redux';
 import { ingredientsReducer } from './ingredients/reducer';
 import { currentIngredientReducer } from './current-ingredient/reducer';
 import { constructorIngredientsReducer } from './ingrediens-constructor/reducers';
 import { orderReducer } from './order/reducer';
+import { configureStore } from '@reduxjs/toolkit';
 
 export const rootReducer = combineReducers({
 	ingredients: ingredientsReducer,
@@ -13,11 +12,4 @@ export const rootReducer = combineReducers({
 	order: orderReducer,
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const configureStore = (initialState?: any) => {
-	return createStore(
-		rootReducer,
-		initialState,
-		composeWithDevTools(applyMiddleware(thunk))
-	);
-};
+export const store = configureStore({ reducer: rootReducer });
