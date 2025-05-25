@@ -1,4 +1,5 @@
-import { TIngredient } from '@/utils/types';
+import { TIngredient, TIngredientCategories } from '@/utils/types';
+import { createSelector } from 'reselect';
 
 type TIngredientsState = {
 	ingredients: { loading: boolean; error: boolean; items: TIngredient[] };
@@ -6,3 +7,10 @@ type TIngredientsState = {
 
 export const getAllIngredients = (state: TIngredientsState) =>
 	state.ingredients;
+
+export const getTasksByCategory = (category: TIngredientCategories) =>
+	createSelector([(state) => state.ingredients.items], (ingredients) =>
+		ingredients.filter(
+			(ingredient: TIngredient) => ingredient.type === category
+		)
+	);
