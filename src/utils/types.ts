@@ -13,6 +13,8 @@ export type TIngredient = {
 	__v: number;
 };
 
+export type TConstructorIngredient = TIngredient & { id: string };
+
 export type TIngredientCategories = 'bun' | 'main' | 'sauce';
 
 export type TIngredientsState = {
