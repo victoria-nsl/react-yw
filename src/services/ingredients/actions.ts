@@ -5,9 +5,13 @@ export const INGREDIENTS_LOAD_SUCCESS = 'INGREDIENTS_LOAD_SUCCESS';
 export const INGREDIENTS_LOADING = 'INGREDIENTS_LOADING';
 export const INGREDIENTS_ERROR = 'INGREDIENTS_ERROR';
 
+export type TIngredientsAction = {
+	type: string;
+	payload?: TIngredient[];
+};
+
 export const loadIngredients =
-	() =>
-	(dispatch: (arg0: { type: string; payload?: TIngredient[] }) => void) => {
+	() => (dispatch: (arg0: TIngredientsAction) => void) => {
 		dispatch({
 			type: INGREDIENTS_LOADING,
 		});

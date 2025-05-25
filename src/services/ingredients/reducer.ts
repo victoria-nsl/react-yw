@@ -1,8 +1,8 @@
-import { TIngredient } from '@/utils/types';
 import {
 	INGREDIENTS_LOAD_SUCCESS,
 	INGREDIENTS_LOADING,
 	INGREDIENTS_ERROR,
+	TIngredientsAction,
 } from './actions';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 
 export const ingredientsReducer = (
 	state = initialState,
-	action: { type: string; payload: TIngredient[] }
+	action: TIngredientsAction
 ) => {
 	switch (action.type) {
 		case INGREDIENTS_LOADING:

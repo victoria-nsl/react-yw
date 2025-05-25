@@ -1,5 +1,8 @@
-import { TIngredient } from '@/utils/types';
-import { SET_CURRENT_INGREDIENT, DELETE_CURRENT_INGREDIENT } from './actions';
+import {
+	SET_CURRENT_INGREDIENT,
+	DELETE_CURRENT_INGREDIENT,
+	TCurrentIngredientAction,
+} from './actions';
 
 const initialState = {
 	currentItem: null,
@@ -7,7 +10,7 @@ const initialState = {
 
 export const currentIngredientReducer = (
 	state = initialState,
-	action: { type: string; payload: TIngredient }
+	action: TCurrentIngredientAction
 ) => {
 	switch (action.type) {
 		case SET_CURRENT_INGREDIENT:

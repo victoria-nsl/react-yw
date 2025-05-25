@@ -1,4 +1,3 @@
-import { TIngredientsState } from '@utils/types.ts';
 import React, { useCallback, useState } from 'react';
 import styles from './burger-constructor.module.css';
 import { BurgerConstructorOrder } from './burger-constructor-order/burger-constructor-order';
@@ -9,12 +8,11 @@ import {
 import { OrderDetails } from './order-details/order-details';
 import { Modal } from '../modal/modal';
 import { useSelector } from 'react-redux';
+import { getAllIngredients } from '@/services/ingredients/selectors';
 
 export const BurgerConstructor = (): React.JSX.Element => {
 	const [visible, setVisible] = useState<boolean>(false);
-	const { items } = useSelector(
-		(state: { ingredients: TIngredientsState }) => state.ingredients
-	);
+	const { items } = useSelector(getAllIngredients);
 
 	const onClose = useCallback(() => setVisible(false), []);
 

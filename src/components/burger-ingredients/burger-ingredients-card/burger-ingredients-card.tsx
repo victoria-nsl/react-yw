@@ -5,7 +5,7 @@ import {
 	CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux';
-import { SET_CURRENT_INGREDIENT } from '@/services/current-ingredient/actions';
+import { setCurrentIngredient } from '@/services/current-ingredient/actions';
 
 type TBurgerIngredientsCardProps = {
 	ingredient: TIngredient;
@@ -14,16 +14,14 @@ type TBurgerIngredientsCardProps = {
 export const BurgerIngredientsCard = ({
 	ingredient,
 }: TBurgerIngredientsCardProps): React.JSX.Element => {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 
-	const updateCurrentIngredient = () =>
-		dispatch({ type: SET_CURRENT_INGREDIENT, payload: ingredient });
+	const addCurrentIngredient = () => dispatch(setCurrentIngredient(ingredient));
 
 	return (
 		<li
 			className={styles.card}
-			onClick={() => updateCurrentIngredient()}
+			onClick={() => addCurrentIngredient()}
 			aria-hidden='true'>
 			<div className={`${styles.wrapper_image} pl-4 pr-4`}>
 				<img src={ingredient.image} alt={`${ingredient.name}.`} />
