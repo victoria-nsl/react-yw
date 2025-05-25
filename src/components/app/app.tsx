@@ -6,12 +6,10 @@ import { AppHeader } from '@components/app-header/app-header.tsx';
 import { Preloader } from '../preloader/preloader';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadIngredients } from '@/services/ingredients/actions';
-import { TIngredientsState } from '@/utils/types';
+import { getAllIngredients } from '@/services/ingredients/selectors';
 
 export const App = (): React.JSX.Element => {
-	const { loading, error, items } = useSelector(
-		(state: { ingredients: TIngredientsState }) => state.ingredients
-	);
+	const { loading, error, items } = useSelector(getAllIngredients);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();

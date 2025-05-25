@@ -16,7 +16,13 @@ export type TIngredient = {
 export type TIngredientCategories = 'bun' | 'main' | 'sauce';
 
 export type TIngredientsState = {
-	loading: boolean;
-	error: boolean;
-	items: TIngredient[];
+	ingredients: {
+		loading: boolean;
+		error: boolean;
+		items: TIngredient[];
+	};
+};
+
+export type TCurrentIngredientState = {
+	currentIngredient: { currentItem: TIngredient };
 };

@@ -1,8 +1,4 @@
-import { TIngredient } from '@/utils/types';
-
-type TCurrentIngredientState = {
-	currentIngredient: { currentItem: TIngredient };
-};
+import { TCurrentIngredientState } from '@/utils/types';
 
 export const getCurrentIngredient = (state: TCurrentIngredientState) =>
 	state.currentIngredient;
