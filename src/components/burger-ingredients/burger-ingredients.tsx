@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import styles from './burger-ingredients.module.css';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -16,35 +16,85 @@ export const BurgerIngredients = (): React.JSX.Element => {
 	const itemsSauce = useSelector(getTasksByCategory('sauce'));
 	const { currentItem } = useSelector(getCurrentIngredient);
 	const dispatch = useDispatch();
+	const container = useRef<HTMLInputElement>(null);
+	const bunCategory = useRef<HTMLInputElement>(null);
+	const mainCategory = useRef<HTMLInputElement>(null);
+	const sauceCategory = useRef<HTMLInputElement>(null);
+	const [activeTab, setActiveTab] = useState('bun');
 
 	const onClose = useCallback(() => dispatch(deleteCurrentIngredient()), []);
+
+	const switchTabs = () => {
+		const topContainer = Math.round(
+			container.current!.getBoundingClientRect().top
+		);
+		const topBun = Math.round(bunCategory.current!.getBoundingClientRect().top);
+		const topMain = Math.round(
+			mainCategory.current!.getBoundingClientRect().top
+		);
+		const topSause = Math.round(
+			sauceCategory.current!.getBoundingClientRect().top
+		);
+
+		const spacingBun = Math.abs(topBun - topContainer);
+		const spacingMain = Math.abs(topMain - topContainer);
+		const spacingSause = Math.abs(topSause - topContainer);
+
+		const spacingMin = Math.min(spacingBun, spacingMain, spacingSause);
+
+		switch (spacingMin) {
+			case spacingBun:
+				setActiveTab('bun');
+				break;
+			case spacingMain:
+				setActiveTab('main');
+				break;
+			case spacingSause:
+				setActiveTab('sause');
+				break;
+			default:
+				setActiveTab('bun');
+		}
+	};
 
 	return (
 		<section className={styles.burger_ingredients}>
 			<nav className='mb-10'>
 				<ul className={styles.menu}>
-					<Tab value='bun' active={true} onClick={() => {}}>
+					<Tab value='bun' active={activeTab === 'bun'} onClick={() => {}}>
 						Булки
 					</Tab>
-					<Tab value='main' active={false} onClick={() => {}}>
+					<Tab value='main' active={activeTab === 'main'} onClick={() => {}}>
 						Начинки
 					</Tab>
-					<Tab value='sauce' active={false} onClick={() => {}}>
+					<Tab value='sauce' active={activeTab === 'sause'} onClick={() => {}}>
 						Соусы
 					</Tab>
 				</ul>
 			</nav>
 
-			<div className={`${styles.categories} custom-scroll`}>
-				<BurgerIngredientsCategory ingredientsCategory={itemsBun} type='bun' />
-				<BurgerIngredientsCategory
-					ingredientsCategory={itemsMain}
-					type='main'
-				/>
-				<BurgerIngredientsCategory
-					ingredientsCategory={itemsSauce}
-					type='sauce'
-				/>
+			<div
+				ref={container}
+				className={`${styles.categories} custom-scroll`}
+				onScroll={() => switchTabs()}>
+				<div ref={bunCategory}>
+					<BurgerIngredientsCategory
+						ingredientsCategory={itemsBun}
+						type='bun'
+					/>
+				</div>
+				<div ref={mainCategory}>
+					<BurgerIngredientsCategory
+						ingredientsCategory={itemsMain}
+						type='main'
+					/>
+				</div>
+				<div ref={sauceCategory}>
+					<BurgerIngredientsCategory
+						ingredientsCategory={itemsSauce}
+						type='sauce'
+					/>
+				</div>
 			</div>
 			{currentItem && (
 				<Modal header='Детали ингредиента' onClose={onClose}>
