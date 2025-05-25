@@ -28,3 +28,11 @@ export type TIngredientsState = {
 export type TCurrentIngredientState = {
 	currentIngredient: { currentItem: TIngredient };
 };
+
+export type TOrderState = {
+	order: {
+		loading: boolean;
+		error: boolean;
+		orderId: number;
+	};
+};

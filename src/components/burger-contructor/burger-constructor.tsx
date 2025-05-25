@@ -9,14 +9,27 @@ import { OrderDetails } from './order-details/order-details';
 import { Modal } from '../modal/modal';
 import { useSelector } from 'react-redux';
 import { getAllIngredients } from '@/services/ingredients/selectors';
+// import { createOrder } from '@/services/order/actions';
 
 export const BurgerConstructor = (): React.JSX.Element => {
 	const [visible, setVisible] = useState<boolean>(false);
 	const { items } = useSelector(getAllIngredients);
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// const dispatch: any = useDispatch();
 
 	const onClose = useCallback(() => setVisible(false), []);
 
-	const onOpen = () => setVisible(true);
+	const onOpen = () => {
+		// dispatch(
+		// 	createOrder([
+		// 		'643d69a5c3f7b9001cfa093c',
+		// 		'643d69a5c3f7b9001cfa094e',
+		// 		'643d69a5c3f7b9001cfa093f',
+		// 		'643d69a5c3f7b9001cfa093c',
+		// 	])
+		// );
+		setVisible(true);
+	};
 
 	return (
 		<section className={`${styles.burger_constructor} pb-2`}>

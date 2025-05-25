@@ -7,6 +7,14 @@ type TIngredientsResponse = {
 	data: TIngredient[];
 };
 
+type TOrderResponse = {
+	success: boolean;
+	order: {
+		number: number;
+	};
+	name: string;
+};
+
 const checkResponse = (response: Response): Promise<TIngredientsResponse> => {
 	return response.ok
 		? response.json()
@@ -18,6 +26,27 @@ export const getIngredients = (): Promise<TIngredient[]> => {
 		.then(checkResponse)
 		.then((data) => {
 			if (data?.success) return data.data;
+			return Promise.reject(data);
+		});
+};
+
+export const addOrder = (ids: string[]): Promise<TOrderResponse> => {
+	return fetch(`${BURGER_API_URL}/orders`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			ingredients: ids,
+		}),
+	})
+		.then((response) =>
+			response.ok
+				? response.json()
+				: response.json().then((error) => Promise.reject(error))
+		)
+		.then((data) => {
+			if (data?.success) return data;
 			return Promise.reject(data);
 		});
 };

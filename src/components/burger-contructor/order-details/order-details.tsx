@@ -1,7 +1,12 @@
 import styles from './order-details.module.css';
 import iconDone from '../../../images/done.png';
+// import { useSelector } from 'react-redux';
+// import { getOrder } from '@/services/order/selectors';
 
 export const OrderDetails = (): React.JSX.Element => {
+	// const { loading, error, orderId } = useSelector(getOrder);
+	// console.log(loading, error, orderId);
+
 	return (
 		<div className={`${styles.card} pb-20 pt-4`}>
 			<h2 className='text text_type_digits-large mb-8'>034536</h2>

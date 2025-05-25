@@ -11,7 +11,7 @@ import { getCurrentIngredient } from '@/services/current-ingredient/selectors';
 import { getTasksByCategory } from '@/services/ingredients/selectors';
 
 export const BurgerIngredients = (): React.JSX.Element => {
-	const itemsBuh = useSelector(getTasksByCategory('bun'));
+	const itemsBun = useSelector(getTasksByCategory('bun'));
 	const itemsMain = useSelector(getTasksByCategory('main'));
 	const itemsSauce = useSelector(getTasksByCategory('sauce'));
 	const { currentItem } = useSelector(getCurrentIngredient);
@@ -36,7 +36,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 			</nav>
 
 			<div className={`${styles.categories} custom-scroll`}>
-				<BurgerIngredientsCategory ingredientsCategory={itemsBuh} type='bun' />
+				<BurgerIngredientsCategory ingredientsCategory={itemsBun} type='bun' />
 				<BurgerIngredientsCategory
 					ingredientsCategory={itemsMain}
 					type='main'
