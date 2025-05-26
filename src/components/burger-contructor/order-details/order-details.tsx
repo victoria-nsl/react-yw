@@ -18,7 +18,7 @@ export const OrderDetails = (): React.JSX.Element => {
 			)}
 			{!loading && !error && orderId && (
 				<>
-					<h2 className='text text_type_digits-large mb-8'>034536</h2>
+					<h2 className='text text_type_digits-large mb-8'>{orderId}</h2>
 					<p className='text text_type_main-medium mb-15'>
 						{' '}
 						идентификатор заказа

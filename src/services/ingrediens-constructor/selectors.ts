@@ -22,12 +22,14 @@ export const getIdsConstructorIngredients = createSelector(
 		(state) => state.constructorIngredients.itemsConstructor,
 	],
 	(bun, itemsConstructor) => {
-		const ids = [];
+		let ids: string[] = [];
 
 		if (itemsConstructor.length) {
-			ids.push(
-				itemsConstructor.map((item: TConstructorIngredient) => item._id)
+			const idsItems = itemsConstructor.map(
+				(item: TConstructorIngredient) => item._id
 			);
+
+			ids = [...idsItems];
 		}
 
 		if (bun) {
