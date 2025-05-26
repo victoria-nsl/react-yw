@@ -27,6 +27,9 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 					/>
 				</div>
 			)}
+			{!bun && (
+				<div className={`${styles.empty} ${styles.top}`}>Выберите булку</div>
+			)}
 			<ul className={`${styles.list} custom-scroll`}>
 				{itemsConstructor.map((item) => (
 					<li className={styles.item} key={item._id}>
@@ -38,7 +41,11 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 						/>
 					</li>
 				))}
+				{!itemsConstructor.length && (
+					<li className={`${styles.empty} `}>Выберите начинку</li>
+				)}
 			</ul>
+
 			{bun && (
 				<div className='pr-2'>
 					<ConstructorElement
@@ -49,6 +56,9 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 						thumbnail={bun!.image}
 					/>
 				</div>
+			)}
+			{!bun && (
+				<div className={`${styles.empty} ${styles.bottom}`}>Выберите булку</div>
 			)}
 		</div>
 	);
