@@ -8,12 +8,12 @@ import { Modal } from '../modal/modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteCurrentIngredient } from '@/services/current-ingredient/actions';
 import { getCurrentIngredient } from '@/services/current-ingredient/selectors';
-import { getTasksByCategory } from '@/services/ingredients/selectors';
+import { getIngredientsByCategory } from '@/services/ingredients/selectors';
 
 export const BurgerIngredients = (): React.JSX.Element => {
-	const itemsBun = useSelector(getTasksByCategory('bun'));
-	const itemsMain = useSelector(getTasksByCategory('main'));
-	const itemsSauce = useSelector(getTasksByCategory('sauce'));
+	const itemsBun = useSelector(getIngredientsByCategory('bun'));
+	const itemsMain = useSelector(getIngredientsByCategory('main'));
+	const itemsSauce = useSelector(getIngredientsByCategory('sauce'));
 	const { currentItem } = useSelector(getCurrentIngredient);
 	const dispatch = useDispatch();
 	const container = useRef<HTMLInputElement>(null);

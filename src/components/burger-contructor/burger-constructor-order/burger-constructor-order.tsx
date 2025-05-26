@@ -5,6 +5,11 @@ import {
 	ConstructorElement,
 	DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+// import {
+// 	getBunConstructorIngredients,
+// 	getItemsConstructorIngredients,
+// } from '@/services/ingrediens-constructor/selectors';
+// import { useSelector } from 'react-redux';
 
 type TBurgerIngredientsProps = {
 	ingredients: TIngredient[];
@@ -13,6 +18,10 @@ type TBurgerIngredientsProps = {
 export const BurgerConstructorOrder = ({
 	ingredients,
 }: TBurgerIngredientsProps): React.JSX.Element => {
+	// const bun = useSelector(getBunConstructorIngredients);
+	// const itemsConstructor = useSelector(getItemsConstructorIngredients);
+	// console.log(bun, itemsConstructor);
+
 	const bun = useMemo(
 		() => ingredients.find((item) => item.type === 'bun'),
 		[ingredients]

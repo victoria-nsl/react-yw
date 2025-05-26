@@ -25,6 +25,13 @@ export type TIngredientsState = {
 	};
 };
 
+export type TIngredientsConstructorState = {
+	constructorIngredients: {
+		bun: TConstructorIngredient;
+		itemsConstructor: TConstructorIngredient[];
+	};
+};
+
 export type TCurrentIngredientState = {
 	currentIngredient: { currentItem: TIngredient };
 };
