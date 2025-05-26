@@ -1,68 +1,55 @@
-import React, { useMemo } from 'react';
 import styles from './burger-constructor-order.module.css';
-import { TIngredient } from '@utils/types.ts';
+
 import {
 	ConstructorElement,
 	DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-// import {
-// 	getBunConstructorIngredients,
-// 	getItemsConstructorIngredients,
-// } from '@/services/ingrediens-constructor/selectors';
-// import { useSelector } from 'react-redux';
+import {
+	getBunConstructorIngredients,
+	getItemsConstructorIngredients,
+} from '@/services/ingrediens-constructor/selectors';
+import { useSelector } from 'react-redux';
 
-type TBurgerIngredientsProps = {
-	ingredients: TIngredient[];
-};
-
-export const BurgerConstructorOrder = ({
-	ingredients,
-}: TBurgerIngredientsProps): React.JSX.Element => {
-	// const bun = useSelector(getBunConstructorIngredients);
-	// const itemsConstructor = useSelector(getItemsConstructorIngredients);
-	// console.log(bun, itemsConstructor);
-
-	const bun = useMemo(
-		() => ingredients.find((item) => item.type === 'bun'),
-		[ingredients]
-	);
-	const otherIngredients = useMemo(
-		() => ingredients.filter((item) => item.type !== 'bun'),
-		[ingredients]
-	);
+export const BurgerConstructorOrder = (): React.JSX.Element => {
+	const bun = useSelector(getBunConstructorIngredients);
+	const itemsConstructor = useSelector(getItemsConstructorIngredients);
 
 	return (
 		<div className={styles.order}>
-			<div className='pr-2'>
-				<ConstructorElement
-					type='top'
-					isLocked={true}
-					text={`${bun!.name} (верх)`}
-					price={bun!.price}
-					thumbnail={bun!.image}
-				/>
-			</div>
+			{bun && (
+				<div className='pr-2'>
+					<ConstructorElement
+						type='top'
+						isLocked={true}
+						text={`${bun!.name} (верх)`}
+						price={bun!.price}
+						thumbnail={bun!.image}
+					/>
+				</div>
+			)}
 			<ul className={`${styles.list} custom-scroll`}>
-				{otherIngredients.map((ingredient) => (
-					<li className={styles.item} key={ingredient._id}>
+				{itemsConstructor.map((item) => (
+					<li className={styles.item} key={item._id}>
 						<DragIcon type='primary' />
 						<ConstructorElement
-							text={ingredient!.name}
-							price={ingredient!.price}
-							thumbnail={ingredient!.image}
+							text={item!.name}
+							price={item!.price}
+							thumbnail={item!.image}
 						/>
 					</li>
 				))}
 			</ul>
-			<div className='pr-2'>
-				<ConstructorElement
-					type='bottom'
-					isLocked={true}
-					text={`${bun!.name} (низ)`}
-					price={bun!.price}
-					thumbnail={bun!.image}
-				/>
-			</div>
+			{bun && (
+				<div className='pr-2'>
+					<ConstructorElement
+						type='bottom'
+						isLocked={true}
+						text={`${bun!.name} (низ)`}
+						price={bun!.price}
+						thumbnail={bun!.image}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };
