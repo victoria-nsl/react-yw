@@ -11,15 +11,16 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { TConstructorIngredient } from '@/utils/types';
 import { deleteConstructorIngredient } from '@/services/ingrediens-constructor/actions';
+import { useCallback } from 'react';
 
 export const BurgerConstructorOrder = (): React.JSX.Element => {
 	const bun = useSelector(getBunConstructorIngredients);
 	const itemsConstructor = useSelector(getItemsConstructorIngredients);
 	const dispatch = useDispatch();
 
-	const onDelete = (item: TConstructorIngredient) => {
+	const onDelete = useCallback((item: TConstructorIngredient) => {
 		dispatch(deleteConstructorIngredient(item));
-	};
+	}, []);
 
 	return (
 		<div className={styles.order}>

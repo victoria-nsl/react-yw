@@ -41,7 +41,8 @@ export const BurgerConstructor = (): React.JSX.Element => {
 					htmlType='button'
 					type='primary'
 					size='medium'
-					onClick={sendOrder}>
+					onClick={sendOrder}
+					disabled={!ids.length}>
 					Оформить заказ
 				</Button>
 			</div>
