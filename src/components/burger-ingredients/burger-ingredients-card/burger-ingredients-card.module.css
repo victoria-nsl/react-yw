@@ -10,6 +10,8 @@
 }
 
 .wrapper_image img {
+	position: relative;
+	z-index: 10;
 	width: 100%;
 	height: auto;
 }
