@@ -1,30 +1,25 @@
-import { TIngredient } from '@/utils/types';
 import styles from './ingredient-details.module.css';
+import { useSelector } from 'react-redux';
+import { getCurrentIngredient } from '@/services/current-ingredient/selectors';
 
-type TIngredientDetailsProps = {
-	currentIngredient: TIngredient;
-};
+export const IngredientDetails = (): React.JSX.Element => {
+	const { currentItem } = useSelector(getCurrentIngredient);
 
-export const IngredientDetails = ({
-	currentIngredient,
-}: TIngredientDetailsProps): React.JSX.Element => {
 	return (
 		<div className={styles.card}>
 			<img
 				className='mb-4'
-				src={currentIngredient.image_large}
-				alt={`${currentIngredient.name}.`}
+				src={currentItem.image_large}
+				alt={`${currentItem.name}.`}
 			/>
-			<h2 className='text text_type_main-medium mb-8'>
-				{currentIngredient.name}
-			</h2>
+			<h2 className='text text_type_main-medium mb-8'>{currentItem.name}</h2>
 			<ul className={styles.list}>
 				<li>
 					<h3 className='text text_type_main-default text_color_inactive mb-2'>
 						Калории,ккал
 					</h3>
 					<p className='text text_type_digits-default text_color_inactive mb-2'>
-						{currentIngredient.calories}
+						{currentItem.calories}
 					</p>
 				</li>
 				<li>
@@ -32,7 +27,7 @@ export const IngredientDetails = ({
 						Белки, г
 					</h3>
 					<p className='text text_type_digits-default text_color_inactive'>
-						{currentIngredient.proteins}
+						{currentItem.proteins}
 					</p>
 				</li>
 				<li>
@@ -40,7 +35,7 @@ export const IngredientDetails = ({
 						Жиры, г
 					</h3>
 					<p className='text text_type_digits-default text_color_inactive'>
-						{currentIngredient.fat}
+						{currentItem.fat}
 					</p>
 				</li>
 				<li>
@@ -48,7 +43,7 @@ export const IngredientDetails = ({
 						Углеводы, г
 					</h3>
 					<p className='text text_type_digits-default text_color_inactive'>
-						{currentIngredient.carbohydrates}
+						{currentItem.carbohydrates}
 					</p>
 				</li>
 			</ul>

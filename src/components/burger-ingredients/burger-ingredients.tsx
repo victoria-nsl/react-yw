@@ -98,8 +98,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 			</div>
 			{currentItem && (
 				<Modal header='Детали ингредиента' onClose={onClose}>
-					<IngredientDetails
-						currentIngredient={currentItem}></IngredientDetails>
+					<IngredientDetails></IngredientDetails>
 				</Modal>
 			)}
 		</section>
