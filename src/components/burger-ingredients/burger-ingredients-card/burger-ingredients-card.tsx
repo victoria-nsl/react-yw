@@ -7,6 +7,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentIngredient } from '@/services/current-ingredient/actions';
 import { getQuantityByIdIngredients } from '@/services/ingrediens-constructor/selectors';
+import { useDrag } from 'react-dnd';
 
 type TBurgerIngredientsCardProps = {
 	ingredient: TIngredient;
@@ -20,13 +21,25 @@ export const BurgerIngredientsCard = ({
 
 	const addCurrentIngredient = () => dispatch(setCurrentIngredient(ingredient));
 
+	const [{ opacity }, refIngredient] = useDrag({
+		type: 'ingredient',
+		item: ingredient,
+		collect: (monitor) => ({
+			opacity: !!monitor.isDragging(),
+		}),
+	});
+
 	return (
 		<li
-			className={styles.card}
+			className={`${styles.card}  ${opacity && styles.opacity_view}`}
 			onClick={() => addCurrentIngredient()}
 			aria-hidden='true'>
 			<div className={`${styles.wrapper_image} pl-4 pr-4`}>
-				<img src={ingredient.image} alt={`${ingredient.name}.`} />
+				<img
+					ref={refIngredient}
+					src={ingredient.image}
+					alt={`${ingredient.name}.`}
+				/>
 				<div className={`${styles.wrapper_price} pt-1 pb-1`}>
 					<span className='text text_type_digits-default'>
 						{ingredient.price}

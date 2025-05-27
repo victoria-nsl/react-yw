@@ -5,6 +5,10 @@
 	cursor: pointer;
 }
 
+.card.opacity_view {
+	opacity: 0.5;
+}
+
 .wrapper_image img {
 	width: 100%;
 	height: auto;

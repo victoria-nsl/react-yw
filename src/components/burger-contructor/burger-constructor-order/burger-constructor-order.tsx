@@ -9,9 +9,14 @@ import {
 	getItemsConstructorIngredients,
 } from '@/services/ingrediens-constructor/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { TConstructorIngredient } from '@/utils/types';
-import { deleteConstructorIngredient } from '@/services/ingrediens-constructor/actions';
+import { TConstructorIngredient, TIngredient } from '@/utils/types';
+import {
+	addConstructorIngredient,
+	deleteConstructorIngredient,
+} from '@/services/ingrediens-constructor/actions';
 import { useCallback } from 'react';
+import { useDrop } from 'react-dnd';
+import { v4 as uuidv4 } from 'uuid';
 
 export const BurgerConstructorOrder = (): React.JSX.Element => {
 	const bun = useSelector(getBunConstructorIngredients);
@@ -21,6 +26,13 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 	const onDelete = useCallback((item: TConstructorIngredient) => {
 		dispatch(deleteConstructorIngredient(item));
 	}, []);
+
+	const [, dropTarget] = useDrop({
+		accept: 'ingredient',
+		drop(itemId: TIngredient) {
+			dispatch(addConstructorIngredient({ ...itemId, id: uuidv4() }));
+		},
+	});
 
 	return (
 		<div className={styles.order}>
@@ -38,7 +50,7 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 			{!bun && (
 				<div className={`${styles.empty} ${styles.top}`}>Выберите булку</div>
 			)}
-			<ul className={`${styles.list} custom-scroll`}>
+			<ul ref={dropTarget} className={`${styles.list} custom-scroll`}>
 				{itemsConstructor.map((item) => (
 					<li className={styles.item} key={item.id}>
 						<DragIcon type='primary' />

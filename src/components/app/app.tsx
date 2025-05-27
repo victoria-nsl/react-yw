@@ -7,6 +7,8 @@ import { Preloader } from '../preloader/preloader';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadIngredients } from '@/services/ingredients/actions';
 import { getAllIngredients } from '@/services/ingredients/selectors';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
@@ -34,10 +36,12 @@ export const App = (): React.JSX.Element => {
 						</p>
 					)}
 					{!loading && !error && items.length && (
-						<div className={styles.wrapper_data}>
-							<BurgerIngredients />
-							<BurgerConstructor />
-						</div>
+						<DndProvider backend={HTML5Backend}>
+							<div className={styles.wrapper_data}>
+								<BurgerIngredients />
+								<BurgerConstructor />
+							</div>
+						</DndProvider>
 					)}
 				</div>
 			</main>

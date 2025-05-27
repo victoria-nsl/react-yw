@@ -6,7 +6,6 @@ import { Preloader } from '@/components/preloader/preloader';
 
 export const OrderDetails = (): React.JSX.Element => {
 	const { loading, error, orderId } = useSelector(getOrder);
-	console.log(loading, error, orderId);
 
 	return (
 		<div className={`${styles.card} pb-20 pt-4`}>
