@@ -65,3 +65,27 @@ export const getTotalPrice = createSelector(
 		return totalPrice;
 	}
 );
+
+export const getQuantityByIdIngredients = createSelector(
+	[
+		(state) => state.constructorIngredients.bun,
+		(state) => state.constructorIngredients.itemsConstructor,
+	],
+	(bun, itemsConstructor) => {
+		const quantityByIdIngredients: Record<string, number> = {};
+
+		if (bun) quantityByIdIngredients[bun['_id']] = 2;
+		if (itemsConstructor.length) {
+			itemsConstructor.forEach((item: TConstructorIngredient) => {
+				if (quantityByIdIngredients[item['_id']]) {
+					quantityByIdIngredients[item['_id']] =
+						quantityByIdIngredients[item['_id']] + 1;
+				} else {
+					quantityByIdIngredients[item['_id']] = 1;
+				}
+			});
+		}
+
+		return quantityByIdIngredients;
+	}
+);

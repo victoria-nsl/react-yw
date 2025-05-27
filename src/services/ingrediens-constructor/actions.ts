@@ -15,7 +15,7 @@ export const addConstructorIngredient = (
 	payload: ingredient,
 });
 
-export const deleteonstructorIngredient = (
+export const deleteConstructorIngredient = (
 	ingredient: TConstructorIngredient
 ): TConstructorIngredientsAction => ({
 	type: DELETE_CONSTRUCTOR_INGREDIENTS,

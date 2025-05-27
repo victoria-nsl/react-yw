@@ -4,8 +4,9 @@ import {
 	Counter,
 	CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentIngredient } from '@/services/current-ingredient/actions';
+import { getQuantityByIdIngredients } from '@/services/ingrediens-constructor/selectors';
 
 type TBurgerIngredientsCardProps = {
 	ingredient: TIngredient;
@@ -14,6 +15,7 @@ type TBurgerIngredientsCardProps = {
 export const BurgerIngredientsCard = ({
 	ingredient,
 }: TBurgerIngredientsCardProps): React.JSX.Element => {
+	const quantityByIdIngredients = useSelector(getQuantityByIdIngredients);
 	const dispatch = useDispatch();
 
 	const addCurrentIngredient = () => dispatch(setCurrentIngredient(ingredient));
@@ -33,7 +35,13 @@ export const BurgerIngredientsCard = ({
 				</div>
 			</div>
 			<h3 className='text text_type_main-small'>{ingredient.name}</h3>
-			<Counter count={1} size='default' extraClass='m-1' />
+			{quantityByIdIngredients[ingredient['_id']] && (
+				<Counter
+					count={quantityByIdIngredients[ingredient['_id']]}
+					size='default'
+					extraClass='m-1'
+				/>
+			)}
 		</li>
 	);
 };

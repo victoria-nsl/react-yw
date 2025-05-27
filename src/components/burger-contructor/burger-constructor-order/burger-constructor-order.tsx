@@ -8,11 +8,18 @@ import {
 	getBunConstructorIngredients,
 	getItemsConstructorIngredients,
 } from '@/services/ingrediens-constructor/selectors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { TConstructorIngredient } from '@/utils/types';
+import { deleteConstructorIngredient } from '@/services/ingrediens-constructor/actions';
 
 export const BurgerConstructorOrder = (): React.JSX.Element => {
 	const bun = useSelector(getBunConstructorIngredients);
 	const itemsConstructor = useSelector(getItemsConstructorIngredients);
+	const dispatch = useDispatch();
+
+	const onDelete = (item: TConstructorIngredient) => {
+		dispatch(deleteConstructorIngredient(item));
+	};
 
 	return (
 		<div className={styles.order}>
@@ -32,12 +39,13 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 			)}
 			<ul className={`${styles.list} custom-scroll`}>
 				{itemsConstructor.map((item) => (
-					<li className={styles.item} key={item._id}>
+					<li className={styles.item} key={item.id}>
 						<DragIcon type='primary' />
 						<ConstructorElement
 							text={item!.name}
 							price={item!.price}
 							thumbnail={item!.image}
+							handleClose={() => onDelete(item)}
 						/>
 					</li>
 				))}
