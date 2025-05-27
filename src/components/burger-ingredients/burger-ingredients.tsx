@@ -48,7 +48,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 		[bunCategory, mainCategory, sauceCategory]
 	);
 
-	const switchTabs = () => {
+	const handlerOnScroll = () => {
 		const topContainer = Math.round(
 			container.current!.getBoundingClientRect().top
 		);
@@ -118,7 +118,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 			<div
 				ref={container}
 				className={`${styles.categories} custom-scroll`}
-				onScroll={() => switchTabs()}>
+				onScroll={() => handlerOnScroll()}>
 				<div ref={bunCategory}>
 					<BurgerIngredientsCategory
 						ingredientsCategory={itemsBun}
