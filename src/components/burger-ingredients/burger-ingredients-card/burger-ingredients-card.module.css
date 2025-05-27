@@ -11,7 +11,7 @@
 
 .wrapper_image img {
 	position: relative;
-	z-index: 10;
+	z-index: 5;
 	width: 100%;
 	height: auto;
 }
