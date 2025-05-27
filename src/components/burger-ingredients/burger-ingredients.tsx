@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteCurrentIngredient } from '@/services/current-ingredient/actions';
 import { getCurrentIngredient } from '@/services/current-ingredient/selectors';
 import { getIngredientsByCategory } from '@/services/ingredients/selectors';
+import { TIngredientCategories } from '@/utils/types';
 
 export const BurgerIngredients = (): React.JSX.Element => {
 	const itemsBun = useSelector(getIngredientsByCategory('bun'));
@@ -23,6 +24,29 @@ export const BurgerIngredients = (): React.JSX.Element => {
 	const [activeTab, setActiveTab] = useState('bun');
 
 	const onClose = useCallback(() => dispatch(deleteCurrentIngredient()), []);
+
+	const handlerOnClickTab = useCallback(
+		(item: TIngredientCategories) => {
+			switch (item) {
+				case 'bun':
+					setActiveTab('bun');
+					bunCategory.current!.scrollIntoView({ behavior: 'smooth' });
+					break;
+				case 'main':
+					setActiveTab('main');
+					mainCategory.current!.scrollIntoView({ behavior: 'smooth' });
+					break;
+				case 'sauce':
+					setActiveTab('sauce');
+					sauceCategory.current!.scrollIntoView({ behavior: 'smooth' });
+					break;
+				default:
+					setActiveTab('bun');
+					bunCategory.current!.scrollIntoView({ behavior: 'smooth' });
+			}
+		},
+		[bunCategory, mainCategory, sauceCategory]
+	);
 
 	const switchTabs = () => {
 		const topContainer = Math.round(
@@ -59,15 +83,33 @@ export const BurgerIngredients = (): React.JSX.Element => {
 
 	return (
 		<section className={styles.burger_ingredients}>
+			<h1 className={`${styles.title} text text_type_main-large mb-5`}>
+				Соберите бургер
+			</h1>
 			<nav className='mb-10'>
 				<ul className={styles.menu}>
-					<Tab value='bun' active={activeTab === 'bun'} onClick={() => {}}>
+					<Tab
+						value='bun'
+						active={activeTab === 'bun'}
+						onClick={() => {
+							handlerOnClickTab('bun');
+						}}>
 						Булки
 					</Tab>
-					<Tab value='main' active={activeTab === 'main'} onClick={() => {}}>
+					<Tab
+						value='main'
+						active={activeTab === 'main'}
+						onClick={() => {
+							handlerOnClickTab('main');
+						}}>
 						Начинки
 					</Tab>
-					<Tab value='sauce' active={activeTab === 'sause'} onClick={() => {}}>
+					<Tab
+						value='sauce'
+						active={activeTab === 'sause'}
+						onClick={() => {
+							handlerOnClickTab('sauce');
+						}}>
 						Соусы
 					</Tab>
 				</ul>

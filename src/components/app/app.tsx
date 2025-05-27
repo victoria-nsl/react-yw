@@ -25,9 +25,6 @@ export const App = (): React.JSX.Element => {
 			<AppHeader />
 
 			<main className={`${styles.main} pt-10 pb-10 pl-5 pr-5`}>
-				<h1 className={`${styles.title} text text_type_main-large  mb-5 pl-5`}>
-					Соберите бургер
-				</h1>
 				<div className={styles.inner_main}>
 					{loading && <Preloader />}
 					{error && (
