@@ -4,10 +4,18 @@ export const ORDER_LOAD_SUCCESS = 'ORDER_LOAD_SUCCESS';
 export const ORDER_LOADING = 'ORDER_LOADING';
 export const ORDER_ERROR = 'ORDER_ERROR';
 
-export type TOrdersAction = {
-	type: string;
-	payload?: number;
-};
+export type TOrdersAction =
+	| {
+			type: 'ORDER_LOAD_SUCCESS';
+			payload: number;
+	  }
+	| {
+			type: 'ORDER_ERROR';
+			payload: string;
+	  }
+	| {
+			type: 'ORDER_LOADING';
+	  };
 
 export const createOrder =
 	(ids: string[]) => (dispatch: (arg0: TOrdersAction) => void) => {
