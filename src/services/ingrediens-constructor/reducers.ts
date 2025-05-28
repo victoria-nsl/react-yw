@@ -2,6 +2,8 @@ import { TConstructorIngredient } from '@/utils/types';
 import {
 	ADD_CONSTRUCTOR_INGREDIENTS,
 	DELETE_CONSTRUCTOR_INGREDIENTS,
+	UPDATE_CONSTRUCTOR_INGREDIENTS,
+	TConstructorIngredientsAction,
 } from './actions';
 
 const initialState = {
@@ -11,7 +13,7 @@ const initialState = {
 
 export const constructorIngredientsReducer = (
 	state = initialState,
-	action: { type: string; payload: TConstructorIngredient }
+	action: TConstructorIngredientsAction
 ) => {
 	switch (action.type) {
 		case ADD_CONSTRUCTOR_INGREDIENTS:
@@ -29,6 +31,12 @@ export const constructorIngredientsReducer = (
 				itemsConstructor: state.itemsConstructor.filter(
 					(item: TConstructorIngredient) => item.id !== action.payload.id
 				),
+			};
+
+		case UPDATE_CONSTRUCTOR_INGREDIENTS:
+			return {
+				...state,
+				itemsConstructor: action.payload,
 			};
 
 		default:

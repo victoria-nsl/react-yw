@@ -1,31 +1,26 @@
 import styles from './burger-constructor-order.module.css';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import { v4 as uuidv4 } from 'uuid';
 
-import {
-	ConstructorElement,
-	DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import {
 	getBunConstructorIngredients,
 	getItemsConstructorIngredients,
 } from '@/services/ingrediens-constructor/selectors';
-import { useDispatch, useSelector } from 'react-redux';
-import { TConstructorIngredient, TIngredient } from '@/utils/types';
+import { TIngredient } from '@/utils/types';
 import {
 	addConstructorIngredient,
-	deleteConstructorIngredient,
+	updateConstructorIngredient,
 } from '@/services/ingrediens-constructor/actions';
-import { useCallback } from 'react';
-import { useDrop } from 'react-dnd';
-import { v4 as uuidv4 } from 'uuid';
+
+import { BurgerConstructorIngredientCard } from '../burger-constructor-ingredient-card/burger-constructor-ingredient-card';
 
 export const BurgerConstructorOrder = (): React.JSX.Element => {
 	const bun = useSelector(getBunConstructorIngredients);
 	const itemsConstructor = useSelector(getItemsConstructorIngredients);
 	const dispatch = useDispatch();
-
-	const onDelete = useCallback((item: TConstructorIngredient) => {
-		dispatch(deleteConstructorIngredient(item));
-	}, []);
 
 	const [, dropTarget] = useDrop({
 		accept: 'ingredient',
@@ -33,6 +28,19 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 			dispatch(addConstructorIngredient({ ...itemId, id: uuidv4() }));
 		},
 	});
+
+	const moveCard = useCallback(
+		(dragIndex: number, hoverIndex: number) => {
+			const dragCard = itemsConstructor[dragIndex];
+			const newCards = [...itemsConstructor];
+
+			newCards.splice(dragIndex, 1);
+			newCards.splice(hoverIndex, 0, dragCard);
+
+			dispatch(updateConstructorIngredient(newCards));
+		},
+		[itemsConstructor]
+	);
 
 	return (
 		<div className={styles.order}>
@@ -51,16 +59,14 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 				<div className={`${styles.empty} ${styles.top}`}>Выберите булку</div>
 			)}
 			<ul ref={dropTarget} className={`${styles.list} custom-scroll`}>
-				{itemsConstructor.map((item) => (
-					<li className={styles.item} key={item.id}>
-						<DragIcon type='primary' />
-						<ConstructorElement
-							text={item!.name}
-							price={item!.price}
-							thumbnail={item!.image}
-							handleClose={() => onDelete(item)}
-						/>
-					</li>
+				{itemsConstructor.map((item, index) => (
+					<BurgerConstructorIngredientCard
+						key={item.id}
+						index={index}
+						id={item.id}
+						ingredientConstructor={item}
+						moveCard={moveCard}
+					/>
 				))}
 				{!itemsConstructor.length && (
 					<li className={`${styles.empty} `}>Выберите начинку</li>

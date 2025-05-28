@@ -1,0 +1,10 @@
+.card_constructor {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	opacity: 1;
+}
+
+.card_constructor.opacity_view {
+	opacity: 0;
+}
