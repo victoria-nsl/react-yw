@@ -2,11 +2,6 @@ import { TIngredient } from './types';
 
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api';
 
-type TIngredientsResponse = {
-	success: boolean;
-	data: TIngredient[];
-};
-
 type TOrderResponse = {
 	success: boolean;
 	order: {
@@ -15,7 +10,7 @@ type TOrderResponse = {
 	name: string;
 };
 
-const checkResponse = (response: Response): Promise<TIngredientsResponse> => {
+const checkResponse = (response: Response) => {
 	return response.ok
 		? response.json()
 		: response.json().then((error) => Promise.reject(error));
@@ -40,11 +35,7 @@ export const addOrder = (ids: string[]): Promise<TOrderResponse> => {
 			ingredients: ids,
 		}),
 	})
-		.then((response) =>
-			response.ok
-				? response.json()
-				: response.json().then((error) => Promise.reject(error))
-		)
+		.then(checkResponse)
 		.then((data) => {
 			if (data?.success) return data;
 			return Promise.reject(data);

@@ -1,5 +1,7 @@
 .card {
+	box-sizing: border-box;
 	width: 520px;
+	min-height: 573px;
 	margin: 0 auto;
 	text-align: center;
 }

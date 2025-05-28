@@ -23,11 +23,11 @@ export const BurgerConstructor = (): React.JSX.Element => {
 
 	const onClose = useCallback(() => setVisible(false), []);
 
-	const sendOrder = () => {
+	const sendOrder = useCallback(() => {
 		if (!ids.length) return;
 		dispatch(createOrder(ids));
 		setVisible(true);
-	};
+	}, [ids]);
 
 	return (
 		<section className={`${styles.burger_constructor} pb-2`}>
