@@ -18,7 +18,7 @@ export const App = (): React.JSX.Element => {
 
 	useEffect(() => {
 		dispatch(loadIngredients());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<div className={styles.app}>

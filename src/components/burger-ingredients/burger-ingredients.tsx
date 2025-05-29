@@ -23,7 +23,10 @@ export const BurgerIngredients = (): React.JSX.Element => {
 	const sauceCategory = useRef<HTMLInputElement>(null);
 	const [activeTab, setActiveTab] = useState('bun');
 
-	const onClose = useCallback(() => dispatch(deleteCurrentIngredient()), []);
+	const onClose = useCallback(
+		() => dispatch(deleteCurrentIngredient()),
+		[dispatch]
+	);
 
 	const handlerOnClickTab = useCallback(
 		(item: TIngredientCategories) => {

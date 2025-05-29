@@ -27,7 +27,7 @@ export const BurgerConstructor = (): React.JSX.Element => {
 		if (!ids.length) return;
 		dispatch(createOrder(ids));
 		setVisible(true);
-	}, [ids]);
+	}, [ids, dispatch]);
 
 	return (
 		<section className={`${styles.burger_constructor} pb-2`}>

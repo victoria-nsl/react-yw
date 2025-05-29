@@ -33,7 +33,7 @@ export const BurgerConstructorIngredientCard = ({
 
 	const onDelete = useCallback(() => {
 		dispatch(deleteConstructorIngredient(ingredientConstructor));
-	}, [ingredientConstructor]);
+	}, [ingredientConstructor, dispatch]);
 
 	const [{ opacity }, drag] = useDrag({
 		type: 'card',

@@ -39,7 +39,7 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 
 			dispatch(updateConstructorIngredient(newCards));
 		},
-		[itemsConstructor]
+		[itemsConstructor, dispatch]
 	);
 
 	return (
