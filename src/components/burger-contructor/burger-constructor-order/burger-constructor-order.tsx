@@ -43,7 +43,7 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 	);
 
 	return (
-		<div className={styles.order}>
+		<div ref={dropTarget} className={styles.order}>
 			{bun && (
 				<div className='pr-2'>
 					<ConstructorElement
@@ -58,7 +58,7 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 			{!bun && (
 				<div className={`${styles.empty} ${styles.top}`}>Выберите булку</div>
 			)}
-			<ul ref={dropTarget} className={`${styles.list} custom-scroll`}>
+			<ul className={`${styles.list} custom-scroll`}>
 				{itemsConstructor.map((item, index) => (
 					<BurgerConstructorIngredientCard
 						key={item.id}
