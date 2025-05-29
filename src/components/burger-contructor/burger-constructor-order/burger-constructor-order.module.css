@@ -29,7 +29,7 @@
 	box-sizing: border-box;
 	width: 536px;
 	min-height: 80px;
-	margin-right: -8px;
+	margin-right: 0;
 	padding: 16px 24px;
 	color: #f2f2f3;
 	font-size: 16px;
@@ -38,11 +38,11 @@
 }
 
 .empty.top {
-	margin-right: 0;
+	margin-right: 8px;
 	border-radius: 88px 88px 40px 40px;
 }
 
 .empty.bottom {
-	margin-right: 0;
+	margin-right: 8px;
 	border-radius: 40px 40px 88px 88px;
 }
