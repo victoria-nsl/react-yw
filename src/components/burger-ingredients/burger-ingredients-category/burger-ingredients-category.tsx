@@ -1,18 +1,16 @@
 import styles from './burger-ingredients-category.module.css';
 import { TIngredient, TIngredientCategories } from '@/utils/types';
 import { BurgerIngredientsCard } from '../burger-ingredients-card/burger-ingredients-card';
-import { SetStateAction, useMemo } from 'react';
+import { useMemo } from 'react';
 
 type TBurgerIngredientsCategoryProps = {
 	ingredientsCategory: TIngredient[];
 	type: TIngredientCategories;
-	onValueChange: (newValue: SetStateAction<null | TIngredient>) => void;
 };
 
 export const BurgerIngredientsCategory = ({
 	ingredientsCategory,
 	type,
-	onValueChange,
 }: TBurgerIngredientsCategoryProps): React.JSX.Element => {
 	const getNameType = useMemo(
 		() =>
@@ -38,7 +36,6 @@ export const BurgerIngredientsCategory = ({
 					<BurgerIngredientsCard
 						key={ingredientCard._id}
 						ingredient={ingredientCard}
-						onValueChange={onValueChange}
 					/>
 				))}
 			</ul>

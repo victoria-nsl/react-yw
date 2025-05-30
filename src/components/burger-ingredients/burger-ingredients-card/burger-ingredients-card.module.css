@@ -5,7 +5,13 @@
 	cursor: pointer;
 }
 
+.card.opacity_view {
+	opacity: 0.5;
+}
+
 .wrapper_image img {
+	position: relative;
+	z-index: 5;
 	width: 100%;
 	height: auto;
 }

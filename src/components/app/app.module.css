@@ -13,12 +13,6 @@
 	overflow: hidden;
 }
 
-.title {
-	align-self: center;
-	width: 100%;
-	max-width: 1260px;
-}
-
 .inner_main {
 	height: 100%;
 	text-align: center;

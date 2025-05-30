@@ -13,4 +13,33 @@ export type TIngredient = {
 	__v: number;
 };
 
+export type TConstructorIngredient = TIngredient & { id: string };
+
 export type TIngredientCategories = 'bun' | 'main' | 'sauce';
+
+export type TIngredientsState = {
+	ingredients: {
+		loading: boolean;
+		error: boolean;
+		items: TIngredient[];
+	};
+};
+
+export type TIngredientsConstructorState = {
+	constructorIngredients: {
+		bun: TConstructorIngredient;
+		itemsConstructor: TConstructorIngredient[];
+	};
+};
+
+export type TCurrentIngredientState = {
+	currentIngredient: { currentItem: TIngredient };
+};
+
+export type TOrderState = {
+	order: {
+		loading: boolean;
+		error: boolean;
+		orderId: number;
+	};
+};

@@ -21,3 +21,28 @@
 	align-items: center;
 	gap: 8px;
 }
+
+.empty {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	width: 536px;
+	min-height: 80px;
+	margin-right: 0;
+	padding: 16px 24px;
+	color: #f2f2f3;
+	font-size: 16px;
+	background: var(--background-element);
+	border-radius: 40px;
+}
+
+.empty.top {
+	margin-right: 8px;
+	border-radius: 88px 88px 40px 40px;
+}
+
+.empty.bottom {
+	margin-right: 8px;
+	border-radius: 40px 40px 88px 88px;
+}

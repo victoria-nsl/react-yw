@@ -1,59 +1,92 @@
-import React, { useMemo } from 'react';
 import styles from './burger-constructor-order.module.css';
-import { TIngredient } from '@utils/types.ts';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import { v4 as uuidv4 } from 'uuid';
+
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import {
-	ConstructorElement,
-	DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+	getBunConstructorIngredients,
+	getItemsConstructorIngredients,
+} from '@/services/ingrediens-constructor/selectors';
+import { TIngredient } from '@/utils/types';
+import {
+	addConstructorIngredient,
+	updateConstructorIngredient,
+} from '@/services/ingrediens-constructor/actions';
 
-type TBurgerIngredientsProps = {
-	ingredients: TIngredient[];
-};
+import { BurgerConstructorIngredientCard } from '../burger-constructor-ingredient-card/burger-constructor-ingredient-card';
 
-export const BurgerConstructorOrder = ({
-	ingredients,
-}: TBurgerIngredientsProps): React.JSX.Element => {
-	const bun = useMemo(
-		() => ingredients.find((item) => item.type === 'bun'),
-		[ingredients]
-	);
-	const otherIngredients = useMemo(
-		() => ingredients.filter((item) => item.type !== 'bun'),
-		[ingredients]
+export const BurgerConstructorOrder = (): React.JSX.Element => {
+	const bun = useSelector(getBunConstructorIngredients);
+	const itemsConstructor = useSelector(getItemsConstructorIngredients);
+	const dispatch = useDispatch();
+
+	const [, dropTarget] = useDrop({
+		accept: 'ingredient',
+		drop(itemId: TIngredient) {
+			dispatch(addConstructorIngredient({ ...itemId, id: uuidv4() }));
+		},
+	});
+
+	const moveCard = useCallback(
+		(dragIndex: number, hoverIndex: number) => {
+			const dragCard = itemsConstructor[dragIndex];
+			const newCards = [...itemsConstructor];
+
+			newCards.splice(dragIndex, 1);
+			newCards.splice(hoverIndex, 0, dragCard);
+
+			dispatch(updateConstructorIngredient(newCards));
+		},
+		[itemsConstructor, dispatch]
 	);
 
 	return (
-		<div className={styles.order}>
-			<div className='pr-2'>
-				<ConstructorElement
-					type='top'
-					isLocked={true}
-					text={`${bun!.name} (верх)`}
-					price={bun!.price}
-					thumbnail={bun!.image}
-				/>
-			</div>
+		<div ref={dropTarget} className={styles.order}>
+			{bun && (
+				<div className='pr-2'>
+					<ConstructorElement
+						type='top'
+						isLocked={true}
+						text={`${bun!.name} (верх)`}
+						price={bun!.price}
+						thumbnail={bun!.image}
+					/>
+				</div>
+			)}
+			{!bun && (
+				<div className={`${styles.empty} ${styles.top}`}>Выберите булку</div>
+			)}
 			<ul className={`${styles.list} custom-scroll`}>
-				{otherIngredients.map((ingredient) => (
-					<li className={styles.item} key={ingredient._id}>
-						<DragIcon type='primary' />
-						<ConstructorElement
-							text={ingredient!.name}
-							price={ingredient!.price}
-							thumbnail={ingredient!.image}
-						/>
-					</li>
+				{itemsConstructor.map((item, index) => (
+					<BurgerConstructorIngredientCard
+						key={item.id}
+						index={index}
+						id={item.id}
+						ingredientConstructor={item}
+						moveCard={moveCard}
+					/>
 				))}
+				{!itemsConstructor.length && (
+					<li className={`${styles.empty} `}>Выберите начинку</li>
+				)}
 			</ul>
-			<div className='pr-2'>
-				<ConstructorElement
-					type='bottom'
-					isLocked={true}
-					text={`${bun!.name} (низ)`}
-					price={bun!.price}
-					thumbnail={bun!.image}
-				/>
-			</div>
+
+			{bun && (
+				<div className='pr-2'>
+					<ConstructorElement
+						type='bottom'
+						isLocked={true}
+						text={`${bun!.name} (низ)`}
+						price={bun!.price}
+						thumbnail={bun!.image}
+					/>
+				</div>
+			)}
+			{!bun && (
+				<div className={`${styles.empty} ${styles.bottom}`}>Выберите булку</div>
+			)}
 		</div>
 	);
 };

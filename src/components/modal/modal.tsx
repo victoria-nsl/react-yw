@@ -15,8 +15,8 @@ type TModalProps = {
 
 export const Modal = ({
 	header,
-	onClose,
 	children,
+	onClose,
 }: TModalProps): React.JSX.Element => {
 	const closeModalEsc = (evt: KeyboardEvent): void => {
 		if (isEscEvent(evt)) {
