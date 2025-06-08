@@ -16,12 +16,6 @@
 	list-style: none;
 }
 
-.item {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-}
-
 .empty {
 	display: flex;
 	justify-content: center;

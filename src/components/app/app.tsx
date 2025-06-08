@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import styles from './app.module.css';
 import { AppHeader } from '@components/app-header/app-header.tsx';
 import { Preloader } from '../preloader/preloader';
@@ -29,7 +30,11 @@ export const App = (): React.JSX.Element => {
 							Произошла ошибка
 						</p>
 					)}
-					{!loading && !error && items.length && <Home />}
+					{!loading && !error && items.length && (
+						<Routes>
+							<Route path='/' element={<Home />} />
+						</Routes>
+					)}
 				</div>
 			</main>
 		</div>
