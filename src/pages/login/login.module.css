@@ -1,3 +1,33 @@
 .wrapper {
-	text-align: start;
+	width: 480px;
+	margin: 0 auto;
+	margin-top: 140px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-bottom: 88px;
+}
+
+.wrapper_button {
+	align-self: flex-start;
+	margin: 0 auto;
+}
+
+.wrapper_link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+}
+
+.link {
+	color: rgb(76 76 255 / 100%);
+	text-decoration: none;
+}
+
+.link:hover {
+	opacity: 0.8;
 }
