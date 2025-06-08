@@ -10,6 +10,12 @@ import { Home } from '@/pages/home/home';
 import { Modal } from '../modal/modal';
 import { IngredientDetails } from '../burger-ingredients/ingredient-details/ingredient-details';
 import { IngredientDetailsPage } from '@/pages/ingredient-details-page/ingredient-details-page';
+import { Login } from '@/pages/login/login';
+import { NotFound } from '@/pages/not-found/not-found';
+import { Register } from '@/pages/register/register';
+import { ForgotPassword } from '@/pages/forgot-password/forgot-password';
+import { ResetPassword } from '@/pages/reset-password/reset-password';
+import { Profile } from '@/pages/profile/profile';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
@@ -44,10 +50,16 @@ export const App = (): React.JSX.Element => {
 						<>
 							<Routes location={background || location}>
 								<Route path='/' element={<Home />} />
+								<Route path='/login' element={<Login />} />
+								<Route path='/register' element={<Register />} />
+								<Route path='/forgot-password' element={<ForgotPassword />} />
+								<Route path='/reset-password' element={<ResetPassword />} />
+								<Route path='/profile' element={<Profile />} />
 								<Route
 									path='/ingredients/:ingredientId'
 									element={<IngredientDetailsPage />}
 								/>
+								<Route path='*' element={<NotFound />} />
 							</Routes>
 
 							{background && (
