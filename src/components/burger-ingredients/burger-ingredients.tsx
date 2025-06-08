@@ -3,11 +3,9 @@ import styles from './burger-ingredients.module.css';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerIngredientsCategory } from './burger-ingredients-category/burger-ingredients-category';
-import { IngredientDetails } from './ingredient-details/ingredient-details';
-import { Modal } from '../modal/modal';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteCurrentIngredient } from '@/services/current-ingredient/actions';
-import { getCurrentIngredient } from '@/services/current-ingredient/selectors';
+
+import { useSelector } from 'react-redux';
+
 import { getIngredientsByCategory } from '@/services/ingredients/selectors';
 import { TIngredientCategories } from '@/utils/types';
 
@@ -15,18 +13,12 @@ export const BurgerIngredients = (): React.JSX.Element => {
 	const itemsBun = useSelector(getIngredientsByCategory('bun'));
 	const itemsMain = useSelector(getIngredientsByCategory('main'));
 	const itemsSauce = useSelector(getIngredientsByCategory('sauce'));
-	const { currentItem } = useSelector(getCurrentIngredient);
-	const dispatch = useDispatch();
+
 	const container = useRef<HTMLInputElement>(null);
 	const bunCategory = useRef<HTMLInputElement>(null);
 	const mainCategory = useRef<HTMLInputElement>(null);
 	const sauceCategory = useRef<HTMLInputElement>(null);
 	const [activeTab, setActiveTab] = useState('bun');
-
-	const onClose = useCallback(
-		() => dispatch(deleteCurrentIngredient()),
-		[dispatch]
-	);
 
 	const handlerOnClickTab = useCallback(
 		(item: TIngredientCategories) => {
@@ -141,11 +133,6 @@ export const BurgerIngredients = (): React.JSX.Element => {
 					/>
 				</div>
 			</div>
-			{currentItem && (
-				<Modal header='Детали ингредиента' onClose={onClose}>
-					<IngredientDetails></IngredientDetails>
-				</Modal>
-			)}
 		</section>
 	);
 };

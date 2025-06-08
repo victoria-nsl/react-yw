@@ -4,10 +4,10 @@ import {
 	Counter,
 	CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentIngredient } from '@/services/current-ingredient/actions';
+import { useSelector } from 'react-redux';
 import { getQuantityByIdIngredients } from '@/services/ingrediens-constructor/selectors';
 import { useDrag } from 'react-dnd';
+import { Link, useLocation } from 'react-router-dom';
 
 type TBurgerIngredientsCardProps = {
 	ingredient: TIngredient;
@@ -17,9 +17,9 @@ export const BurgerIngredientsCard = ({
 	ingredient,
 }: TBurgerIngredientsCardProps): React.JSX.Element => {
 	const quantityByIdIngredients = useSelector(getQuantityByIdIngredients);
-	const dispatch = useDispatch();
+	const location = useLocation();
 
-	const addCurrentIngredient = () => dispatch(setCurrentIngredient(ingredient));
+	const ingredientId = ingredient['_id'];
 
 	const [{ opacity }, refIngredient] = useDrag({
 		type: 'ingredient',
@@ -30,31 +30,34 @@ export const BurgerIngredientsCard = ({
 	});
 
 	return (
-		<li
-			className={`${styles.card}  ${opacity && styles.opacity_view}`}
-			onClick={() => addCurrentIngredient()}
-			aria-hidden='true'>
-			<div className={`${styles.wrapper_image} pl-4 pr-4`}>
-				<img
-					ref={refIngredient}
-					src={ingredient.image}
-					alt={`${ingredient.name}.`}
-				/>
-				<div className={`${styles.wrapper_price} pt-1 pb-1`}>
-					<span className='text text_type_digits-default'>
-						{ingredient.price}
-					</span>
-					<CurrencyIcon type='primary' />
+		<li className={`${styles.card}  ${opacity && styles.opacity_view}`}>
+			<Link
+				key={ingredientId}
+				to={`/ingredients/${ingredientId}`}
+				state={{ background: location }}
+				className={styles.link}>
+				<div className={`${styles.wrapper_image} pl-4 pr-4`}>
+					<img
+						ref={refIngredient}
+						src={ingredient.image}
+						alt={`${ingredient.name}.`}
+					/>
+					<div className={`${styles.wrapper_price} pt-1 pb-1`}>
+						<span className='text text_type_digits-default'>
+							{ingredient.price}
+						</span>
+						<CurrencyIcon type='primary' />
+					</div>
 				</div>
-			</div>
-			<h3 className='text text_type_main-small'>{ingredient.name}</h3>
-			{quantityByIdIngredients[ingredient['_id']] && (
-				<Counter
-					count={quantityByIdIngredients[ingredient['_id']]}
-					size='default'
-					extraClass='m-1'
-				/>
-			)}
+				<h3 className='text text_type_main-small'>{ingredient.name}</h3>
+				{quantityByIdIngredients[ingredient['_id']] && (
+					<Counter
+						count={quantityByIdIngredients[ingredient['_id']]}
+						size='default'
+						extraClass='m-1'
+					/>
+				)}
+			</Link>
 		</li>
 	);
 };

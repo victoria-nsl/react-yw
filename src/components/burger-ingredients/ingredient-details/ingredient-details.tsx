@@ -1,9 +1,11 @@
 import styles from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
-import { getCurrentIngredient } from '@/services/current-ingredient/selectors';
+import { useParams } from 'react-router-dom';
+import { getIngredientById } from '@/services/ingredients/selectors';
 
 export const IngredientDetails = (): React.JSX.Element => {
-	const { currentItem } = useSelector(getCurrentIngredient);
+	const { ingredientId } = useParams();
+	const currentItem = useSelector(getIngredientById(ingredientId!));
 
 	return (
 		<div className={styles.card}>

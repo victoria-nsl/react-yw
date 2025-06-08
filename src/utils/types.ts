@@ -32,10 +32,6 @@ export type TIngredientsConstructorState = {
 	};
 };
 
-export type TCurrentIngredientState = {
-	currentIngredient: { currentItem: TIngredient };
-};
-
 export type TOrderState = {
 	order: {
 		loading: boolean;
