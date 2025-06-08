@@ -32,7 +32,6 @@ export const BurgerIngredientsCard = ({
 	return (
 		<li className={`${styles.card}  ${opacity && styles.opacity_view}`}>
 			<Link
-				key={ingredientId}
 				to={`/ingredients/${ingredientId}`}
 				state={{ background: location }}
 				className={styles.link}>
