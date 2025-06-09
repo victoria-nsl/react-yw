@@ -16,13 +16,24 @@
 }
 
 .link {
-	display: flex;
-	color: var(--text-inactive-color);
 	text-decoration: none;
 }
 
-.link_active {
+.link_content {
+	display: flex;
+	color: var(--text-inactive-color);
+}
+
+.link_content svg {
+	fill: var(--text-inactive-color);
+}
+
+.link_content_active {
 	color: var(--text-primary-color);
+}
+
+.link_content_active svg {
+	fill: var(--text-primary-color);
 }
 
 .link_position_last {
