@@ -17,6 +17,11 @@ export type TConstructorIngredient = TIngredient & { id: string };
 
 export type TIngredientCategories = 'bun' | 'main' | 'sauce';
 
+export type TUser = {
+	name: string;
+	email: string;
+};
+
 export type TIngredientsState = {
 	ingredients: {
 		loading: boolean;

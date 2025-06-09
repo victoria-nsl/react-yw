@@ -1,6 +1,22 @@
-import { TIngredient } from './types';
+import { TIngredient, TUser } from './types';
 
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api';
+
+export type TResetRequest = {
+	password: string;
+	token: string;
+};
+
+export type TRegisterRequest = {
+	email: string;
+	password: string;
+	name: string;
+};
+
+export type TLoginRequest = {
+	email: string;
+	password: string;
+};
 
 type TOrderResponse = {
 	success: boolean;
@@ -8,6 +24,29 @@ type TOrderResponse = {
 		number: number;
 	};
 	name: string;
+};
+
+type TAuthResponse = {
+	success: boolean;
+	accessToken: string;
+	refreshToken: string;
+	user: TUser;
+};
+
+type TTokenResponse = {
+	success: boolean;
+	accessToken: string;
+	refreshToken: string;
+};
+
+type TUserResponse = {
+	success: boolean;
+	user: TUser;
+};
+
+type TSuccessResponse = {
+	success: boolean;
+	message: string;
 };
 
 const checkResponse = (response: Response) => {
@@ -38,6 +77,143 @@ export const addOrder = (ids: string[]): Promise<TOrderResponse> => {
 		.then(checkResponse)
 		.then((data) => {
 			if (data?.success) return data;
+			return Promise.reject(data);
+		});
+};
+
+export const forgotPasswordApi = (requestForgot: {
+	email: string;
+}): Promise<TSuccessResponse> => {
+	return fetch(`${BURGER_API_URL}/password-reset`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(requestForgot),
+	})
+		.then(checkResponse)
+		.then((data) => {
+			if (data?.success) return data;
+			return Promise.reject(data);
+		});
+};
+
+export const resetPasswordApi = (
+	requestReset: TResetRequest
+): Promise<TSuccessResponse> => {
+	console.log(requestReset);
+	return fetch(`${BURGER_API_URL}/password-reset/reset`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(requestReset),
+	})
+		.then(checkResponse)
+		.then((data) => {
+			if (data?.success) return data;
+			return Promise.reject(data);
+		});
+};
+
+export const registerApi = (
+	requestRegister: TRegisterRequest
+): Promise<TAuthResponse> => {
+	return fetch(`${BURGER_API_URL}/auth/register`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(requestRegister),
+	})
+		.then(checkResponse)
+		.then((data) => {
+			if (data?.success) return data;
+			return Promise.reject(data);
+		});
+};
+
+export const loginApi = (
+	requestLogin: TLoginRequest
+): Promise<TAuthResponse> => {
+	return fetch(`${BURGER_API_URL}/auth/login`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(requestLogin),
+	})
+		.then(checkResponse)
+		.then((data) => {
+			if (data?.success) return data;
+			return Promise.reject(data);
+		});
+};
+
+export const tokenApi = (requestToken: {
+	token: string;
+}): Promise<TTokenResponse> => {
+	return fetch(`${BURGER_API_URL}/auth/token`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(requestToken),
+	})
+		.then(checkResponse)
+		.then((data) => {
+			if (data?.success) return data;
+			return Promise.reject(data);
+		});
+};
+
+export const logoutApi = (requestToken: {
+	token: string;
+}): Promise<TSuccessResponse> => {
+	return fetch(`${BURGER_API_URL}/auth/logout`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(requestToken),
+	})
+		.then(checkResponse)
+		.then((data) => {
+			if (data?.success) return data;
+			return Promise.reject(data);
+		});
+};
+
+export const getUserApi = (accessToken: string): Promise<TUserResponse> => {
+	return fetch(`${BURGER_API_URL}/auth/user`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `'Bearer '${accessToken}`,
+		},
+	})
+		.then(checkResponse)
+		.then((data) => {
+			if (data?.success) return data.data;
+			return Promise.reject(data);
+		});
+};
+
+export const updateUserApi = (
+	accessToken: string,
+	requestUpdateUser: TRegisterRequest
+): Promise<TUserResponse> => {
+	return fetch(`${BURGER_API_URL}/auth/user`, {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `'Bearer '${accessToken}`,
+		},
+		body: JSON.stringify(requestUpdateUser),
+	})
+		.then(checkResponse)
+		.then((data) => {
+			if (data?.success) return data.data;
 			return Promise.reject(data);
 		});
 };

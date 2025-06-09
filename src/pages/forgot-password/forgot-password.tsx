@@ -5,6 +5,7 @@ import {
 import styles from './forgot-password.module.css';
 import { Link } from 'react-router-dom';
 import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
+//import { forgotPasswordApi } from '@/utils/api';
 
 export const ForgotPassword = (): React.JSX.Element => {
 	const [form, setValue] = useState({ email: '' });
@@ -12,7 +13,7 @@ export const ForgotPassword = (): React.JSX.Element => {
 	const restore = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
 			evt.preventDefault();
-			console.log(form);
+			//forgotPasswordApi(form);
 		},
 		[form]
 	);

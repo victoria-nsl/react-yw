@@ -6,6 +6,7 @@ import {
 	PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
+//import { resetPasswordApi } from '@/utils/api';
 
 export const ResetPassword = (): React.JSX.Element => {
 	const [form, setValue] = useState({ password: '', token: '' });
@@ -13,7 +14,7 @@ export const ResetPassword = (): React.JSX.Element => {
 	const reset = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
 			evt.preventDefault();
-			console.log(form);
+			//resetPasswordApi(form);
 		},
 		[form]
 	);
