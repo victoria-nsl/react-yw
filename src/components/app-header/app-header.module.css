@@ -16,23 +16,20 @@
 }
 
 .link {
+	display: flex;
+	color: var(--text-inactive-color);
 	text-decoration: none;
 }
 
-.link_content {
-	display: flex;
-	color: var(--text-inactive-color);
-}
-
-.link_content svg {
+.link svg {
 	fill: var(--text-inactive-color);
 }
 
-.link_content_active {
+.link_active {
 	color: var(--text-primary-color);
 }
 
-.link_content_active svg {
+.link_active svg {
 	fill: var(--text-primary-color);
 }
 
