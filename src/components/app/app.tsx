@@ -18,6 +18,7 @@ import { ResetPassword } from '@/pages/reset-password/reset-password';
 import { Profile } from '@/pages/profile/profile';
 import { ChangeDataUser } from '../change-data-user/change-data-user';
 import { OrdersHistory } from '../orders-history/orders-history';
+import { Feed } from '@/pages/feed/feed';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
@@ -60,6 +61,7 @@ export const App = (): React.JSX.Element => {
 									<Route index element={<ChangeDataUser />} />
 									<Route path='orders' element={<OrdersHistory />} />
 								</Route>
+								<Route path='/feed' element={<Feed />} />
 								<Route
 									path='/ingredients/:ingredientId'
 									element={<IngredientDetailsPage />}

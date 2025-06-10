@@ -1,3 +1,91 @@
+import {
+	Button,
+	EmailInput,
+	Input,
+	PasswordInput,
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
+import styles from './change-data-user.module.css';
+
 export const ChangeDataUser = (): React.JSX.Element => {
-	return <div>ChangeDataUser</div>;
+	const [form, setValue] = useState({ name: '', email: '', password: '' });
+	const [isVisibleButtons, setVisibleButtons] = useState(false);
+
+	const update = useCallback(
+		(evt: SyntheticEvent<Element, Event>) => {
+			evt.preventDefault();
+			console.log(form);
+			setVisibleButtons(false);
+		},
+		[form]
+	);
+
+	const cansel = useCallback(
+		(evt: SyntheticEvent<Element, Event>) => {
+			evt.preventDefault();
+			console.log(form);
+			//setValue()
+			setVisibleButtons(false);
+		},
+		[form]
+	);
+
+	const onChange = useCallback(
+		(evt: ChangeEvent<HTMLInputElement>) => {
+			setValue({ ...form, [evt.target!.name]: evt.target!.value });
+			setVisibleButtons(true);
+		},
+		[form]
+	);
+
+	return (
+		<div className={styles.wrapper}>
+			<form className={styles.form}>
+				<Input
+					type={'text'}
+					placeholder={'Имя'}
+					onChange={onChange}
+					icon={'EditIcon'}
+					value={form.name}
+					name={'name'}
+					error={false}
+					errorText={'Ошибка'}
+					size={'default'}
+					extraClass='ml-1'
+				/>
+				<EmailInput
+					onChange={onChange}
+					value={form.email}
+					name={'email'}
+					placeholder='Логин'
+					isIcon={true}
+					extraClass='mb-2'
+				/>
+				<PasswordInput
+					onChange={onChange}
+					value={form.password}
+					name={'password'}
+					icon={'EditIcon'}
+				/>
+				{isVisibleButtons && (
+					<div className={styles.wrapper_button}>
+						<Button
+							htmlType='button'
+							type='secondary'
+							size='large'
+							onClick={cansel}>
+							Отмена
+						</Button>
+						<Button
+							htmlType='button'
+							type='primary'
+							size='medium'
+							onClick={update}>
+							Сохранить
+						</Button>
+					</div>
+				)}
+			</form>
+		</div>
+	);
 };
