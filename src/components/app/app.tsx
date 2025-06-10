@@ -16,6 +16,8 @@ import { Register } from '@/pages/register/register';
 import { ForgotPassword } from '@/pages/forgot-password/forgot-password';
 import { ResetPassword } from '@/pages/reset-password/reset-password';
 import { Profile } from '@/pages/profile/profile';
+import { ChangeDataUser } from '../change-data-user/change-data-user';
+import { OrdersHistory } from '../orders-history/orders-history';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
@@ -54,7 +56,10 @@ export const App = (): React.JSX.Element => {
 								<Route path='/register' element={<Register />} />
 								<Route path='/forgot-password' element={<ForgotPassword />} />
 								<Route path='/reset-password' element={<ResetPassword />} />
-								<Route path='/profile' element={<Profile />} />
+								<Route path='/profile' element={<Profile />}>
+									<Route index element={<ChangeDataUser />} />
+									<Route path='orders' element={<OrdersHistory />} />
+								</Route>
 								<Route
 									path='/ingredients/:ingredientId'
 									element={<IngredientDetailsPage />}
