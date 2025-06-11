@@ -22,6 +22,13 @@ export type TUser = {
 	email: string;
 };
 
+export type TUserState = {
+	auth: {
+		user: TUser;
+		isAuthChecked: boolean;
+	};
+};
+
 export type TIngredientsState = {
 	ingredients: {
 		loading: boolean;
