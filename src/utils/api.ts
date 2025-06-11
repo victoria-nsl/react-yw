@@ -2,18 +2,18 @@ import { TIngredient, TUser } from './types';
 
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api';
 
-export type TResetRequest = {
+type TResetRequest = {
 	password: string;
 	token: string;
 };
 
-export type TRegisterRequest = {
+type TRegisterRequest = {
 	email: string;
 	password: string;
 	name: string;
 };
 
-export type TLoginRequest = {
+type TLoginRequest = {
 	email: string;
 	password: string;
 };
