@@ -128,7 +128,11 @@ export const registerApi = (
 	})
 		.then(checkResponse)
 		.then((data) => {
-			if (data?.success) return data;
+			if (data?.success) {
+				localStorage.setItem('refreshToken', data.refreshToken);
+				localStorage.setItem('accessToken', data.accessToken);
+				return data.user;
+			}
 			return Promise.reject(data);
 		});
 };
@@ -145,37 +149,22 @@ export const loginApi = (
 	})
 		.then(checkResponse)
 		.then((data) => {
-			if (data?.success) return data;
+			if (data?.success) {
+				localStorage.setItem('refreshToken', data.refreshToken);
+				localStorage.setItem('accessToken', data.accessToken);
+				return data.user;
+			}
 			return Promise.reject(data);
 		});
 };
 
-export const tokenApi = (requestToken: {
-	token: string;
-}): Promise<TTokenResponse> => {
-	return fetch(`${BURGER_API_URL}/auth/token`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(requestToken),
-	})
-		.then(checkResponse)
-		.then((data) => {
-			if (data?.success) return data;
-			return Promise.reject(data);
-		});
-};
-
-export const logoutApi = (requestToken: {
-	token: string;
-}): Promise<TSuccessResponse> => {
+export const logoutApi = (): Promise<TSuccessResponse> => {
 	return fetch(`${BURGER_API_URL}/auth/logout`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(requestToken),
+		body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
 	})
 		.then(checkResponse)
 		.then((data) => {
@@ -185,7 +174,7 @@ export const logoutApi = (requestToken: {
 };
 
 export const getUserApi = (accessToken: string): Promise<TUserResponse> => {
-	return fetch(`${BURGER_API_URL}/auth/user`, {
+	return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -194,7 +183,7 @@ export const getUserApi = (accessToken: string): Promise<TUserResponse> => {
 	})
 		.then(checkResponse)
 		.then((data) => {
-			if (data?.success) return data.data;
+			if (data?.success) return data.user;
 			return Promise.reject(data);
 		});
 };
@@ -203,7 +192,7 @@ export const updateUserApi = (
 	accessToken: string,
 	requestUpdateUser: TRegisterRequest
 ): Promise<TUserResponse> => {
-	return fetch(`${BURGER_API_URL}/auth/user`, {
+	return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json',
@@ -213,7 +202,47 @@ export const updateUserApi = (
 	})
 		.then(checkResponse)
 		.then((data) => {
-			if (data?.success) return data.data;
+			if (data?.success) return data.user;
 			return Promise.reject(data);
 		});
+};
+
+export const refreshTokenApi = (): Promise<TTokenResponse> => {
+	return fetch(`${BURGER_API_URL}/auth/token`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8',
+		},
+		body: JSON.stringify({
+			token: localStorage.getItem('refreshToken'),
+		}),
+	})
+		.then(checkResponse)
+		.then((data) => {
+			if (data.success) {
+				localStorage.setItem('refreshToken', data.refreshToken);
+				localStorage.setItem('accessToken', data.accessToken);
+				return data;
+			}
+
+			return Promise.reject(data);
+		});
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const fetchWithRefresh = async (url: string, options: any) => {
+	try {
+		const res = await fetch(url, options);
+		return await checkResponse(res);
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	} catch (err: any) {
+		if (err.message === 'jwt expired') {
+			const refreshData = await refreshTokenApi();
+			options.headers.authorization = refreshData.accessToken;
+			const res = await fetch(url, options);
+			return await checkResponse(res);
+		} else {
+			return Promise.reject(err);
+		}
+	}
 };
