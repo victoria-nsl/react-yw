@@ -87,7 +87,7 @@ export const forgotPasswordApi = (requestForgot: {
 	return fetch(`${BURGER_API_URL}/password-reset`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
 		},
 		body: JSON.stringify(requestForgot),
 	})
@@ -105,7 +105,7 @@ export const resetPasswordApi = (
 	return fetch(`${BURGER_API_URL}/password-reset/reset`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
 		},
 		body: JSON.stringify(requestReset),
 	})
@@ -122,7 +122,7 @@ export const registerApi = (
 	return fetch(`${BURGER_API_URL}/auth/register`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
 		},
 		body: JSON.stringify(requestRegister),
 	})
@@ -143,7 +143,7 @@ export const loginApi = (
 	return fetch(`${BURGER_API_URL}/auth/login`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
 		},
 		body: JSON.stringify(requestLogin),
 	})
@@ -162,7 +162,7 @@ export const logoutApi = (): Promise<TSuccessResponse> => {
 	return fetch(`${BURGER_API_URL}/auth/logout`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
 		},
 		body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
 	})
@@ -173,12 +173,12 @@ export const logoutApi = (): Promise<TSuccessResponse> => {
 		});
 };
 
-export const getUserApi = (accessToken: string): Promise<TUserResponse> => {
+export const getUserApi = (): Promise<TUserResponse> => {
 	return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
 		method: 'GET',
 		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `'Bearer '${accessToken}`,
+			'Content-Type': 'application/json;charset=utf-8',
+			authorization: localStorage.getItem('accessToken'),
 		},
 	})
 		.then(checkResponse)
@@ -189,14 +189,13 @@ export const getUserApi = (accessToken: string): Promise<TUserResponse> => {
 };
 
 export const updateUserApi = (
-	accessToken: string,
 	requestUpdateUser: TRegisterRequest
 ): Promise<TUserResponse> => {
 	return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
 		method: 'PATCH',
 		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `'Bearer '${accessToken}`,
+			'Content-Type': 'application/json;charset=utf-8',
+			authorization: localStorage.getItem('accessToken'),
 		},
 		body: JSON.stringify(requestUpdateUser),
 	})
