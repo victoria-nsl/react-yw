@@ -36,7 +36,7 @@ export const registerUser =
 				});
 			})
 			.catch((err) => {
-				console.log(err);
+				console.log(err.message);
 			});
 	};
 
@@ -50,7 +50,7 @@ export const loginUser =
 				});
 			})
 			.catch((err) => {
-				console.log(err);
+				console.log(err.message);
 			});
 	};
 
@@ -64,7 +64,7 @@ export const updateUser =
 				});
 			})
 			.catch((err) => {
-				console.log(err);
+				console.log(err.message);
 			});
 	};
 
@@ -76,7 +76,7 @@ export const logoutUser = () => (dispatch: (arg0: TAuthAction) => void) => {
 			});
 		})
 		.catch((err) => {
-			console.log(err);
+			console.log(err.message);
 		});
 };
 
@@ -96,6 +96,6 @@ export const checkUserAuth = () => (dispatch: (arg0: TAuthAction) => void) => {
 			});
 		})
 		.catch((err) => {
-			console.log(err);
+			console.log(err.message);
 		});
 };
