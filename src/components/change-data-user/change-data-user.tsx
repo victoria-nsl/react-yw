@@ -4,10 +4,17 @@ import {
 	Input,
 	PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
+import {
+	ChangeEvent,
+	SyntheticEvent,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import styles from './change-data-user.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '@/services/auth/actions';
+import { getAuth } from '@/services/auth/selectors';
 
 export const ChangeDataUser = (): React.JSX.Element => {
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,6 +25,15 @@ export const ChangeDataUser = (): React.JSX.Element => {
 		password: '',
 	});
 	const [isVisibleButtons, setVisibleButtons] = useState(false);
+	const { user } = useSelector(getAuth);
+
+	useEffect(() => {
+		setValueForm({
+			name: user?.name || '',
+			email: user?.email || '',
+			password: '',
+		});
+	}, [user]);
 
 	const update = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
