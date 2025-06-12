@@ -6,18 +6,26 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
 import styles from './change-data-user.module.css';
+import { useDispatch } from 'react-redux';
+import { updateUser } from '@/services/auth/actions';
 
 export const ChangeDataUser = (): React.JSX.Element => {
-	const [form, setValue] = useState({ name: '', email: '', password: '' });
+	//eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dispatch: any = useDispatch();
+	const [form, setValueForm] = useState({
+		name: '',
+		email: '',
+		password: '',
+	});
 	const [isVisibleButtons, setVisibleButtons] = useState(false);
 
 	const update = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
 			evt.preventDefault();
-			console.log(form);
+			dispatch(updateUser(form));
 			setVisibleButtons(false);
 		},
-		[form]
+		[form, dispatch]
 	);
 
 	const cansel = useCallback(
@@ -32,7 +40,7 @@ export const ChangeDataUser = (): React.JSX.Element => {
 
 	const onChange = useCallback(
 		(evt: ChangeEvent<HTMLInputElement>) => {
-			setValue({ ...form, [evt.target!.name]: evt.target!.value });
+			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 			setVisibleButtons(true);
 		},
 		[form]
@@ -67,6 +75,7 @@ export const ChangeDataUser = (): React.JSX.Element => {
 					name={'password'}
 					icon={'EditIcon'}
 				/>
+
 				{isVisibleButtons && (
 					<div className={styles.wrapper_button}>
 						<Button

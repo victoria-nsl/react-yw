@@ -6,21 +6,25 @@ import {
 	PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '@/services/auth/actions';
 
 export const Login = (): React.JSX.Element => {
-	const [form, setValue] = useState({ email: '', password: '' });
+	const [form, setValueForm] = useState({ email: '', password: '' });
+	//eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dispatch: any = useDispatch();
 
 	const login = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
 			evt.preventDefault();
-			console.log(form);
+			dispatch(loginUser(form));
 		},
-		[form]
+		[form, dispatch]
 	);
 
 	const onChange = useCallback(
 		(evt: ChangeEvent<HTMLInputElement>) => {
-			setValue({ ...form, [evt.target!.name]: evt.target!.value });
+			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]
 	);

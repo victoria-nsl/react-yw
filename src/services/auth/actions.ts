@@ -1,31 +1,29 @@
-import { registerApi, TRegisterRequest } from '@/utils/api';
+import {
+	getUserApi,
+	loginApi,
+	logoutApi,
+	registerApi,
+	updateUserApi,
+	TLoginRequest,
+	TRegisterRequest,
+} from '@/utils/api';
 import { TUser } from '@/utils/types';
 
-export const REGISTER = 'REGISTER';
-export const LOGIN = 'LOGIN';
-export const LOGOUT = 'LOGOUT';
-export const CHECK_AUTH = 'CHECK_AUTH';
-export const AUTH_ERROR = 'AUTH_ERROR';
+export const SET_USER = 'SET_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED';
 
 export type TAuthAction =
 	| {
-			type: 'REGISTER';
+			type: 'SET_USER';
 			payload?: TUser;
 	  }
 	| {
-			type: 'LOGIN';
+			type: 'SET_IS_AUTH_CHECKED';
 			payload?: TUser;
 	  }
 	| {
-			type: 'CHECK_AUTH';
-			payload?: TUser;
-	  }
-	| {
-			type: 'LOGOUT';
-	  }
-	| {
-			type: 'AUTH_ERROR';
-			payload?: string;
+			type: 'LOGOUT_USER';
 	  };
 
 export const registerUser =
@@ -33,14 +31,71 @@ export const registerUser =
 		return registerApi(form)
 			.then((res) => {
 				dispatch({
-					type: REGISTER,
+					type: SET_USER,
 					payload: res.user,
 				});
 			})
 			.catch((err) => {
-				dispatch({
-					type: AUTH_ERROR,
-					payload: err.message,
-				});
+				console.log(err);
 			});
 	};
+
+export const loginUser =
+	(form: TLoginRequest) => (dispatch: (arg0: TAuthAction) => void) => {
+		return loginApi(form)
+			.then((res) => {
+				dispatch({
+					type: SET_USER,
+					payload: res.user,
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+export const updateUser =
+	(form: TRegisterRequest) => (dispatch: (arg0: TAuthAction) => void) => {
+		return updateUserApi(form)
+			.then((res) => {
+				dispatch({
+					type: SET_USER,
+					payload: res.user,
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+export const logoutUser = () => (dispatch: (arg0: TAuthAction) => void) => {
+	return logoutApi()
+		.then(() => {
+			dispatch({
+				type: LOGOUT_USER,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
+export const checkUserAuth = () => (dispatch: (arg0: TAuthAction) => void) => {
+	if (!localStorage.getItem('accessToken')) {
+		dispatch({
+			type: SET_IS_AUTH_CHECKED,
+		});
+		return;
+	}
+
+	return getUserApi()
+		.then((res) => {
+			dispatch({
+				type: SET_USER,
+				payload: res.user,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};

@@ -19,10 +19,10 @@ import { Profile } from '@/pages/profile/profile';
 import { ChangeDataUser } from '../change-data-user/change-data-user';
 import { OrdersHistory } from '../orders-history/orders-history';
 import { Feed } from '@/pages/feed/feed';
+import { checkUserAuth } from '@/services/auth/actions';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
-
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();
 	const location = useLocation();
@@ -30,6 +30,7 @@ export const App = (): React.JSX.Element => {
 	const background = location.state && location.state.background;
 
 	useEffect(() => {
+		dispatch(checkUserAuth());
 		dispatch(loadIngredients());
 	}, [dispatch]);
 

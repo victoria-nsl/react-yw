@@ -1,59 +1,35 @@
 import {
-	LOGIN,
-	LOGOUT,
-	REGISTER,
-	CHECK_AUTH,
-	AUTH_ERROR,
+	LOGOUT_USER,
+	SET_USER,
+	SET_IS_AUTH_CHECKED,
 	TAuthAction,
 } from './actions';
 
 const initialState = {
-	user: {
-		email: '',
-		name: '',
-	},
+	user: null,
 	isAuthChecked: false,
-	error: null,
 };
 
 export const authReducer = (state = initialState, action: TAuthAction) => {
 	switch (action.type) {
-		case LOGIN:
+		case SET_USER:
 			return {
 				...state,
 				user: action.payload,
 				isAuthChecked: true,
-				error: null,
 			};
-		case REGISTER:
+		case SET_IS_AUTH_CHECKED:
 			return {
 				...state,
-				user: action.payload,
 				isAuthChecked: true,
-				error: null,
 			};
-		case CHECK_AUTH:
+		case LOGOUT_USER:
 			return {
 				...state,
-				user: action.payload,
-				isAuthChecked: true,
-				error: null,
-			};
-		case LOGOUT:
-			return {
-				...state,
-				user: {
-					email: '',
-					name: '',
-				},
+				user: null,
 				isAuthChecked: false,
-				error: null,
 			};
-		case AUTH_ERROR:
-			return {
-				...state,
-				error: action.payload,
-			};
+
 		default:
 			return state;
 	}

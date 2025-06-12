@@ -8,14 +8,12 @@ import {
 	PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { registerUser } from '@/services/auth/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAuth } from '@/services/auth/selectors';
+import { useDispatch } from 'react-redux';
 
 export const Register = (): React.JSX.Element => {
 	const [form, setValueForm] = useState({ name: '', email: '', password: '' });
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();
-	const { error } = useSelector(getAuth);
 
 	const register = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
@@ -59,7 +57,7 @@ export const Register = (): React.JSX.Element => {
 					name={'password'}
 					extraClass='mb-2'
 				/>
-				{error && <p className={`${styles.error} text`}>Произошла ошибка</p>}
+
 				<div className={styles.wrapper_button}>
 					<Button
 						htmlType='button'

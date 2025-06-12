@@ -1,8 +1,18 @@
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import styles from './profile.module.css';
+import { logoutUser } from '@/services/auth/actions';
+import { useDispatch } from 'react-redux';
+import { SyntheticEvent } from 'react';
 
 export const Profile = (): React.JSX.Element => {
 	const { pathname } = useLocation();
+	//eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dispatch: any = useDispatch();
+
+	const logout = (evt: SyntheticEvent<Element, Event>) => {
+		evt.preventDefault();
+		dispatch(logoutUser());
+	};
 
 	return (
 		<div className={styles.wrapper}>
@@ -28,7 +38,9 @@ export const Profile = (): React.JSX.Element => {
 						}>
 						<span className='text text_type_main-medium'>История заказов</span>
 					</NavLink>
-					<button className={`${styles.button_logout} mt-4 mb-4`}>
+					<button
+						className={`${styles.button_logout} mt-4 mb-4`}
+						onClick={logout}>
 						<span className='text text_type_main-medium'>Выход</span>
 					</button>
 				</div>

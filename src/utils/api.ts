@@ -52,7 +52,9 @@ export type TSuccessResponse = {
 const checkResponse = (response: Response) => {
 	return response.ok
 		? response.json()
-		: response.json().then((error) => Promise.reject(error));
+		: response.json().then((error) => {
+				return Promise.reject(error);
+			});
 };
 
 export const getIngredients = (): Promise<TIngredient[]> => {
@@ -163,7 +165,11 @@ export const logoutApi = (): Promise<TSuccessResponse> => {
 	})
 		.then(checkResponse)
 		.then((data) => {
-			if (data?.success) return data;
+			if (data?.success) {
+				localStorage.removeItem('accessToken');
+				localStorage.removeItem('refreshToken');
+				return data;
+			}
 			return Promise.reject(data);
 		});
 };
@@ -175,12 +181,13 @@ export const getUserApi = (): Promise<TUserResponse> => {
 			'Content-Type': 'application/json;charset=utf-8',
 			authorization: localStorage.getItem('accessToken'),
 		},
-	})
-		.then(checkResponse)
-		.then((data) => {
-			if (data?.success) return data;
-			return Promise.reject(data);
-		});
+	}).then((data) => {
+		if (data?.success) return data;
+		localStorage.removeItem('accessToken');
+		localStorage.removeItem('refreshToken');
+
+		return Promise.reject(data);
+	});
 };
 
 export const updateUserApi = (
