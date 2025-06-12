@@ -2,23 +2,23 @@ import { TIngredient, TUser } from './types';
 
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api';
 
-type TResetRequest = {
+export type TResetRequest = {
 	password: string;
 	token: string;
 };
 
-type TRegisterRequest = {
+export type TRegisterRequest = {
 	email: string;
 	password: string;
 	name: string;
 };
 
-type TLoginRequest = {
+export type TLoginRequest = {
 	email: string;
 	password: string;
 };
 
-type TOrderResponse = {
+export type TOrderResponse = {
 	success: boolean;
 	order: {
 		number: number;
@@ -26,25 +26,25 @@ type TOrderResponse = {
 	name: string;
 };
 
-type TAuthResponse = {
+export type TAuthResponse = {
 	success: boolean;
 	accessToken: string;
 	refreshToken: string;
 	user: TUser;
 };
 
-type TTokenResponse = {
+export type TTokenResponse = {
 	success: boolean;
 	accessToken: string;
 	refreshToken: string;
 };
 
-type TUserResponse = {
+export type TUserResponse = {
 	success: boolean;
 	user: TUser;
 };
 
-type TSuccessResponse = {
+export type TSuccessResponse = {
 	success: boolean;
 	message: string;
 };
@@ -81,7 +81,7 @@ export const addOrder = (ids: string[]): Promise<TOrderResponse> => {
 		});
 };
 
-export const forgotPasswordApi = (requestForgot: {
+export const forgotPasswordApi = (form: {
 	email: string;
 }): Promise<TSuccessResponse> => {
 	return fetch(`${BURGER_API_URL}/password-reset`, {
@@ -89,7 +89,7 @@ export const forgotPasswordApi = (requestForgot: {
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8',
 		},
-		body: JSON.stringify(requestForgot),
+		body: JSON.stringify(form),
 	})
 		.then(checkResponse)
 		.then((data) => {
@@ -99,15 +99,14 @@ export const forgotPasswordApi = (requestForgot: {
 };
 
 export const resetPasswordApi = (
-	requestReset: TResetRequest
+	form: TResetRequest
 ): Promise<TSuccessResponse> => {
-	console.log(requestReset);
 	return fetch(`${BURGER_API_URL}/password-reset/reset`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8',
 		},
-		body: JSON.stringify(requestReset),
+		body: JSON.stringify(form),
 	})
 		.then(checkResponse)
 		.then((data) => {
@@ -116,43 +115,39 @@ export const resetPasswordApi = (
 		});
 };
 
-export const registerApi = (
-	requestRegister: TRegisterRequest
-): Promise<TAuthResponse> => {
+export const registerApi = (form: TRegisterRequest): Promise<TAuthResponse> => {
 	return fetch(`${BURGER_API_URL}/auth/register`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8',
 		},
-		body: JSON.stringify(requestRegister),
+		body: JSON.stringify(form),
 	})
 		.then(checkResponse)
 		.then((data) => {
 			if (data?.success) {
 				localStorage.setItem('refreshToken', data.refreshToken);
 				localStorage.setItem('accessToken', data.accessToken);
-				return data.user;
+				return data;
 			}
 			return Promise.reject(data);
 		});
 };
 
-export const loginApi = (
-	requestLogin: TLoginRequest
-): Promise<TAuthResponse> => {
+export const loginApi = (form: TLoginRequest): Promise<TAuthResponse> => {
 	return fetch(`${BURGER_API_URL}/auth/login`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8',
 		},
-		body: JSON.stringify(requestLogin),
+		body: JSON.stringify(form),
 	})
 		.then(checkResponse)
 		.then((data) => {
 			if (data?.success) {
 				localStorage.setItem('refreshToken', data.refreshToken);
 				localStorage.setItem('accessToken', data.accessToken);
-				return data.user;
+				return data;
 			}
 			return Promise.reject(data);
 		});
@@ -183,13 +178,13 @@ export const getUserApi = (): Promise<TUserResponse> => {
 	})
 		.then(checkResponse)
 		.then((data) => {
-			if (data?.success) return data.user;
+			if (data?.success) return data;
 			return Promise.reject(data);
 		});
 };
 
 export const updateUserApi = (
-	requestUpdateUser: TRegisterRequest
+	form: TRegisterRequest
 ): Promise<TUserResponse> => {
 	return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
 		method: 'PATCH',
@@ -197,11 +192,11 @@ export const updateUserApi = (
 			'Content-Type': 'application/json;charset=utf-8',
 			authorization: localStorage.getItem('accessToken'),
 		},
-		body: JSON.stringify(requestUpdateUser),
+		body: JSON.stringify(form),
 	})
 		.then(checkResponse)
 		.then((data) => {
-			if (data?.success) return data.user;
+			if (data?.success) return data;
 			return Promise.reject(data);
 		});
 };

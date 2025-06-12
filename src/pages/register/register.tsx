@@ -7,16 +7,22 @@ import {
 	Input,
 	PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { registerUser } from '@/services/auth/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth } from '@/services/auth/selectors';
 
 export const Register = (): React.JSX.Element => {
 	const [form, setValue] = useState({ name: '', email: '', password: '' });
+	//eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dispatch: any = useDispatch();
+	const auth = useSelector(getAuth);
 
 	const register = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
 			evt.preventDefault();
-			console.log(form);
+			dispatch(registerUser(form));
 		},
-		[form]
+		[form, dispatch]
 	);
 
 	const onChange = useCallback(
@@ -25,6 +31,8 @@ export const Register = (): React.JSX.Element => {
 		},
 		[form]
 	);
+
+	console.log(auth);
 
 	return (
 		<div className={styles.wrapper}>

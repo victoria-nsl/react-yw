@@ -26,6 +26,7 @@ export type TUserState = {
 	auth: {
 		user: TUser;
 		isAuthChecked: boolean;
+		error: boolean;
 	};
 };
 
