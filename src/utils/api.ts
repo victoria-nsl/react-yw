@@ -200,12 +200,10 @@ export const updateUserApi = (
 			authorization: localStorage.getItem('accessToken'),
 		},
 		body: JSON.stringify(form),
-	})
-		.then(checkResponse)
-		.then((data) => {
-			if (data?.success) return data;
-			return Promise.reject(data);
-		});
+	}).then((data) => {
+		if (data?.success) return data;
+		return Promise.reject(data);
+	});
 };
 
 export const refreshTokenApi = (): Promise<TTokenResponse> => {
