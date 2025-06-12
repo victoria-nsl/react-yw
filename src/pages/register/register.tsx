@@ -12,10 +12,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from '@/services/auth/selectors';
 
 export const Register = (): React.JSX.Element => {
-	const [form, setValue] = useState({ name: '', email: '', password: '' });
+	const [form, setValueForm] = useState({ name: '', email: '', password: '' });
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();
-	const auth = useSelector(getAuth);
+	const { error } = useSelector(getAuth);
 
 	const register = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
@@ -27,12 +27,10 @@ export const Register = (): React.JSX.Element => {
 
 	const onChange = useCallback(
 		(evt: ChangeEvent<HTMLInputElement>) => {
-			setValue({ ...form, [evt.target!.name]: evt.target!.value });
+			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]
 	);
-
-	console.log(auth);
 
 	return (
 		<div className={styles.wrapper}>
@@ -61,6 +59,7 @@ export const Register = (): React.JSX.Element => {
 					name={'password'}
 					extraClass='mb-2'
 				/>
+				{error && <p className={`${styles.error} text`}>Произошла ошибка</p>}
 				<div className={styles.wrapper_button}>
 					<Button
 						htmlType='button'
