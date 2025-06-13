@@ -20,6 +20,7 @@ import { ChangeDataUser } from '../change-data-user/change-data-user';
 import { OrdersHistory } from '../orders-history/orders-history';
 import { Feed } from '@/pages/feed/feed';
 import { checkUserAuth } from '@/services/auth/actions';
+import { OnlyAuth, OnlyUnAuth } from '../protected-route';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
@@ -54,11 +55,18 @@ export const App = (): React.JSX.Element => {
 						<>
 							<Routes location={background || location}>
 								<Route path='/' element={<Home />} />
-								<Route path='/login' element={<Login />} />
+								<Route
+									path='/login'
+									element={<OnlyUnAuth component={<Login />} />}
+								/>
 								<Route path='/register' element={<Register />} />
 								<Route path='/forgot-password' element={<ForgotPassword />} />
 								<Route path='/reset-password' element={<ResetPassword />} />
-								<Route path='/profile' element={<Profile />}>
+								<Route
+									path='/profile'
+									element={
+										<OnlyAuth onlyUnAuth={false} component={<Profile />} />
+									}>
 									<Route index element={<ChangeDataUser />} />
 									<Route path='orders' element={<OrdersHistory />} />
 								</Route>
