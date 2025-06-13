@@ -183,9 +183,9 @@ export const getUserApi = (): Promise<TUserResponse> => {
 		},
 	}).then((data) => {
 		if (data?.success) return data;
+
 		localStorage.removeItem('accessToken');
 		localStorage.removeItem('refreshToken');
-
 		return Promise.reject(data);
 	});
 };

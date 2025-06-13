@@ -92,9 +92,9 @@ export const checkUserAuth = () => (dispatch: (arg0: TAuthAction) => void) => {
 				type: SET_USER,
 				payload: res.user,
 			});
-			dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
 		})
 		.catch((err) => {
 			console.log(err.message);
-		});
+		})
+		.finally(() => dispatch({ type: SET_IS_AUTH_CHECKED, payload: true }));
 };
