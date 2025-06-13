@@ -63,8 +63,14 @@ export const App = (): React.JSX.Element => {
 									path='/register'
 									element={<OnlyUnAuth component={<Register />} />}
 								/>
-								<Route path='/forgot-password' element={<ForgotPassword />} />
-								<Route path='/reset-password' element={<ResetPassword />} />
+								<Route
+									path='/forgot-password'
+									element={<OnlyUnAuth component={<ForgotPassword />} />}
+								/>
+								<Route
+									path='/reset-password'
+									element={<OnlyUnAuth component={<ResetPassword />} />}
+								/>
 								<Route
 									path='/profile'
 									element={

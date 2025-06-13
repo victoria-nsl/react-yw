@@ -5,12 +5,13 @@ import {
 	Input,
 	PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { resetPasswordApi } from '@/utils/api';
 
 export const ResetPassword = (): React.JSX.Element => {
 	const [form, setValueForm] = useState({ password: '', token: '' });
 	const navigate = useNavigate();
+	const resetPassword = localStorage.getItem('resetPassword');
 
 	const reset = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
@@ -18,11 +19,12 @@ export const ResetPassword = (): React.JSX.Element => {
 			resetPasswordApi(form)
 				.then((data) => {
 					if (data.success) {
+						localStorage.removeItem('resetPassword');
 						navigate('/', { replace: true });
 					}
 				})
 				.catch((err) => {
-					console.log(err);
+					console.log(err.message);
 				});
 		},
 		[form, navigate]
@@ -34,6 +36,10 @@ export const ResetPassword = (): React.JSX.Element => {
 		},
 		[form]
 	);
+
+	if (!resetPassword) {
+		return <Navigate to='/forgot-password' replace />;
+	}
 
 	return (
 		<div className={styles.wrapper}>

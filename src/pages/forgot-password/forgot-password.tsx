@@ -17,6 +17,7 @@ export const ForgotPassword = (): React.JSX.Element => {
 			forgotPasswordApi(form)
 				.then((data) => {
 					if (data.success) {
+						localStorage.setItem('resetPassword', 'true');
 						navigate('/reset-password', { replace: true });
 					}
 				})
