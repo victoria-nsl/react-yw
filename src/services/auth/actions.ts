@@ -30,7 +30,6 @@ export const registerUser =
 					type: SET_USER,
 					payload: res.user,
 				});
-				dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -45,7 +44,6 @@ export const loginUser =
 					type: SET_USER,
 					payload: res.user,
 				});
-				dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -60,7 +58,6 @@ export const updateUser =
 					type: SET_USER,
 					payload: res.user,
 				});
-				dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -74,7 +71,6 @@ export const logoutUser = () => (dispatch: (arg0: TAuthAction) => void) => {
 				type: SET_USER,
 				payload: null,
 			});
-			dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
 		})
 		.catch((err) => {
 			console.log(err.message);
