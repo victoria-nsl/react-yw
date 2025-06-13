@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { resetPasswordApi } from '@/utils/api';
 
 export const ResetPassword = (): React.JSX.Element => {
-	const [form, setValue] = useState({ password: '', token: '' });
+	const [form, setValueForm] = useState({ password: '', token: '' });
 	const navigate = useNavigate();
 
 	const reset = useCallback(
@@ -30,7 +30,7 @@ export const ResetPassword = (): React.JSX.Element => {
 
 	const onChange = useCallback(
 		(evt: ChangeEvent<HTMLInputElement>) => {
-			setValue({ ...form, [evt.target!.name]: evt.target!.value });
+			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]
 	);

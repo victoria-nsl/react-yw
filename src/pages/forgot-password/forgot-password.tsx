@@ -8,7 +8,7 @@ import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
 import { forgotPasswordApi } from '@/utils/api';
 
 export const ForgotPassword = (): React.JSX.Element => {
-	const [form, setValue] = useState({ email: '' });
+	const [form, setValueForm] = useState({ email: '' });
 	const navigate = useNavigate();
 
 	const restore = useCallback(
@@ -29,7 +29,7 @@ export const ForgotPassword = (): React.JSX.Element => {
 
 	const onChange = useCallback(
 		(evt: ChangeEvent<HTMLInputElement>) => {
-			setValue({ ...form, [evt.target!.name]: evt.target!.value });
+			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]
 	);
