@@ -10,20 +10,16 @@ import {
 import { TUser } from '@/utils/types';
 
 export const SET_USER = 'SET_USER';
-export const LOGOUT_USER = 'LOGOUT_USER';
 export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED';
 
 export type TAuthAction =
 	| {
 			type: 'SET_USER';
-			payload?: TUser;
+			payload?: TUser | null;
 	  }
 	| {
 			type: 'SET_IS_AUTH_CHECKED';
-			payload?: TUser;
-	  }
-	| {
-			type: 'LOGOUT_USER';
+			payload?: boolean;
 	  };
 
 export const registerUser =
@@ -34,6 +30,7 @@ export const registerUser =
 					type: SET_USER,
 					payload: res.user,
 				});
+				dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -48,6 +45,7 @@ export const loginUser =
 					type: SET_USER,
 					payload: res.user,
 				});
+				dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -62,6 +60,7 @@ export const updateUser =
 					type: SET_USER,
 					payload: res.user,
 				});
+				dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -72,8 +71,10 @@ export const logoutUser = () => (dispatch: (arg0: TAuthAction) => void) => {
 	return logoutApi()
 		.then(() => {
 			dispatch({
-				type: LOGOUT_USER,
+				type: SET_USER,
+				payload: null,
 			});
+			dispatch({ type: SET_IS_AUTH_CHECKED, payload: false });
 		})
 		.catch((err) => {
 			console.log(err.message);
@@ -84,6 +85,7 @@ export const checkUserAuth = () => (dispatch: (arg0: TAuthAction) => void) => {
 	if (!localStorage.getItem('accessToken')) {
 		dispatch({
 			type: SET_IS_AUTH_CHECKED,
+			payload: true,
 		});
 		return;
 	}
@@ -94,6 +96,7 @@ export const checkUserAuth = () => (dispatch: (arg0: TAuthAction) => void) => {
 				type: SET_USER,
 				payload: res.user,
 			});
+			dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
 		})
 		.catch((err) => {
 			console.log(err.message);
