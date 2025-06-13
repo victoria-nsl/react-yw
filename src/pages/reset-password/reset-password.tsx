@@ -5,11 +5,12 @@ import {
 	Input,
 	PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { resetPasswordApi } from '@/utils/api';
 
 export const ResetPassword = (): React.JSX.Element => {
 	const [form, setValue] = useState({ password: '', token: '' });
+	const navigate = useNavigate();
 
 	const reset = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
@@ -17,14 +18,14 @@ export const ResetPassword = (): React.JSX.Element => {
 			resetPasswordApi(form)
 				.then((data) => {
 					if (data.success) {
-						console.log(data);
+						navigate('/', { replace: true });
 					}
 				})
 				.catch((err) => {
 					console.log(err);
 				});
 		},
-		[form]
+		[form, navigate]
 	);
 
 	const onChange = useCallback(

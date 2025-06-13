@@ -3,12 +3,13 @@ import {
 	EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './forgot-password.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
 import { forgotPasswordApi } from '@/utils/api';
 
 export const ForgotPassword = (): React.JSX.Element => {
 	const [form, setValue] = useState({ email: '' });
+	const navigate = useNavigate();
 
 	const restore = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
@@ -16,14 +17,14 @@ export const ForgotPassword = (): React.JSX.Element => {
 			forgotPasswordApi(form)
 				.then((data) => {
 					if (data.success) {
-						console.log(data);
+						navigate('/reset-password', { replace: true });
 					}
 				})
 				.catch((err) => {
 					console.log(err.message);
 				});
 		},
-		[form]
+		[form, navigate]
 	);
 
 	const onChange = useCallback(

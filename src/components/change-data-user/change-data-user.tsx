@@ -47,11 +47,15 @@ export const ChangeDataUser = (): React.JSX.Element => {
 	const cansel = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {
 			evt.preventDefault();
-			console.log(form);
-			//setValue()
+
+			setValueForm({
+				name: user?.name || '',
+				email: user?.email || '',
+				password: '',
+			});
 			setVisibleButtons(false);
 		},
-		[form]
+		[user]
 	);
 
 	const onChange = useCallback(
