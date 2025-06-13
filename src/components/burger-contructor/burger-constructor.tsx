@@ -13,6 +13,8 @@ import {
 	getTotalPrice,
 } from '@/services/ingrediens-constructor/selectors';
 import { createOrder } from '@/services/order/actions';
+import { getUser } from '@/services/auth/selectors';
+import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor = (): React.JSX.Element => {
 	const [visible, setVisible] = useState<boolean>(false);
@@ -20,14 +22,20 @@ export const BurgerConstructor = (): React.JSX.Element => {
 	const ids = useSelector(getIdsConstructorIngredients);
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();
+	const user = useSelector(getUser);
+	const navigate = useNavigate();
 
 	const onClose = useCallback(() => setVisible(false), []);
 
 	const sendOrder = useCallback(() => {
+		if (!user) {
+			navigate('/login');
+		}
 		if (!ids.length) return;
+
 		dispatch(createOrder(ids));
 		setVisible(true);
-	}, [ids, dispatch]);
+	}, [ids, dispatch, user, navigate]);
 
 	return (
 		<section className={`${styles.burger_constructor} pb-2`}>

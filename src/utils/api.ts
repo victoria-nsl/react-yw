@@ -67,10 +67,11 @@ export const getIngredients = (): Promise<TIngredient[]> => {
 };
 
 export const addOrder = (ids: string[]): Promise<TOrderResponse> => {
-	return fetch(`${BURGER_API_URL}/orders`, {
+	return fetchWithRefresh(`${BURGER_API_URL}/orders`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
+			authorization: localStorage.getItem('accessToken'),
 		},
 		body: JSON.stringify({
 			ingredients: ids,
