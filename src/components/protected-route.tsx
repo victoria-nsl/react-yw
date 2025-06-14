@@ -4,7 +4,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { Preloader } from './preloader/preloader';
 
 const Protected = ({
-	onlyUnAuth = false,
+	onlyUnAuth,
 	component,
 }: {
 	onlyUnAuth: boolean;
@@ -30,7 +30,9 @@ const Protected = ({
 	return component;
 };
 
-export const OnlyAuth = Protected;
+export const OnlyAuth = ({ component }: { component: React.JSX.Element }) => (
+	<Protected onlyUnAuth={false} component={component} />
+);
 export const OnlyUnAuth = ({ component }: { component: React.JSX.Element }) => (
 	<Protected onlyUnAuth={true} component={component} />
 );

@@ -73,9 +73,7 @@ export const App = (): React.JSX.Element => {
 								/>
 								<Route
 									path='/profile'
-									element={
-										<OnlyAuth onlyUnAuth={false} component={<Profile />} />
-									}>
+									element={<OnlyAuth component={<Profile />} />}>
 									<Route index element={<ChangeDataUser />} />
 									<Route path='orders' element={<OrdersHistory />} />
 								</Route>
