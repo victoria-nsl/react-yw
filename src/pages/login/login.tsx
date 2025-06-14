@@ -1,5 +1,4 @@
 import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
-import styles from './login.module.css';
 import {
 	Button,
 	EmailInput,
@@ -30,8 +29,8 @@ export const Login = (): React.JSX.Element => {
 	);
 
 	return (
-		<div className={styles.wrapper}>
-			<form className={styles.form}>
+		<div className='wrapper_page_form'>
+			<form className='form'>
 				<h1 className='text text_type_main-medium'>Вход</h1>
 				<EmailInput
 					onChange={onChange}
@@ -45,7 +44,7 @@ export const Login = (): React.JSX.Element => {
 					name={'password'}
 					extraClass='mb-2'
 				/>
-				<div className={styles.wrapper_button}>
+				<div className='wrapper_button'>
 					<Button
 						htmlType='button'
 						type='primary'
@@ -55,23 +54,21 @@ export const Login = (): React.JSX.Element => {
 					</Button>
 				</div>
 			</form>
-			<div className={`${styles.wrapper_link} mb-4`}>
+			<div className='wrapper_link mb-4'>
 				<p className='text text_type_main-default text_color_inactive'>
 					Вы — новый пользователь?
 				</p>
-				<Link
-					to='/register'
-					className={`${styles.link} text text_type_main-default`}>
+				<Link to='/register' className='link text text_type_main-default'>
 					Зарегистрироваться
 				</Link>
 			</div>
-			<div className={styles.wrapper_link}>
+			<div className='wrapper_link'>
 				<p className='text text_type_main-default text_color_inactive'>
 					Забыли пароль?
 				</p>
 				<Link
 					to='/forgot-password'
-					className={`${styles.link} text text_type_main-default`}>
+					className='link text text_type_main-default'>
 					Восстановить пароль
 				</Link>
 			</div>

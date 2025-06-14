@@ -2,7 +2,6 @@ import {
 	Button,
 	EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './forgot-password.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
 import { forgotPasswordApi } from '@/utils/api';
@@ -36,8 +35,8 @@ export const ForgotPassword = (): React.JSX.Element => {
 	);
 
 	return (
-		<div className={styles.wrapper}>
-			<form className={styles.form}>
+		<div className='wrapper_page_form'>
+			<form className='form'>
 				<h1 className='text text_type_main-medium'>Восстановление пароля</h1>
 				<EmailInput
 					onChange={onChange}
@@ -46,7 +45,7 @@ export const ForgotPassword = (): React.JSX.Element => {
 					name={'email'}
 					isIcon={false}
 				/>
-				<div className={styles.wrapper_button}>
+				<div className='wrapper_button'>
 					<Button
 						htmlType='button'
 						type='primary'
@@ -57,13 +56,11 @@ export const ForgotPassword = (): React.JSX.Element => {
 				</div>
 			</form>
 
-			<div className={styles.wrapper_link}>
+			<div className='wrapper_link'>
 				<p className='text text_type_main-default text_color_inactive'>
 					Вспомнили пароль?
 				</p>
-				<Link
-					to='/login'
-					className={`${styles.link} text text_type_main-default`}>
+				<Link to='/login' className='link text text_type_main-default'>
 					Войти
 				</Link>
 			</div>

@@ -1,5 +1,4 @@
 import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
-import styles from './reset-password.module.css';
 import {
 	Button,
 	Input,
@@ -42,8 +41,8 @@ export const ResetPassword = (): React.JSX.Element => {
 	}
 
 	return (
-		<div className={styles.wrapper}>
-			<form className={styles.form}>
+		<div className='wrapper_page_form'>
+			<form className='form'>
 				<h1 className='text text_type_main-medium'>Восстановление пароля</h1>
 				<PasswordInput
 					onChange={onChange}
@@ -63,7 +62,7 @@ export const ResetPassword = (): React.JSX.Element => {
 					size={'default'}
 					extraClass='ml-1'
 				/>
-				<div className={styles.wrapper_button}>
+				<div className='wrapper_button'>
 					<Button
 						htmlType='button'
 						type='primary'
@@ -74,13 +73,11 @@ export const ResetPassword = (): React.JSX.Element => {
 				</div>
 			</form>
 
-			<div className={styles.wrapper_link}>
+			<div className='wrapper_link'>
 				<p className='text text_type_main-default text_color_inactive'>
 					Вспомнили пароль?
 				</p>
-				<Link
-					to='/login'
-					className={`${styles.link} text text_type_main-default`}>
+				<Link to='/login' className='link text text_type_main-default'>
 					Войти
 				</Link>
 			</div>
