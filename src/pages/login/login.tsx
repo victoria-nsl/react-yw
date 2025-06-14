@@ -16,6 +16,9 @@ export const Login = (): React.JSX.Element => {
 	const login = (evt: SyntheticEvent<Element, Event>) => {
 		evt.preventDefault();
 		dispatch(loginUser(form));
+
+		if (localStorage.getItem('resetPassword'))
+			localStorage.removeItem('resetPassword');
 	};
 
 	const onChange = useCallback(
