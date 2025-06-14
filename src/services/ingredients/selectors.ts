@@ -14,3 +14,8 @@ export const getIngredientsByCategory = (category: TIngredientCategories) =>
 			(ingredient: TIngredient) => ingredient.type === category
 		)
 	);
+
+export const getIngredientById = (id: string) =>
+	createSelector([(state) => state.ingredients.items], (ingredients) =>
+		ingredients.find((ingredient: TIngredient) => ingredient._id === id)
+	);

@@ -17,6 +17,18 @@ export type TConstructorIngredient = TIngredient & { id: string };
 
 export type TIngredientCategories = 'bun' | 'main' | 'sauce';
 
+export type TUser = {
+	name: string;
+	email: string;
+};
+
+export type TUserState = {
+	auth: {
+		user: TUser;
+		isAuthChecked: boolean;
+	};
+};
+
 export type TIngredientsState = {
 	ingredients: {
 		loading: boolean;
@@ -30,10 +42,6 @@ export type TIngredientsConstructorState = {
 		bun: TConstructorIngredient;
 		itemsConstructor: TConstructorIngredient[];
 	};
-};
-
-export type TCurrentIngredientState = {
-	currentIngredient: { currentItem: TIngredient };
 };
 
 export type TOrderState = {

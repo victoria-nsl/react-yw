@@ -9,7 +9,12 @@ export const OrderDetails = (): React.JSX.Element => {
 
 	return (
 		<div className={`${styles.card} pb-20 pt-4`}>
-			{loading && <Preloader />}
+			{loading && (
+				<>
+					<h1 className='text text_type_main-large mb-5'>Оформляем заказ...</h1>
+					<Preloader />
+				</>
+			)}
 			{error && (
 				<p className={`${styles.error} text text_type_main-medium`}>
 					Произошла ошибка

@@ -15,3 +15,39 @@ body {
 		scrollbar-width: thin;
 	}
 }
+
+/* For pages with forms */
+
+.wrapper_page_form {
+	width: 480px;
+	margin: 0 auto;
+	margin-top: 140px;
+}
+
+.wrapper_page_form .form {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-bottom: 88px;
+}
+
+.wrapper_page_form .wrapper_button {
+	align-self: flex-start;
+	margin: 0 auto;
+}
+
+.wrapper_page_form .wrapper_link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+}
+
+.wrapper_page_form .link {
+	color: rgb(76 76 255 / 100%);
+	text-decoration: none;
+}
+
+.wrapper_page_form .link:hover {
+	opacity: 0.8;
+}

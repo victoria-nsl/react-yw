@@ -1,0 +1,19 @@
+.wrapper {
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 140px;
+}
+
+.wrapper_image img {
+	width: 100%;
+	height: auto;
+}
+
+.link {
+	color: rgb(76 76 255 / 100%);
+	text-decoration: none;
+}
+
+.link:hover {
+	opacity: 0.8;
+}
