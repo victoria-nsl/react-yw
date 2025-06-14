@@ -35,14 +35,11 @@ export const ChangeDataUser = (): React.JSX.Element => {
 		});
 	}, [user]);
 
-	const update = useCallback(
-		(evt: SyntheticEvent<Element, Event>) => {
-			evt.preventDefault();
-			dispatch(updateUser(form));
-			setVisibleButtons(false);
-		},
-		[form, dispatch]
-	);
+	const update = (evt: SyntheticEvent<Element, Event>) => {
+		evt.preventDefault();
+		dispatch(updateUser(form));
+		setVisibleButtons(false);
+	};
 
 	const cansel = useCallback(
 		(evt: SyntheticEvent<Element, Event>) => {

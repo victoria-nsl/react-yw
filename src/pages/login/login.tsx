@@ -13,13 +13,10 @@ export const Login = (): React.JSX.Element => {
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();
 
-	const login = useCallback(
-		(evt: SyntheticEvent<Element, Event>) => {
-			evt.preventDefault();
-			dispatch(loginUser(form));
-		},
-		[form, dispatch]
-	);
+	const login = (evt: SyntheticEvent<Element, Event>) => {
+		evt.preventDefault();
+		dispatch(loginUser(form));
+	};
 
 	const onChange = useCallback(
 		(evt: ChangeEvent<HTMLInputElement>) => {

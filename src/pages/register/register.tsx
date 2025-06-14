@@ -14,13 +14,10 @@ export const Register = (): React.JSX.Element => {
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();
 
-	const register = useCallback(
-		(evt: SyntheticEvent<Element, Event>) => {
-			evt.preventDefault();
-			dispatch(registerUser(form));
-		},
-		[form, dispatch]
-	);
+	const register = (evt: SyntheticEvent<Element, Event>) => {
+		evt.preventDefault();
+		dispatch(registerUser(form));
+	};
 
 	const onChange = useCallback(
 		(evt: ChangeEvent<HTMLInputElement>) => {

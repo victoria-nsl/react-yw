@@ -10,22 +10,19 @@ export const ForgotPassword = (): React.JSX.Element => {
 	const [form, setValueForm] = useState({ email: '' });
 	const navigate = useNavigate();
 
-	const restore = useCallback(
-		(evt: SyntheticEvent<Element, Event>) => {
-			evt.preventDefault();
-			forgotPasswordApi(form)
-				.then((data) => {
-					if (data.success) {
-						localStorage.setItem('resetPassword', 'true');
-						navigate('/reset-password', { replace: true });
-					}
-				})
-				.catch((err) => {
-					console.log(err.message);
-				});
-		},
-		[form, navigate]
-	);
+	const restore = (evt: SyntheticEvent<Element, Event>) => {
+		evt.preventDefault();
+		forgotPasswordApi(form)
+			.then((data) => {
+				if (data.success) {
+					localStorage.setItem('resetPassword', 'true');
+					navigate('/reset-password', { replace: true });
+				}
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
+	};
 
 	const onChange = useCallback(
 		(evt: ChangeEvent<HTMLInputElement>) => {

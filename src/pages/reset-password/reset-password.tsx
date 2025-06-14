@@ -12,22 +12,19 @@ export const ResetPassword = (): React.JSX.Element => {
 	const navigate = useNavigate();
 	const resetPassword = localStorage.getItem('resetPassword');
 
-	const reset = useCallback(
-		(evt: SyntheticEvent<Element, Event>) => {
-			evt.preventDefault();
-			resetPasswordApi(form)
-				.then((data) => {
-					if (data.success) {
-						localStorage.removeItem('resetPassword');
-						navigate('/', { replace: true });
-					}
-				})
-				.catch((err) => {
-					console.log(err.message);
-				});
-		},
-		[form, navigate]
-	);
+	const reset = (evt: SyntheticEvent<Element, Event>) => {
+		evt.preventDefault();
+		resetPasswordApi(form)
+			.then((data) => {
+				if (data.success) {
+					localStorage.removeItem('resetPassword');
+					navigate('/', { replace: true });
+				}
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
+	};
 
 	const onChange = useCallback(
 		(evt: ChangeEvent<HTMLInputElement>) => {
