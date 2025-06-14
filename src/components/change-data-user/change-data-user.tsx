@@ -68,7 +68,7 @@ export const ChangeDataUser = (): React.JSX.Element => {
 
 	return (
 		<div className={styles.wrapper}>
-			<form className={styles.form}>
+			<form className={styles.form} onSubmit={update}>
 				<Input
 					type={'text'}
 					placeholder={'Имя'}
@@ -105,11 +105,7 @@ export const ChangeDataUser = (): React.JSX.Element => {
 							onClick={cansel}>
 							Отмена
 						</Button>
-						<Button
-							htmlType='button'
-							type='primary'
-							size='medium'
-							onClick={update}>
+						<Button htmlType='submit' type='primary' size='medium'>
 							Сохранить
 						</Button>
 					</div>

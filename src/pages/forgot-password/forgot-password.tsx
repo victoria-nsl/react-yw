@@ -36,7 +36,7 @@ export const ForgotPassword = (): React.JSX.Element => {
 
 	return (
 		<div className='wrapper_page_form'>
-			<form className='form'>
+			<form className='form' onSubmit={restore}>
 				<h1 className='text text_type_main-medium'>Восстановление пароля</h1>
 				<EmailInput
 					onChange={onChange}
@@ -46,11 +46,7 @@ export const ForgotPassword = (): React.JSX.Element => {
 					isIcon={false}
 				/>
 				<div className='wrapper_button'>
-					<Button
-						htmlType='button'
-						type='primary'
-						size='medium'
-						onClick={restore}>
+					<Button htmlType='submit' type='primary' size='medium'>
 						Восстановить
 					</Button>
 				</div>

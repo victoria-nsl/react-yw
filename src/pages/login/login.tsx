@@ -30,7 +30,7 @@ export const Login = (): React.JSX.Element => {
 
 	return (
 		<div className='wrapper_page_form'>
-			<form className='form'>
+			<form className='form' onSubmit={login}>
 				<h1 className='text text_type_main-medium'>Вход</h1>
 				<EmailInput
 					onChange={onChange}
@@ -45,11 +45,7 @@ export const Login = (): React.JSX.Element => {
 					extraClass='mb-2'
 				/>
 				<div className='wrapper_button'>
-					<Button
-						htmlType='button'
-						type='primary'
-						size='medium'
-						onClick={login}>
+					<Button htmlType='submit' type='primary' size='medium'>
 						Войти
 					</Button>
 				</div>

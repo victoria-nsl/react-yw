@@ -42,7 +42,7 @@ export const ResetPassword = (): React.JSX.Element => {
 
 	return (
 		<div className='wrapper_page_form'>
-			<form className='form'>
+			<form className='form' onSubmit={reset}>
 				<h1 className='text text_type_main-medium'>Восстановление пароля</h1>
 				<PasswordInput
 					onChange={onChange}
@@ -63,11 +63,7 @@ export const ResetPassword = (): React.JSX.Element => {
 					extraClass='ml-1'
 				/>
 				<div className='wrapper_button'>
-					<Button
-						htmlType='button'
-						type='primary'
-						size='medium'
-						onClick={reset}>
+					<Button htmlType='submit' type='primary' size='medium'>
 						Сохранить
 					</Button>
 				</div>

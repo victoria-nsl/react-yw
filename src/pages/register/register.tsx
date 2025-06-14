@@ -31,7 +31,7 @@ export const Register = (): React.JSX.Element => {
 
 	return (
 		<div className='wrapper_page_form'>
-			<form className='form'>
+			<form className='form' onSubmit={register}>
 				<h1 className='text text_type_main-medium'>Регистрация</h1>
 				<Input
 					type={'text'}
@@ -58,11 +58,7 @@ export const Register = (): React.JSX.Element => {
 				/>
 
 				<div className='wrapper_button'>
-					<Button
-						htmlType='button'
-						type='primary'
-						size='medium'
-						onClick={register}>
+					<Button htmlType='submit' type='primary' size='medium'>
 						Зарегистрироваться
 					</Button>
 				</div>
