@@ -18,7 +18,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 	const bunCategory = useRef<HTMLInputElement>(null);
 	const mainCategory = useRef<HTMLInputElement>(null);
 	const sauceCategory = useRef<HTMLInputElement>(null);
-	const [activeTab, setActiveTab] = useState('bun');
+	const [activeTab, setActiveTab] = useState<TIngredientCategories>('bun');
 
 	const handlerOnClickTab = useCallback(
 		(item: TIngredientCategories) => {
@@ -69,7 +69,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 				setActiveTab('main');
 				break;
 			case spacingSause:
-				setActiveTab('sause');
+				setActiveTab('sauce');
 				break;
 			default:
 				setActiveTab('bun');
@@ -101,7 +101,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 					</Tab>
 					<Tab
 						value='sauce'
-						active={activeTab === 'sause'}
+						active={activeTab === 'sauce'}
 						onClick={() => {
 							handlerOnClickTab('sauce');
 						}}>

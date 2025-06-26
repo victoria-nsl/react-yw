@@ -17,8 +17,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '@/services/auth/actions';
 import { getAuth } from '@/services/auth/selectors';
 
-type canselCallback = (evt: SyntheticEvent<Element, Event>) => void;
-
 export const ChangeDataUser = (): React.JSX.Element => {
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();
@@ -44,8 +42,8 @@ export const ChangeDataUser = (): React.JSX.Element => {
 		setVisibleButtons(false);
 	};
 
-	const cansel = useCallback<canselCallback>(
-		(evt) => {
+	const cansel = useCallback(
+		(evt: SyntheticEvent<Element, Event>) => {
 			evt.preventDefault();
 
 			setValueForm({

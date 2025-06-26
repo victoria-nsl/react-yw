@@ -17,7 +17,7 @@ import { getUser } from '@/services/auth/selectors';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor = (): React.JSX.Element => {
-	const [visible, setVisible] = useState<boolean>(false);
+	const [visible, setVisible] = useState(false);
 	const totalPrice = useSelector(getTotalPrice);
 	const ids = useSelector(getIdsConstructorIngredients);
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
