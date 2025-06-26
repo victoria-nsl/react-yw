@@ -2,11 +2,7 @@ import { TIngredient, TUser } from './types';
 
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api';
 
-export type TResetRequest = {
-	password: string;
-	token: string;
-};
-
+//Request
 export type TRegisterRequest = {
 	email: string;
 	password: string;
@@ -16,6 +12,21 @@ export type TRegisterRequest = {
 export type TLoginRequest = {
 	email: string;
 	password: string;
+};
+
+export type TResetRequest = {
+	password: string;
+	token: string;
+};
+
+export type RequestInitFetchWithRefresh = RequestInit & {
+	headers: Record<string, string>;
+};
+
+//Response
+export type TIngredientsResponse = {
+	success: boolean;
+	data: TIngredient[];
 };
 
 export type TOrderResponse = {
@@ -49,7 +60,7 @@ export type TSuccessResponse = {
 	message: string;
 };
 
-const checkResponse = (response: Response) => {
+const checkResponse = <T>(response: Response): Promise<T> => {
 	return response.ok
 		? response.json()
 		: response.json().then((error) => {
@@ -59,7 +70,7 @@ const checkResponse = (response: Response) => {
 
 export const getIngredients = (): Promise<TIngredient[]> => {
 	return fetch(`${BURGER_API_URL}/ingredients`)
-		.then(checkResponse)
+		.then(checkResponse<TIngredientsResponse>)
 		.then((data) => {
 			if (data?.success) return data.data;
 			return Promise.reject(data);
@@ -67,11 +78,11 @@ export const getIngredients = (): Promise<TIngredient[]> => {
 };
 
 export const addOrder = (ids: string[]): Promise<TOrderResponse> => {
-	return fetchWithRefresh(`${BURGER_API_URL}/orders`, {
+	return fetchWithRefresh<TOrderResponse>(`${BURGER_API_URL}/orders`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8',
-			authorization: localStorage.getItem('accessToken'),
+			authorization: localStorage.getItem('accessToken')!,
 		},
 		body: JSON.stringify({
 			ingredients: ids,
@@ -92,7 +103,7 @@ export const forgotPasswordApi = (form: {
 		},
 		body: JSON.stringify(form),
 	})
-		.then(checkResponse)
+		.then(checkResponse<TSuccessResponse>)
 		.then((data) => {
 			if (data?.success) return data;
 			return Promise.reject(data);
@@ -109,7 +120,7 @@ export const resetPasswordApi = (
 		},
 		body: JSON.stringify(form),
 	})
-		.then(checkResponse)
+		.then(checkResponse<TSuccessResponse>)
 		.then((data) => {
 			if (data?.success) return data;
 			return Promise.reject(data);
@@ -124,7 +135,7 @@ export const registerApi = (form: TRegisterRequest): Promise<TAuthResponse> => {
 		},
 		body: JSON.stringify(form),
 	})
-		.then(checkResponse)
+		.then(checkResponse<TAuthResponse>)
 		.then((data) => {
 			if (data?.success) {
 				localStorage.setItem('refreshToken', data.refreshToken);
@@ -143,7 +154,7 @@ export const loginApi = (form: TLoginRequest): Promise<TAuthResponse> => {
 		},
 		body: JSON.stringify(form),
 	})
-		.then(checkResponse)
+		.then(checkResponse<TAuthResponse>)
 		.then((data) => {
 			if (data?.success) {
 				localStorage.setItem('refreshToken', data.refreshToken);
@@ -162,7 +173,7 @@ export const logoutApi = (): Promise<TSuccessResponse> => {
 		},
 		body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
 	})
-		.then(checkResponse)
+		.then(checkResponse<TSuccessResponse>)
 		.then((data) => {
 			if (data?.success) {
 				localStorage.removeItem('accessToken');
@@ -174,11 +185,11 @@ export const logoutApi = (): Promise<TSuccessResponse> => {
 };
 
 export const getUserApi = (): Promise<TUserResponse> => {
-	return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
+	return fetchWithRefresh<TUserResponse>(`${BURGER_API_URL}/auth/user`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8',
-			authorization: localStorage.getItem('accessToken'),
+			authorization: localStorage.getItem('accessToken')!,
 		},
 	}).then((data) => {
 		if (data?.success) return data;
@@ -192,11 +203,11 @@ export const getUserApi = (): Promise<TUserResponse> => {
 export const updateUserApi = (
 	form: TRegisterRequest
 ): Promise<TUserResponse> => {
-	return fetchWithRefresh(`${BURGER_API_URL}/auth/user`, {
+	return fetchWithRefresh<TUserResponse>(`${BURGER_API_URL}/auth/user`, {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8',
-			authorization: localStorage.getItem('accessToken'),
+			authorization: localStorage.getItem('accessToken')!,
 		},
 		body: JSON.stringify(form),
 	}).then((data) => {
@@ -215,7 +226,7 @@ export const refreshTokenApi = (): Promise<TTokenResponse> => {
 			token: localStorage.getItem('refreshToken'),
 		}),
 	})
-		.then(checkResponse)
+		.then(checkResponse<TTokenResponse>)
 		.then((data) => {
 			if (data.success) {
 				localStorage.setItem('refreshToken', data.refreshToken);
@@ -227,8 +238,10 @@ export const refreshTokenApi = (): Promise<TTokenResponse> => {
 		});
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const fetchWithRefresh = async (url: string, options: any) => {
+export const fetchWithRefresh = async <T>(
+	url: string,
+	options: RequestInitFetchWithRefresh
+): Promise<T> => {
 	try {
 		const res = await fetch(url, options);
 		return await checkResponse(res);
