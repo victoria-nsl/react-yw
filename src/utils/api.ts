@@ -3,16 +3,13 @@ import { TIngredient, TUser } from './types';
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api';
 
 //Request
-export type TRegisterRequest = {
+export type TUserRequest = {
 	email: string;
 	password: string;
 	name: string;
 };
 
-export type TLoginRequest = {
-	email: string;
-	password: string;
-};
+export type TLoginRequest = Omit<TUserRequest, 'name'>;
 
 export type TResetRequest = {
 	password: string;
@@ -24,6 +21,11 @@ export type RequestInitFetchWithRefresh = RequestInit & {
 };
 
 //Response
+export type TSuccessResponse = {
+	success: boolean;
+	message: string;
+};
+
 export type TIngredientsResponse = {
 	success: boolean;
 	data: TIngredient[];
@@ -44,21 +46,9 @@ export type TAuthResponse = {
 	user: TUser;
 };
 
-export type TTokenResponse = {
-	success: boolean;
-	accessToken: string;
-	refreshToken: string;
-};
+export type TTokenResponse = Omit<TAuthResponse, 'user'>;
 
-export type TUserResponse = {
-	success: boolean;
-	user: TUser;
-};
-
-export type TSuccessResponse = {
-	success: boolean;
-	message: string;
-};
+export type TUserResponse = Omit<TAuthResponse, 'accessToken' | 'refreshToken'>;
 
 const checkResponse = <T>(response: Response): Promise<T> => {
 	return response.ok
@@ -127,7 +117,7 @@ export const resetPasswordApi = (
 		});
 };
 
-export const registerApi = (form: TRegisterRequest): Promise<TAuthResponse> => {
+export const registerApi = (form: TUserRequest): Promise<TAuthResponse> => {
 	return fetch(`${BURGER_API_URL}/auth/register`, {
 		method: 'POST',
 		headers: {
@@ -200,9 +190,7 @@ export const getUserApi = (): Promise<TUserResponse> => {
 	});
 };
 
-export const updateUserApi = (
-	form: TRegisterRequest
-): Promise<TUserResponse> => {
+export const updateUserApi = (form: TUserRequest): Promise<TUserResponse> => {
 	return fetchWithRefresh<TUserResponse>(`${BURGER_API_URL}/auth/user`, {
 		method: 'PATCH',
 		headers: {
@@ -245,9 +233,8 @@ export const fetchWithRefresh = async <T>(
 	try {
 		const res = await fetch(url, options);
 		return await checkResponse(res);
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	} catch (err: any) {
-		if (err.message === 'jwt expired') {
+	} catch (err: unknown) {
+		if ((err as Error).message === 'jwt expired') {
 			const refreshData = await refreshTokenApi();
 			options.headers.authorization = refreshData.accessToken;
 			const res = await fetch(url, options);
