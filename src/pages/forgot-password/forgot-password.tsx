@@ -3,14 +3,14 @@ import {
 	EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { forgotPasswordApi } from '@/utils/api';
 
 export const ForgotPassword = (): React.JSX.Element => {
 	const [form, setValueForm] = useState({ email: '' });
 	const navigate = useNavigate();
 
-	const restore = (evt: SyntheticEvent<Element, Event>) => {
+	const restore = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		forgotPasswordApi(form)
 			.then((data) => {

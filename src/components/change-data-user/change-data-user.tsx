@@ -6,15 +6,18 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {
 	ChangeEvent,
-	SyntheticEvent,
+	FormEvent,
 	useCallback,
 	useEffect,
 	useState,
+	SyntheticEvent,
 } from 'react';
 import styles from './change-data-user.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '@/services/auth/actions';
 import { getAuth } from '@/services/auth/selectors';
+
+type canselCallback = (evt: SyntheticEvent<Element, Event>) => void;
 
 export const ChangeDataUser = (): React.JSX.Element => {
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,14 +38,14 @@ export const ChangeDataUser = (): React.JSX.Element => {
 		});
 	}, [user]);
 
-	const update = (evt: SyntheticEvent<Element, Event>) => {
+	const update = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		dispatch(updateUser(form));
 		setVisibleButtons(false);
 	};
 
-	const cansel = useCallback(
-		(evt: SyntheticEvent<Element, Event>) => {
+	const cansel = useCallback<canselCallback>(
+		(evt) => {
 			evt.preventDefault();
 
 			setValueForm({

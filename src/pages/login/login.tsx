@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import {
 	Button,
 	EmailInput,
@@ -13,7 +13,7 @@ export const Login = (): React.JSX.Element => {
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();
 
-	const login = (evt: SyntheticEvent<Element, Event>) => {
+	const login = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		dispatch(loginUser(form));
 

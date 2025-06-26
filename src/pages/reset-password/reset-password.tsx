@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import {
 	Button,
 	Input,
@@ -12,7 +12,7 @@ export const ResetPassword = (): React.JSX.Element => {
 	const navigate = useNavigate();
 	const resetPassword = localStorage.getItem('resetPassword');
 
-	const reset = (evt: SyntheticEvent<Element, Event>) => {
+	const reset = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		resetPasswordApi(form)
 			.then((data) => {

@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
 	Button,
@@ -14,7 +14,7 @@ export const Register = (): React.JSX.Element => {
 	//eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dispatch: any = useDispatch();
 
-	const register = (evt: SyntheticEvent<Element, Event>) => {
+	const register = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		dispatch(registerUser(form));
 	};
