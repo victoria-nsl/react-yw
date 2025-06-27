@@ -20,11 +20,20 @@ export type TIngredientCategories = 'bun' | 'main' | 'sauce';
 export type TUser = {
 	name: string;
 	email: string;
+	password: string;
 };
+
+export type TNameEmailUser = Pick<TUser, 'name' | 'email'>;
+
+export type TEmailPasswordUser = Pick<TUser, 'email' | 'password'>;
+
+export type TEmailUser = Pick<TUser, 'email'>;
+
+export type TResetUser = Pick<TUser, 'password'> & { token: string };
 
 export type TUserState = {
 	auth: {
-		user: TUser;
+		user: TNameEmailUser;
 		isAuthChecked: boolean;
 	};
 };

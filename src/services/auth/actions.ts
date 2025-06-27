@@ -4,10 +4,8 @@ import {
 	logoutApi,
 	registerApi,
 	updateUserApi,
-	TLoginRequest,
-	TUserRequest,
 } from '@/utils/api';
-import { TUser } from '@/utils/types';
+import { TEmailPasswordUser, TNameEmailUser, TUser } from '@/utils/types';
 
 export const SET_USER = 'SET_USER';
 export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED';
@@ -15,7 +13,7 @@ export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED';
 export type TAuthAction =
 	| {
 			type: 'SET_USER';
-			payload?: TUser | null;
+			payload?: TNameEmailUser | null;
 	  }
 	| {
 			type: 'SET_IS_AUTH_CHECKED';
@@ -23,7 +21,7 @@ export type TAuthAction =
 	  };
 
 export const registerUser =
-	(form: TUserRequest) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TUser) => (dispatch: (arg0: TAuthAction) => void) => {
 		return registerApi(form)
 			.then((res) => {
 				dispatch({
@@ -38,7 +36,7 @@ export const registerUser =
 	};
 
 export const loginUser =
-	(form: TLoginRequest) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TEmailPasswordUser) => (dispatch: (arg0: TAuthAction) => void) => {
 		return loginApi(form)
 			.then((res) => {
 				dispatch({
@@ -53,7 +51,7 @@ export const loginUser =
 	};
 
 export const updateUser =
-	(form: TUserRequest) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TUser) => (dispatch: (arg0: TAuthAction) => void) => {
 		return updateUserApi(form)
 			.then((res) => {
 				dispatch({
