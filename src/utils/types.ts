@@ -1,3 +1,9 @@
+const IngredientsCategories = {
+	bun: 'Булки',
+	filling: 'Начинки',
+	sauce: 'Соусы',
+} as const;
+
 export type TIngredient = {
 	_id: string;
 	name: string;
@@ -15,7 +21,10 @@ export type TIngredient = {
 
 export type TConstructorIngredient = TIngredient & { id: string };
 
-export type TIngredientCategories = 'bun' | 'main' | 'sauce';
+export type TIngredientsCategoriesKeys = keyof typeof IngredientsCategories;
+
+export type TIngredientsCategoriesValues =
+	(typeof IngredientsCategories)[TIngredientsCategoriesKeys];
 
 export type TUser = {
 	name: string;
