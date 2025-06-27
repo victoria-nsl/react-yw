@@ -11,7 +11,7 @@ import { TIngredientsCategoriesKeys } from '@/utils/types';
 
 export const BurgerIngredients = (): React.JSX.Element => {
 	const itemsBun = useSelector(getIngredientsByCategory('bun'));
-	const itemsFilling = useSelector(getIngredientsByCategory('filling'));
+	const itemsMain = useSelector(getIngredientsByCategory('main'));
 	const itemsSauce = useSelector(getIngredientsByCategory('sauce'));
 
 	const container = useRef<HTMLInputElement>(null);
@@ -27,8 +27,8 @@ export const BurgerIngredients = (): React.JSX.Element => {
 					setActiveTab('bun');
 					bunCategory.current!.scrollIntoView({ behavior: 'smooth' });
 					break;
-				case 'filling':
-					setActiveTab('filling');
+				case 'main':
+					setActiveTab('main');
 					mainCategory.current!.scrollIntoView({ behavior: 'smooth' });
 					break;
 				case 'sauce':
@@ -66,7 +66,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 				setActiveTab('bun');
 				break;
 			case spacingMain:
-				setActiveTab('filling');
+				setActiveTab('main');
 				break;
 			case spacingSause:
 				setActiveTab('sauce');
@@ -92,10 +92,10 @@ export const BurgerIngredients = (): React.JSX.Element => {
 						Булки
 					</Tab>
 					<Tab
-						value='filling'
-						active={activeTab === 'filling'}
+						value='main'
+						active={activeTab === 'main'}
 						onClick={() => {
-							handlerOnClickTab('filling');
+							handlerOnClickTab('main');
 						}}>
 						Начинки
 					</Tab>
@@ -122,8 +122,8 @@ export const BurgerIngredients = (): React.JSX.Element => {
 				</div>
 				<div ref={mainCategory}>
 					<BurgerIngredientsCategory
-						ingredientsCategory={itemsFilling}
-						type='filling'
+						ingredientsCategory={itemsMain}
+						type='main'
 					/>
 				</div>
 				<div ref={sauceCategory}>

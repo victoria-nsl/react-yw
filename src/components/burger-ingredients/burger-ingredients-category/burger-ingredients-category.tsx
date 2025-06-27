@@ -22,7 +22,7 @@ export const BurgerIngredientsCategory = ({
 				switch (type) {
 					case 'bun':
 						return 'Булки';
-					case 'filling':
+					case 'main':
 						return 'Начинки';
 					case 'sauce':
 						return 'Соусы';

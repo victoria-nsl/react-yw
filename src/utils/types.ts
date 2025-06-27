@@ -1,6 +1,6 @@
 const IngredientsCategories = {
 	bun: 'Булки',
-	filling: 'Начинки',
+	main: 'Начинки',
 	sauce: 'Соусы',
 } as const;
 
