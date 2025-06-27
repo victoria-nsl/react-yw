@@ -5,9 +5,10 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { forgotPasswordApi } from '@/utils/api';
+import { TEmailUser } from '@/utils/types';
 
 export const ForgotPassword = (): React.JSX.Element => {
-	const [form, setValueForm] = useState({ email: '' });
+	const [form, setValueForm] = useState<TEmailUser>({ email: '' });
 	const navigate = useNavigate();
 
 	const restore = (evt: FormEvent<HTMLFormElement>) => {

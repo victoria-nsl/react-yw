@@ -7,9 +7,13 @@ import {
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '@/services/auth/actions';
+import { TEmailPasswordUser } from '@/utils/types';
 
 export const Login = (): React.JSX.Element => {
-	const [form, setValueForm] = useState({ email: '', password: '' });
+	const [form, setValueForm] = useState<TEmailPasswordUser>({
+		email: '',
+		password: '',
+	});
 	const dispatch = useDispatch();
 
 	const login = (evt: FormEvent<HTMLFormElement>) => {

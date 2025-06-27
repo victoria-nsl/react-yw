@@ -16,10 +16,11 @@ import styles from './change-data-user.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '@/services/auth/actions';
 import { getAuth } from '@/services/auth/selectors';
+import { TUser } from '@/utils/types';
 
 export const ChangeDataUser = (): React.JSX.Element => {
 	const dispatch = useDispatch();
-	const [form, setValueForm] = useState({
+	const [form, setValueForm] = useState<TUser>({
 		name: '',
 		email: '',
 		password: '',

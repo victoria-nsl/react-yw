@@ -8,9 +8,14 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { registerUser } from '@/services/auth/actions';
 import { useDispatch } from 'react-redux';
+import { TUser } from '@/utils/types';
 
 export const Register = (): React.JSX.Element => {
-	const [form, setValueForm] = useState({ name: '', email: '', password: '' });
+	const [form, setValueForm] = useState<TUser>({
+		name: '',
+		email: '',
+		password: '',
+	});
 	const dispatch = useDispatch();
 
 	const register = (evt: FormEvent<HTMLFormElement>) => {
