@@ -20,8 +20,7 @@ export const BurgerConstructor = (): React.JSX.Element => {
 	const [visible, setVisible] = useState(false);
 	const totalPrice = useSelector(getTotalPrice);
 	const ids = useSelector(getIdsConstructorIngredients);
-	//eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 	const user = useSelector(getUser);
 	const navigate = useNavigate();
 
@@ -32,7 +31,7 @@ export const BurgerConstructor = (): React.JSX.Element => {
 			navigate('/login');
 		}
 		if (!ids.length) return;
-
+		// @ts-expect-error "Ignor"
 		dispatch(createOrder(ids));
 		setVisible(true);
 	}, [ids, dispatch, user, navigate]);

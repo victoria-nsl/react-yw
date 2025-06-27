@@ -6,11 +6,11 @@ import { MouseEvent } from 'react';
 
 export const Profile = (): React.JSX.Element => {
 	const { pathname } = useLocation();
-	//eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 
 	const logout = (evt: MouseEvent) => {
 		evt.preventDefault();
+		// @ts-expect-error "Ignor"
 		dispatch(logoutUser());
 	};
 

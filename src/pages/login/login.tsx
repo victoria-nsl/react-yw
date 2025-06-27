@@ -10,11 +10,11 @@ import { loginUser } from '@/services/auth/actions';
 
 export const Login = (): React.JSX.Element => {
 	const [form, setValueForm] = useState({ email: '', password: '' });
-	//eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 
 	const login = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
+		// @ts-expect-error "Ignor"
 		dispatch(loginUser(form));
 
 		if (localStorage.getItem('resetPassword'))

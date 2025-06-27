@@ -11,11 +11,11 @@ import { useDispatch } from 'react-redux';
 
 export const Register = (): React.JSX.Element => {
 	const [form, setValueForm] = useState({ name: '', email: '', password: '' });
-	//eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 
 	const register = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
+		// @ts-expect-error "Ignor"
 		dispatch(registerUser(form));
 	};
 

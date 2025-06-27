@@ -5,7 +5,7 @@ import {
 	registerApi,
 	updateUserApi,
 	TLoginRequest,
-	TRegisterRequest,
+	TUserRequest,
 } from '@/utils/api';
 import { TUser } from '@/utils/types';
 
@@ -23,7 +23,7 @@ export type TAuthAction =
 	  };
 
 export const registerUser =
-	(form: TRegisterRequest) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TUserRequest) => (dispatch: (arg0: TAuthAction) => void) => {
 		return registerApi(form)
 			.then((res) => {
 				dispatch({
@@ -53,7 +53,7 @@ export const loginUser =
 	};
 
 export const updateUser =
-	(form: TRegisterRequest) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TUserRequest) => (dispatch: (arg0: TAuthAction) => void) => {
 		return updateUserApi(form)
 			.then((res) => {
 				dispatch({
