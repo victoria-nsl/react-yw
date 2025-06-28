@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
+import type { Identifier } from 'dnd-core';
 
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import {
@@ -17,12 +18,16 @@ import {
 
 import { BurgerConstructorIngredientCard } from '../burger-constructor-ingredient-card/burger-constructor-ingredient-card';
 
+type DropCollectedProps = {
+	handlerId: Identifier | null;
+};
+
 export const BurgerConstructorOrder = (): React.JSX.Element => {
 	const bun = useSelector(getBunConstructorIngredients);
 	const itemsConstructor = useSelector(getItemsConstructorIngredients);
 	const dispatch = useDispatch();
 
-	const [, dropTarget] = useDrop({
+	const [, dropTarget] = useDrop<TIngredient, unknown, DropCollectedProps>({
 		accept: 'ingredient',
 		drop(itemId: TIngredient) {
 			dispatch(addConstructorIngredient({ ...itemId, id: uuidv4() }));

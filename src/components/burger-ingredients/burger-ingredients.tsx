@@ -14,10 +14,10 @@ export const BurgerIngredients = (): React.JSX.Element => {
 	const itemsMain = useSelector(getIngredientsByCategory('main'));
 	const itemsSauce = useSelector(getIngredientsByCategory('sauce'));
 
-	const container = useRef<HTMLInputElement>(null);
-	const bunCategory = useRef<HTMLInputElement>(null);
-	const mainCategory = useRef<HTMLInputElement>(null);
-	const sauceCategory = useRef<HTMLInputElement>(null);
+	const container = useRef<HTMLInputElement | null>(null);
+	const bunCategory = useRef<HTMLInputElement | null>(null);
+	const mainCategory = useRef<HTMLInputElement | null>(null);
+	const sauceCategory = useRef<HTMLInputElement | null>(null);
 	const [activeTab, setActiveTab] = useState<TIngredientsCategoriesKeys>('bun');
 
 	const handlerOnClickTab = useCallback(

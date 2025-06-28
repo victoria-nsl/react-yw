@@ -13,6 +13,10 @@ type TBurgerIngredientsCardProps = {
 	ingredient: TIngredient;
 };
 
+type DragCollectedProps = {
+	opacity: boolean;
+};
+
 export const BurgerIngredientsCard = ({
 	ingredient,
 }: TBurgerIngredientsCardProps): React.JSX.Element => {
@@ -21,7 +25,11 @@ export const BurgerIngredientsCard = ({
 
 	const ingredientId = ingredient['_id'];
 
-	const [{ opacity }, refIngredient] = useDrag({
+	const [{ opacity }, refIngredient] = useDrag<
+		TIngredient,
+		unknown,
+		DragCollectedProps
+	>({
 		type: 'ingredient',
 		item: ingredient,
 		collect: (monitor) => ({
