@@ -11,7 +11,7 @@ export const ForgotPassword = (): React.JSX.Element => {
 	const [form, setValueForm] = useState<TEmailUser>({ email: '' });
 	const navigate = useNavigate();
 
-	const restore = (evt: FormEvent<HTMLFormElement>) => {
+	const restore = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
 		forgotPasswordApi(form)
 			.then((data) => {
@@ -26,7 +26,7 @@ export const ForgotPassword = (): React.JSX.Element => {
 	};
 
 	const onChange = useCallback(
-		(evt: ChangeEvent<HTMLInputElement>) => {
+		(evt: ChangeEvent<HTMLInputElement>): void => {
 			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]

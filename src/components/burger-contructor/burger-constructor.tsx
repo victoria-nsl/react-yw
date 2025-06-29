@@ -24,9 +24,9 @@ export const BurgerConstructor = (): React.JSX.Element => {
 	const user = useSelector(getUser);
 	const navigate = useNavigate();
 
-	const onClose = useCallback(() => setVisible(false), []);
+	const onClose = useCallback((): void => setVisible(false), []);
 
-	const sendOrder = useCallback(() => {
+	const sendOrder = useCallback((): void => {
 		if (!user) {
 			navigate('/login');
 		}

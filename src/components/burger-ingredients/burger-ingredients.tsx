@@ -21,7 +21,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 	const [activeTab, setActiveTab] = useState<TIngredientsCategoriesKeys>('bun');
 
 	const handlerOnClickTab = useCallback(
-		(item: TIngredientsCategoriesKeys) => {
+		(item: TIngredientsCategoriesKeys): void => {
 			switch (item) {
 				case 'bun':
 					setActiveTab('bun');
@@ -43,7 +43,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 		[bunCategory, mainCategory, sauceCategory]
 	);
 
-	const handlerOnScroll = () => {
+	const handlerOnScroll = (): void => {
 		const topContainer = Math.round(
 			container.current!.getBoundingClientRect().top
 		);

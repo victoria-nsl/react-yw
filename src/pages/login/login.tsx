@@ -16,7 +16,7 @@ export const Login = (): React.JSX.Element => {
 	});
 	const dispatch = useDispatch();
 
-	const login = (evt: FormEvent<HTMLFormElement>) => {
+	const login = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
 		// @ts-expect-error "Ignor"
 		dispatch(loginUser(form));
@@ -26,7 +26,7 @@ export const Login = (): React.JSX.Element => {
 	};
 
 	const onChange = useCallback(
-		(evt: ChangeEvent<HTMLInputElement>) => {
+		(evt: ChangeEvent<HTMLInputElement>): void => {
 			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]

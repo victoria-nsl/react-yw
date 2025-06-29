@@ -8,7 +8,7 @@ export const Profile = (): React.JSX.Element => {
 	const { pathname } = useLocation();
 	const dispatch = useDispatch();
 
-	const logout = (evt: MouseEvent) => {
+	const logout = (evt: MouseEvent): void => {
 		evt.preventDefault();
 		// @ts-expect-error "Ignor"
 		dispatch(logoutUser());

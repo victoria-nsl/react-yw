@@ -1,4 +1,10 @@
-import { TIngredient, TUser, TEmailPasswordUser, TResetUser } from './types';
+import {
+	TIngredient,
+	TUser,
+	TEmailPasswordUser,
+	TResetUser,
+	TEmailUser,
+} from './types';
 
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api';
 
@@ -73,9 +79,9 @@ export const addOrder = async (ids: string[]): Promise<TOrderResponse> => {
 	return Promise.reject(data);
 };
 
-export const forgotPasswordApi = (form: {
-	email: string;
-}): Promise<TSuccessResponse> => {
+export const forgotPasswordApi = (
+	form: TEmailUser
+): Promise<TSuccessResponse> => {
 	return fetch(`${BURGER_API_URL}/password-reset`, {
 		method: 'POST',
 		headers: {

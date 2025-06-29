@@ -36,7 +36,7 @@ export const App = (): React.JSX.Element => {
 		dispatch(loadIngredients());
 	}, [dispatch]);
 
-	const handleModalClose = () => {
+	const handleModalClose = (): void => {
 		navigate(-1);
 	};
 

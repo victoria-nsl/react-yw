@@ -38,7 +38,7 @@ export const BurgerConstructorIngredientCard = ({
 	const ref = useRef<HTMLLIElement | null>(null);
 	const dispatch = useDispatch();
 
-	const onDelete = useCallback(() => {
+	const onDelete = useCallback((): void => {
 		dispatch(deleteConstructorIngredient(ingredientConstructor));
 	}, [ingredientConstructor, dispatch]);
 

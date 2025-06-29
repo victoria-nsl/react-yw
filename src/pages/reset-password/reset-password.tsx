@@ -16,7 +16,7 @@ export const ResetPassword = (): React.JSX.Element => {
 	const navigate = useNavigate();
 	const resetPassword = localStorage.getItem('resetPassword');
 
-	const reset = (evt: FormEvent<HTMLFormElement>) => {
+	const reset = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
 		resetPasswordApi(form)
 			.then((data) => {
@@ -31,7 +31,7 @@ export const ResetPassword = (): React.JSX.Element => {
 	};
 
 	const onChange = useCallback(
-		(evt: ChangeEvent<HTMLInputElement>) => {
+		(evt: ChangeEvent<HTMLInputElement>): void => {
 			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]

@@ -18,14 +18,14 @@ export const Register = (): React.JSX.Element => {
 	});
 	const dispatch = useDispatch();
 
-	const register = (evt: FormEvent<HTMLFormElement>) => {
+	const register = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
 		// @ts-expect-error "Ignor"
 		dispatch(registerUser(form));
 	};
 
 	const onChange = useCallback(
-		(evt: ChangeEvent<HTMLInputElement>) => {
+		(evt: ChangeEvent<HTMLInputElement>): void => {
 			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]

@@ -35,7 +35,7 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 	});
 
 	const moveCard = useCallback(
-		(dragIndex: number, hoverIndex: number) => {
+		(dragIndex: number, hoverIndex: number): void => {
 			const dragCard = itemsConstructor[dragIndex];
 			const newCards = [...itemsConstructor];
 
