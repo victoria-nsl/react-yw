@@ -1,4 +1,4 @@
-import { TIngredient } from '@/utils/types';
+import { DragCollectedProps, TIngredient } from '@/utils/types';
 import styles from './burger-ingredients-card.module.css';
 import {
 	Counter,
@@ -21,7 +21,11 @@ export const BurgerIngredientsCard = ({
 
 	const ingredientId = ingredient['_id'];
 
-	const [{ opacity }, refIngredient] = useDrag({
+	const [{ opacity }, refIngredient] = useDrag<
+		TIngredient,
+		unknown,
+		DragCollectedProps
+	>({
 		type: 'ingredient',
 		item: ingredient,
 		collect: (monitor) => ({

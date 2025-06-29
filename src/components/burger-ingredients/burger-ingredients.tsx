@@ -7,21 +7,21 @@ import { BurgerIngredientsCategory } from './burger-ingredients-category/burger-
 import { useSelector } from 'react-redux';
 
 import { getIngredientsByCategory } from '@/services/ingredients/selectors';
-import { TIngredientCategories } from '@/utils/types';
+import { TIngredientsCategoriesKeys } from '@/utils/types';
 
 export const BurgerIngredients = (): React.JSX.Element => {
 	const itemsBun = useSelector(getIngredientsByCategory('bun'));
 	const itemsMain = useSelector(getIngredientsByCategory('main'));
 	const itemsSauce = useSelector(getIngredientsByCategory('sauce'));
 
-	const container = useRef<HTMLInputElement>(null);
-	const bunCategory = useRef<HTMLInputElement>(null);
-	const mainCategory = useRef<HTMLInputElement>(null);
-	const sauceCategory = useRef<HTMLInputElement>(null);
-	const [activeTab, setActiveTab] = useState('bun');
+	const container = useRef<HTMLInputElement | null>(null);
+	const bunCategory = useRef<HTMLInputElement | null>(null);
+	const mainCategory = useRef<HTMLInputElement | null>(null);
+	const sauceCategory = useRef<HTMLInputElement | null>(null);
+	const [activeTab, setActiveTab] = useState<TIngredientsCategoriesKeys>('bun');
 
 	const handlerOnClickTab = useCallback(
-		(item: TIngredientCategories) => {
+		(item: TIngredientsCategoriesKeys): void => {
 			switch (item) {
 				case 'bun':
 					setActiveTab('bun');
@@ -43,7 +43,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 		[bunCategory, mainCategory, sauceCategory]
 	);
 
-	const handlerOnScroll = () => {
+	const handlerOnScroll = (): void => {
 		const topContainer = Math.round(
 			container.current!.getBoundingClientRect().top
 		);
@@ -69,7 +69,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 				setActiveTab('main');
 				break;
 			case spacingSause:
-				setActiveTab('sause');
+				setActiveTab('sauce');
 				break;
 			default:
 				setActiveTab('bun');
@@ -101,7 +101,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
 					</Tab>
 					<Tab
 						value='sauce'
-						active={activeTab === 'sause'}
+						active={activeTab === 'sauce'}
 						onClick={() => {
 							handlerOnClickTab('sauce');
 						}}>

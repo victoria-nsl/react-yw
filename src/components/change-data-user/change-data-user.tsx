@@ -6,20 +6,21 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {
 	ChangeEvent,
-	SyntheticEvent,
+	FormEvent,
 	useCallback,
 	useEffect,
 	useState,
+	SyntheticEvent,
 } from 'react';
 import styles from './change-data-user.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '@/services/auth/actions';
 import { getAuth } from '@/services/auth/selectors';
+import { TUser } from '@/utils/types';
 
 export const ChangeDataUser = (): React.JSX.Element => {
-	//eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
-	const [form, setValueForm] = useState({
+	const dispatch = useDispatch();
+	const [form, setValueForm] = useState<TUser>({
 		name: '',
 		email: '',
 		password: '',
@@ -35,14 +36,15 @@ export const ChangeDataUser = (): React.JSX.Element => {
 		});
 	}, [user]);
 
-	const update = (evt: SyntheticEvent<Element, Event>) => {
+	const update = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
+		// @ts-expect-error "Ignor"
 		dispatch(updateUser(form));
 		setVisibleButtons(false);
 	};
 
 	const cansel = useCallback(
-		(evt: SyntheticEvent<Element, Event>) => {
+		(evt: SyntheticEvent<Element, Event>): void => {
 			evt.preventDefault();
 
 			setValueForm({
@@ -56,7 +58,7 @@ export const ChangeDataUser = (): React.JSX.Element => {
 	);
 
 	const onChange = useCallback(
-		(evt: ChangeEvent<HTMLInputElement>) => {
+		(evt: ChangeEvent<HTMLInputElement>): void => {
 			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 			setVisibleButtons(true);
 		},

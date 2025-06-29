@@ -3,13 +3,19 @@ import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import { Preloader } from './preloader/preloader';
 
+type TProtectedProps = {
+	onlyUnAuth: boolean;
+	component: React.JSX.Element;
+};
+
+type TAuthProps = {
+	component: React.JSX.Element;
+};
+
 const Protected = ({
 	onlyUnAuth,
 	component,
-}: {
-	onlyUnAuth: boolean;
-	component: React.JSX.Element;
-}) => {
+}: TProtectedProps): React.JSX.Element => {
 	const isAuthChecked = useSelector(getIsAuthChecked);
 	const user = useSelector(getUser);
 	const location = useLocation();
@@ -30,9 +36,10 @@ const Protected = ({
 	return component;
 };
 
-export const OnlyAuth = ({ component }: { component: React.JSX.Element }) => (
+export const OnlyAuth = ({ component }: TAuthProps): React.JSX.Element => (
 	<Protected onlyUnAuth={false} component={component} />
 );
-export const OnlyUnAuth = ({ component }: { component: React.JSX.Element }) => (
+
+export const OnlyUnAuth = ({ component }: TAuthProps): React.JSX.Element => (
 	<Protected onlyUnAuth={true} component={component} />
 );

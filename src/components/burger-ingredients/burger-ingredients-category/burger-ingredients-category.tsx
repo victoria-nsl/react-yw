@@ -1,11 +1,15 @@
 import styles from './burger-ingredients-category.module.css';
-import { TIngredient, TIngredientCategories } from '@/utils/types';
+import {
+	TIngredient,
+	TIngredientsCategoriesKeys,
+	TIngredientsCategoriesValues,
+} from '@/utils/types';
 import { BurgerIngredientsCard } from '../burger-ingredients-card/burger-ingredients-card';
 import { useMemo } from 'react';
 
 type TBurgerIngredientsCategoryProps = {
 	ingredientsCategory: TIngredient[];
-	type: TIngredientCategories;
+	type: TIngredientsCategoriesKeys;
 };
 
 export const BurgerIngredientsCategory = ({
@@ -14,7 +18,7 @@ export const BurgerIngredientsCategory = ({
 }: TBurgerIngredientsCategoryProps): React.JSX.Element => {
 	const getNameType = useMemo(
 		() =>
-			(type: TIngredientCategories): string => {
+			(type: TIngredientsCategoriesKeys): TIngredientsCategoriesValues => {
 				switch (type) {
 					case 'bun':
 						return 'Булки';

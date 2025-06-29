@@ -17,22 +17,21 @@ import { getUser } from '@/services/auth/selectors';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor = (): React.JSX.Element => {
-	const [visible, setVisible] = useState<boolean>(false);
+	const [visible, setVisible] = useState(false);
 	const totalPrice = useSelector(getTotalPrice);
 	const ids = useSelector(getIdsConstructorIngredients);
-	//eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 	const user = useSelector(getUser);
 	const navigate = useNavigate();
 
-	const onClose = useCallback(() => setVisible(false), []);
+	const onClose = useCallback((): void => setVisible(false), []);
 
-	const sendOrder = useCallback(() => {
+	const sendOrder = useCallback((): void => {
 		if (!user) {
 			navigate('/login');
 		}
 		if (!ids.length) return;
-
+		// @ts-expect-error "Ignor"
 		dispatch(createOrder(ids));
 		setVisible(true);
 	}, [ids, dispatch, user, navigate]);

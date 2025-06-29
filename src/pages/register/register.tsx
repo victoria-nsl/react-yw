@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
 	Button,
@@ -8,19 +8,24 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { registerUser } from '@/services/auth/actions';
 import { useDispatch } from 'react-redux';
+import { TUser } from '@/utils/types';
 
 export const Register = (): React.JSX.Element => {
-	const [form, setValueForm] = useState({ name: '', email: '', password: '' });
-	//eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
+	const [form, setValueForm] = useState<TUser>({
+		name: '',
+		email: '',
+		password: '',
+	});
+	const dispatch = useDispatch();
 
-	const register = (evt: SyntheticEvent<Element, Event>) => {
+	const register = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
+		// @ts-expect-error "Ignor"
 		dispatch(registerUser(form));
 	};
 
 	const onChange = useCallback(
-		(evt: ChangeEvent<HTMLInputElement>) => {
+		(evt: ChangeEvent<HTMLInputElement>): void => {
 			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]

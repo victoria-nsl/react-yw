@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import {
 	Button,
 	EmailInput,
@@ -7,14 +7,18 @@ import {
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '@/services/auth/actions';
+import { TEmailPasswordUser } from '@/utils/types';
 
 export const Login = (): React.JSX.Element => {
-	const [form, setValueForm] = useState({ email: '', password: '' });
-	//eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
+	const [form, setValueForm] = useState<TEmailPasswordUser>({
+		email: '',
+		password: '',
+	});
+	const dispatch = useDispatch();
 
-	const login = (evt: SyntheticEvent<Element, Event>) => {
+	const login = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
+		// @ts-expect-error "Ignor"
 		dispatch(loginUser(form));
 
 		if (localStorage.getItem('resetPassword'))
@@ -22,7 +26,7 @@ export const Login = (): React.JSX.Element => {
 	};
 
 	const onChange = useCallback(
-		(evt: ChangeEvent<HTMLInputElement>) => {
+		(evt: ChangeEvent<HTMLInputElement>): void => {
 			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]
