@@ -1,12 +1,15 @@
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { useCallback, useRef } from 'react';
-import type { Identifier } from 'dnd-core';
 
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/drag-icon';
 import { deleteConstructorIngredient } from '@/services/ingrediens-constructor/actions';
-import { TConstructorIngredient } from '@/utils/types';
+import {
+	DragCollectedProps,
+	DropCollectedProps,
+	TConstructorIngredient,
+} from '@/utils/types';
 import styles from './burger-constructor-ingredient-card.module.css';
 
 type TBurgerConstructorIngredientCardProps = {
@@ -19,14 +22,6 @@ type TBurgerConstructorIngredientCardProps = {
 type DragItem = {
 	index: number;
 	id: string;
-};
-
-type DragCollectedProps = {
-	opacity: boolean;
-};
-
-type DropCollectedProps = {
-	handlerId: Identifier | null;
 };
 
 export const BurgerConstructorIngredientCard = ({

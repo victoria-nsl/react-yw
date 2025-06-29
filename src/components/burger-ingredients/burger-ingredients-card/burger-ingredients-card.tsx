@@ -1,4 +1,4 @@
-import { TIngredient } from '@/utils/types';
+import { DragCollectedProps, TIngredient } from '@/utils/types';
 import styles from './burger-ingredients-card.module.css';
 import {
 	Counter,
@@ -11,10 +11,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 type TBurgerIngredientsCardProps = {
 	ingredient: TIngredient;
-};
-
-type DragCollectedProps = {
-	opacity: boolean;
 };
 
 export const BurgerIngredientsCard = ({

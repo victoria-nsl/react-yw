@@ -39,7 +39,7 @@ export type TTokenResponse = Omit<TAuthResponse, 'user'>;
 export type TUserResponse = Omit<TAuthResponse, 'accessToken' | 'refreshToken'>;
 
 //Request
-export type RequestInitFetchWithRefresh = RequestInit & {
+export type TRequestInitFetchWithRefresh = RequestInit & {
 	headers: Record<string, string>;
 };
 
@@ -228,7 +228,7 @@ export const refreshTokenApi = (): Promise<TTokenResponse> => {
 
 export const fetchWithRefresh = async <T>(
 	url: string,
-	options: RequestInitFetchWithRefresh
+	options: TRequestInitFetchWithRefresh
 ): Promise<T> => {
 	try {
 		const res = await fetch(url, options);

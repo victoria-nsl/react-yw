@@ -1,3 +1,5 @@
+import type { Identifier } from 'dnd-core';
+
 const IngredientsCategories = {
 	bun: 'Булки',
 	main: 'Начинки',
@@ -39,6 +41,14 @@ export type TEmailPasswordUser = Pick<TUser, 'email' | 'password'>;
 export type TEmailUser = Pick<TUser, 'email'>;
 
 export type TResetUser = Pick<TUser, 'password'> & { token: string };
+
+export type DropCollectedProps = {
+	handlerId: Identifier | null;
+};
+
+export type DragCollectedProps = {
+	opacity: boolean;
+};
 
 export type TUserState = {
 	auth: {
