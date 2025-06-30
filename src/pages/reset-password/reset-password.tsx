@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import {
 	Button,
 	Input,
@@ -6,13 +6,17 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { resetPasswordApi } from '@/utils/api';
+import { TResetUser } from '@/utils/types';
 
 export const ResetPassword = (): React.JSX.Element => {
-	const [form, setValueForm] = useState({ password: '', token: '' });
+	const [form, setValueForm] = useState<TResetUser>({
+		password: '',
+		token: '',
+	});
 	const navigate = useNavigate();
 	const resetPassword = localStorage.getItem('resetPassword');
 
-	const reset = (evt: SyntheticEvent<Element, Event>) => {
+	const reset = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
 		resetPasswordApi(form)
 			.then((data) => {
@@ -27,7 +31,7 @@ export const ResetPassword = (): React.JSX.Element => {
 	};
 
 	const onChange = useCallback(
-		(evt: ChangeEvent<HTMLInputElement>) => {
+		(evt: ChangeEvent<HTMLInputElement>): void => {
 			setValueForm({ ...form, [evt.target!.name]: evt.target!.value });
 		},
 		[form]

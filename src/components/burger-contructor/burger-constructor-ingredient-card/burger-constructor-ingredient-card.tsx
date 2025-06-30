@@ -1,12 +1,15 @@
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { useCallback, useRef } from 'react';
-import type { Identifier, XYCoord } from 'dnd-core';
 
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/drag-icon';
 import { deleteConstructorIngredient } from '@/services/ingrediens-constructor/actions';
-import { TConstructorIngredient } from '@/utils/types';
+import {
+	DragCollectedProps,
+	DropCollectedProps,
+	TConstructorIngredient,
+} from '@/utils/types';
 import styles from './burger-constructor-ingredient-card.module.css';
 
 type TBurgerConstructorIngredientCardProps = {
@@ -19,7 +22,6 @@ type TBurgerConstructorIngredientCardProps = {
 type DragItem = {
 	index: number;
 	id: string;
-	type: string;
 };
 
 export const BurgerConstructorIngredientCard = ({
@@ -28,14 +30,14 @@ export const BurgerConstructorIngredientCard = ({
 	index,
 	moveCard,
 }: TBurgerConstructorIngredientCardProps): React.JSX.Element => {
-	const ref = useRef<HTMLLIElement>(null);
+	const ref = useRef<HTMLLIElement | null>(null);
 	const dispatch = useDispatch();
 
-	const onDelete = useCallback(() => {
+	const onDelete = useCallback((): void => {
 		dispatch(deleteConstructorIngredient(ingredientConstructor));
 	}, [ingredientConstructor, dispatch]);
 
-	const [{ opacity }, drag] = useDrag({
+	const [{ opacity }, drag] = useDrag<DragItem, unknown, DragCollectedProps>({
 		type: 'card',
 		item: () => {
 			return { id, index };
@@ -45,7 +47,7 @@ export const BurgerConstructorIngredientCard = ({
 		}),
 	});
 
-	const [, drop] = useDrop<DragItem, void, { handlerId: Identifier | null }>({
+	const [, drop] = useDrop<DragItem, unknown, DropCollectedProps>({
 		accept: 'card',
 		hover(item, monitor) {
 			if (!ref.current) {
@@ -65,7 +67,9 @@ export const BurgerConstructorIngredientCard = ({
 
 			const clientOffset = monitor.getClientOffset();
 
-			const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+			if (!clientOffset) return;
+
+			const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
 			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
 				return;

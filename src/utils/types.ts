@@ -1,3 +1,11 @@
+import type { Identifier } from 'dnd-core';
+
+const IngredientsCategories = {
+	bun: 'Булки',
+	main: 'Начинки',
+	sauce: 'Соусы',
+} as const;
+
 export type TIngredient = {
 	_id: string;
 	name: string;
@@ -15,16 +23,36 @@ export type TIngredient = {
 
 export type TConstructorIngredient = TIngredient & { id: string };
 
-export type TIngredientCategories = 'bun' | 'main' | 'sauce';
+export type TIngredientsCategoriesKeys = keyof typeof IngredientsCategories;
+
+export type TIngredientsCategoriesValues =
+	(typeof IngredientsCategories)[TIngredientsCategoriesKeys];
 
 export type TUser = {
 	name: string;
 	email: string;
+	password: string;
+};
+
+export type TNameEmailUser = Pick<TUser, 'name' | 'email'>;
+
+export type TEmailPasswordUser = Pick<TUser, 'email' | 'password'>;
+
+export type TEmailUser = Pick<TUser, 'email'>;
+
+export type TResetUser = Pick<TUser, 'password'> & { token: string };
+
+export type DropCollectedProps = {
+	handlerId: Identifier | null;
+};
+
+export type DragCollectedProps = {
+	opacity: boolean;
 };
 
 export type TUserState = {
 	auth: {
-		user: TUser;
+		user: TNameEmailUser;
 		isAuthChecked: boolean;
 	};
 };

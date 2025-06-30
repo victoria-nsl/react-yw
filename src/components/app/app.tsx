@@ -24,18 +24,19 @@ import { OnlyAuth, OnlyUnAuth } from '../protected-route';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const background = location.state && location.state.background;
 
 	useEffect(() => {
+		// @ts-expect-error "Ignor"
 		dispatch(checkUserAuth());
+		// @ts-expect-error "Ignor"
 		dispatch(loadIngredients());
 	}, [dispatch]);
 
-	const handleModalClose = () => {
+	const handleModalClose = (): void => {
 		navigate(-1);
 	};
 

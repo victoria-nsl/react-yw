@@ -9,12 +9,11 @@ import {
 	getBunConstructorIngredients,
 	getItemsConstructorIngredients,
 } from '@/services/ingrediens-constructor/selectors';
-import { TIngredient } from '@/utils/types';
+import { DropCollectedProps, TIngredient } from '@/utils/types';
 import {
 	addConstructorIngredient,
 	updateConstructorIngredient,
 } from '@/services/ingrediens-constructor/actions';
-
 import { BurgerConstructorIngredientCard } from '../burger-constructor-ingredient-card/burger-constructor-ingredient-card';
 
 export const BurgerConstructorOrder = (): React.JSX.Element => {
@@ -22,7 +21,7 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 	const itemsConstructor = useSelector(getItemsConstructorIngredients);
 	const dispatch = useDispatch();
 
-	const [, dropTarget] = useDrop({
+	const [, dropTarget] = useDrop<TIngredient, unknown, DropCollectedProps>({
 		accept: 'ingredient',
 		drop(itemId: TIngredient) {
 			dispatch(addConstructorIngredient({ ...itemId, id: uuidv4() }));
@@ -30,7 +29,7 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 	});
 
 	const moveCard = useCallback(
-		(dragIndex: number, hoverIndex: number) => {
+		(dragIndex: number, hoverIndex: number): void => {
 			const dragCard = itemsConstructor[dragIndex];
 			const newCards = [...itemsConstructor];
 

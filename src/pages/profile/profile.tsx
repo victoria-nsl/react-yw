@@ -2,15 +2,15 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import styles from './profile.module.css';
 import { logoutUser } from '@/services/auth/actions';
 import { useDispatch } from 'react-redux';
-import { SyntheticEvent } from 'react';
+import { MouseEvent } from 'react';
 
 export const Profile = (): React.JSX.Element => {
 	const { pathname } = useLocation();
-	//eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 
-	const logout = (evt: SyntheticEvent<Element, Event>) => {
+	const logout = (evt: MouseEvent): void => {
 		evt.preventDefault();
+		// @ts-expect-error "Ignor"
 		dispatch(logoutUser());
 	};
 

@@ -1,6 +1,6 @@
 import {
 	TIngredient,
-	TIngredientCategories,
+	TIngredientsCategoriesKeys,
 	TIngredientsState,
 } from '@/utils/types';
 import { createSelector } from 'reselect';
@@ -8,7 +8,9 @@ import { createSelector } from 'reselect';
 export const getAllIngredients = (state: TIngredientsState) =>
 	state.ingredients;
 
-export const getIngredientsByCategory = (category: TIngredientCategories) =>
+export const getIngredientsByCategory = (
+	category: TIngredientsCategoriesKeys
+) =>
 	createSelector([(state) => state.ingredients.items], (ingredients) =>
 		ingredients.filter(
 			(ingredient: TIngredient) => ingredient.type === category
