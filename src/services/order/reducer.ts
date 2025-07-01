@@ -1,3 +1,4 @@
+import { TOrderState } from '@/utils/types';
 import {
 	ORDER_LOAD_SUCCESS,
 	ORDER_LOADING,
@@ -11,7 +12,10 @@ const initialState = {
 	error: null,
 };
 
-export const orderReducer = (state = initialState, action: TOrdersAction) => {
+export const orderReducer = (
+	state = initialState,
+	action: TOrdersAction
+): TOrderState => {
 	switch (action.type) {
 		case ORDER_LOADING:
 			return {

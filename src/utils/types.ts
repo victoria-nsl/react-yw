@@ -50,32 +50,24 @@ export type DragCollectedProps = {
 	opacity: boolean;
 };
 
-export type TUserState = {
-	auth: {
-		user: TNameEmailUser;
-		isAuthChecked: boolean;
-	};
+export type TAuthState = {
+	user: TNameEmailUser | null;
+	isAuthChecked: boolean;
 };
 
 export type TIngredientsState = {
-	ingredients: {
-		loading: boolean;
-		error: boolean;
-		items: TIngredient[];
-	};
+	loading: boolean;
+	error: string | null;
+	items: TIngredient[];
 };
 
 export type TIngredientsConstructorState = {
-	constructorIngredients: {
-		bun: TConstructorIngredient;
-		itemsConstructor: TConstructorIngredient[];
-	};
+	bun: TConstructorIngredient | null;
+	itemsConstructor: TConstructorIngredient[];
 };
 
 export type TOrderState = {
-	order: {
-		loading: boolean;
-		error: boolean;
-		orderId: number;
-	};
+	loading: boolean;
+	error: string | null;
+	orderId: number | null;
 };

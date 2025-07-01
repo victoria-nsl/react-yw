@@ -1,7 +1,13 @@
-import { TUserState } from '@/utils/types';
+import { TAuthState, TNameEmailUser } from '@/utils/types';
 
-export const getAuth = (state: TUserState) => state.auth;
+export type TAuthStore = {
+	auth: TAuthState;
+};
 
-export const getIsAuthChecked = (state: TUserState) => state.auth.isAuthChecked;
+export const getAuth = (state: TAuthStore): TAuthState => state.auth;
 
-export const getUser = (state: TUserState) => state.auth.user;
+export const getIsAuthChecked = (state: TAuthStore): boolean =>
+	state.auth.isAuthChecked;
+
+export const getUser = (state: TAuthStore): TNameEmailUser | null =>
+	state.auth.user;

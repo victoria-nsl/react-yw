@@ -1,4 +1,5 @@
 import { addOrder } from '@/utils/api';
+import { Dispatch } from 'redux';
 
 export const ORDER_LOAD_SUCCESS = 'ORDER_LOAD_SUCCESS';
 export const ORDER_LOADING = 'ORDER_LOADING';
@@ -18,7 +19,7 @@ export type TOrdersAction =
 	  };
 
 export const createOrder =
-	(ids: string[]) => (dispatch: (arg0: TOrdersAction) => void) => {
+	(ids: string[]) => (dispatch: Dispatch<TOrdersAction>) => {
 		dispatch({
 			type: ORDER_LOADING,
 		});

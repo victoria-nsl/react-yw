@@ -30,7 +30,7 @@ export const deleteConstructorIngredient = (
 
 export const updateConstructorIngredient = (
 	ingredients: TConstructorIngredient[]
-) => ({
+): TConstructorIngredientsAction => ({
 	type: UPDATE_CONSTRUCTOR_INGREDIENTS,
 	payload: ingredients,
 });

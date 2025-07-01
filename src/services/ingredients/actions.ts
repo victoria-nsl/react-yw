@@ -1,5 +1,6 @@
 import { getIngredients } from '@/utils/api';
 import { TIngredient } from '@/utils/types';
+import { Dispatch } from 'redux';
 
 export const INGREDIENTS_LOAD_SUCCESS = 'INGREDIENTS_LOAD_SUCCESS';
 export const INGREDIENTS_LOADING = 'INGREDIENTS_LOADING';
@@ -8,18 +9,18 @@ export const INGREDIENTS_ERROR = 'INGREDIENTS_ERROR';
 export type TIngredientsAction =
 	| {
 			type: 'INGREDIENTS_LOAD_SUCCESS';
-			payload?: TIngredient[];
+			payload: TIngredient[];
 	  }
 	| {
 			type: 'INGREDIENTS_ERROR';
-			payload?: string;
+			payload: string;
 	  }
 	| {
 			type: 'INGREDIENTS_LOADING';
 	  };
 
 export const loadIngredients =
-	() => (dispatch: (arg0: TIngredientsAction) => void) => {
+	() => (dispatch: Dispatch<TIngredientsAction>) => {
 		dispatch({
 			type: INGREDIENTS_LOADING,
 		});

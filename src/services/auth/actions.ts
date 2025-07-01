@@ -6,6 +6,7 @@ import {
 	updateUserApi,
 } from '@/utils/api';
 import { TEmailPasswordUser, TNameEmailUser, TUser } from '@/utils/types';
+import { Dispatch } from 'redux';
 
 export const SET_USER = 'SET_USER';
 export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED';
@@ -13,15 +14,15 @@ export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED';
 export type TAuthAction =
 	| {
 			type: 'SET_USER';
-			payload?: TNameEmailUser | null;
+			payload: TNameEmailUser | null;
 	  }
 	| {
 			type: 'SET_IS_AUTH_CHECKED';
-			payload?: boolean;
+			payload: boolean;
 	  };
 
 export const registerUser =
-	(form: TUser) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TUser) => (dispatch: Dispatch<TAuthAction>) => {
 		return registerApi(form)
 			.then((res) => {
 				dispatch({
@@ -36,7 +37,7 @@ export const registerUser =
 	};
 
 export const loginUser =
-	(form: TEmailPasswordUser) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TEmailPasswordUser) => (dispatch: Dispatch<TAuthAction>) => {
 		return loginApi(form)
 			.then((res) => {
 				dispatch({
@@ -51,7 +52,7 @@ export const loginUser =
 	};
 
 export const updateUser =
-	(form: TUser) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TUser) => (dispatch: Dispatch<TAuthAction>) => {
 		return updateUserApi(form)
 			.then((res) => {
 				dispatch({
@@ -65,7 +66,7 @@ export const updateUser =
 			});
 	};
 
-export const logoutUser = () => (dispatch: (arg0: TAuthAction) => void) => {
+export const logoutUser = () => (dispatch: Dispatch<TAuthAction>) => {
 	return logoutApi()
 		.then(() => {
 			dispatch({
@@ -78,7 +79,7 @@ export const logoutUser = () => (dispatch: (arg0: TAuthAction) => void) => {
 		});
 };
 
-export const checkUserAuth = () => (dispatch: (arg0: TAuthAction) => void) => {
+export const checkUserAuth = () => (dispatch: Dispatch<TAuthAction>) => {
 	if (!localStorage.getItem('accessToken')) {
 		dispatch({
 			type: SET_IS_AUTH_CHECKED,
