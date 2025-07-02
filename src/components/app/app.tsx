@@ -3,7 +3,8 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import styles from './app.module.css';
 import { AppHeader } from '@components/app-header/app-header.tsx';
 import { Preloader } from '../preloader/preloader';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from '@/services/store';
 import { loadIngredients } from '@/services/ingredients/actions';
 import { getAllIngredients } from '@/services/ingredients/selectors';
 import { Home } from '@/pages/home/home';
@@ -30,9 +31,7 @@ export const App = (): React.JSX.Element => {
 	const background = location.state && location.state.background;
 
 	useEffect(() => {
-		// @ts-expect-error "Ignor"
 		dispatch(checkUserAuth());
-		// @ts-expect-error "Ignor"
 		dispatch(loadIngredients());
 	}, [dispatch]);
 

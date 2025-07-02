@@ -7,8 +7,8 @@ import {
 	PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { registerUser } from '@/services/auth/actions';
-import { useDispatch } from 'react-redux';
 import { TUser } from '@/utils/types';
+import { useDispatch } from '@/services/store';
 
 export const Register = (): React.JSX.Element => {
 	const [form, setValueForm] = useState<TUser>({
@@ -20,7 +20,6 @@ export const Register = (): React.JSX.Element => {
 
 	const register = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
-		// @ts-expect-error "Ignor"
 		dispatch(registerUser(form));
 	};
 

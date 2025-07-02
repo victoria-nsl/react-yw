@@ -7,7 +7,8 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderDetails } from './order-details/order-details';
 import { Modal } from '../modal/modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from '@/services/store';
 import {
 	getIdsConstructorIngredients,
 	getTotalPrice,
@@ -31,7 +32,7 @@ export const BurgerConstructor = (): React.JSX.Element => {
 			navigate('/login');
 		}
 		if (!ids.length) return;
-		// @ts-expect-error "Ignor"
+
 		dispatch(createOrder(ids));
 		setVisible(true);
 	}, [ids, dispatch, user, navigate]);
