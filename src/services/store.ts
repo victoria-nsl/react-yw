@@ -4,7 +4,10 @@ import { constructorIngredientsReducer } from './ingrediens-constructor/reducers
 import { orderReducer } from './order/reducer';
 import { configureStore, ThunkDispatch } from '@reduxjs/toolkit';
 import { authReducer } from './auth/reducers';
-import { useDispatch as dispatchHook } from 'react-redux';
+import {
+	useDispatch as dispatchHook,
+	useSelector as selectorHook,
+} from 'react-redux';
 import { TIngredientsAction } from './ingredients/actions';
 import { TConstructorIngredientsAction } from './ingrediens-constructor/actions';
 import { TOrdersAction } from './order/actions';
@@ -22,8 +25,7 @@ export type TRootState = ReturnType<typeof rootReducer>;
 
 export const store = configureStore({ reducer: rootReducer });
 
-// Нужно ли типизировать?
-// export const useSelector = selectorHook.withTypes<TRootState>();
+export const useSelector = selectorHook.withTypes<TRootState>();
 
 export type TAppActions =
 	| TAuthAction

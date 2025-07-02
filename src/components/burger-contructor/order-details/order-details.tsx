@@ -1,6 +1,6 @@
 import styles from './order-details.module.css';
 import iconDone from '../../../images/done.png';
-import { useSelector } from 'react-redux';
+import { useSelector } from '@/services/store';
 import { getOrder } from '@/services/order/selectors';
 import { Preloader } from '@/components/preloader/preloader';
 

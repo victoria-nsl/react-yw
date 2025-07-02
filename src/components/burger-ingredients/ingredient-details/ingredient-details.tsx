@@ -1,5 +1,5 @@
 import styles from './ingredient-details.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '@/services/store';
 import { useParams } from 'react-router-dom';
 import { getIngredientById } from '@/services/ingredients/selectors';
 

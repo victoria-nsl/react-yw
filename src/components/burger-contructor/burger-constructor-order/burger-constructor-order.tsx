@@ -1,7 +1,6 @@
 import styles from './burger-constructor-order.module.css';
 import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from '@/services/store';
+import { useDispatch, useSelector } from '@/services/store';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 

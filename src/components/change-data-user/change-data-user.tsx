@@ -13,8 +13,7 @@ import {
 	SyntheticEvent,
 } from 'react';
 import styles from './change-data-user.module.css';
-import { useSelector } from 'react-redux';
-import { useDispatch } from '@/services/store';
+import { useDispatch, useSelector } from '@/services/store';
 import { updateUser } from '@/services/auth/actions';
 import { getAuth } from '@/services/auth/selectors';
 import { TUser } from '@/utils/types';

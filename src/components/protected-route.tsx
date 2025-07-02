@@ -1,5 +1,5 @@
 import { getIsAuthChecked, getUser } from '../services/auth/selectors';
-import { useSelector } from 'react-redux';
+import { useSelector } from '@/services/store';
 import { Navigate, useLocation } from 'react-router-dom';
 import { Preloader } from './preloader/preloader';
 

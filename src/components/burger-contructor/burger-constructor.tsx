@@ -7,8 +7,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderDetails } from './order-details/order-details';
 import { Modal } from '../modal/modal';
-import { useSelector } from 'react-redux';
-import { useDispatch } from '@/services/store';
+import { useDispatch, useSelector } from '@/services/store';
 import {
 	getIdsConstructorIngredients,
 	getTotalPrice,
