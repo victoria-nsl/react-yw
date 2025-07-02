@@ -22,6 +22,9 @@ export type TRootState = ReturnType<typeof rootReducer>;
 
 export const store = configureStore({ reducer: rootReducer });
 
+// Нужно ли типизировать?
+// export const useSelector = selectorHook.withTypes<TRootState>();
+
 export type TAppActions =
 	| TAuthAction
 	| TIngredientsAction
