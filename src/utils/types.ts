@@ -28,6 +28,29 @@ export type TIngredientsCategoriesKeys = keyof typeof IngredientsCategories;
 export type TIngredientsCategoriesValues =
 	(typeof IngredientsCategories)[TIngredientsCategoriesKeys];
 
+// Временно, уточнить потом правильность
+const StatusOrder = {
+	create: 'Создан',
+	preparation: 'Готовится',
+	done: 'Выполнен',
+} as const;
+
+export type TStatusOrderKeys = keyof typeof StatusOrder;
+
+export type TStatusOrderValues = (typeof StatusOrder)[TStatusOrderKeys];
+
+export type TOrder = {
+	createdAt: string;
+	number: number;
+	name: string;
+	_id: string;
+	price: number;
+	status: string;
+	ingredients: TIngredient[];
+};
+
+// -------------------
+
 export type TUser = {
 	name: string;
 	email: string;

@@ -17,7 +17,7 @@ export const Profile = (): React.JSX.Element => {
 	return (
 		<div className={styles.wrapper}>
 			<div>
-				<div className={`${styles.menu} mb-20`}>
+				<div className={`${styles.menu} mb-20 mt-20`}>
 					<NavLink
 						to='/profile'
 						end

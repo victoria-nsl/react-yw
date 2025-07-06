@@ -21,6 +21,7 @@ import { OrdersHistory } from '../orders-history/orders-history';
 import { Feed } from '@/pages/feed/feed';
 import { checkUserAuth } from '@/services/auth/actions';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route';
+import { OrderDetailsCard } from '../order-details-card/order-details-card';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
@@ -76,6 +77,10 @@ export const App = (): React.JSX.Element => {
 									<Route index element={<ChangeDataUser />} />
 									<Route path='orders' element={<OrdersHistory />} />
 								</Route>
+								<Route
+									path='/profile/orders/:id'
+									element={<OnlyAuth component={<OrderDetailsCard />} />}
+								/>
 								<Route path='/feed' element={<Feed />} />
 								<Route
 									path='/ingredients/:ingredientId'

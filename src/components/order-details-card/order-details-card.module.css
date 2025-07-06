@@ -1,0 +1,53 @@
+.wrapper {
+	width: 640px;
+	margin: 0 auto;
+	margin-top: 82px;
+	text-align: start;
+}
+
+.text_center {
+	text-align: center;
+}
+
+.done {
+	color: #00cccc;
+}
+
+.list_ingredients {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	max-height: 312px;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	list-style: none;
+}
+
+.item_ingredient {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 608px;
+}
+
+.wrapper_block {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.wrapper_title {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 16px;
+	width: 320px;
+}
+
+.wrapper_price {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+}
