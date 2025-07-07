@@ -1,22 +1,27 @@
 import { addOrder } from '@/utils/api';
 import { Dispatch } from 'redux';
 
-export const ORDER_LOAD_SUCCESS = 'ORDER_LOAD_SUCCESS';
-export const ORDER_LOADING = 'ORDER_LOADING';
-export const ORDER_ERROR = 'ORDER_ERROR';
+export const ORDER_LOAD_SUCCESS = 'ORDER_LOAD_SUCCESS' as const;
+export const ORDER_LOADING = 'ORDER_LOADING' as const;
+export const ORDER_ERROR = 'ORDER_ERROR' as const;
+
+export interface ILoadSuccessOrdersAction {
+	readonly type: typeof ORDER_LOAD_SUCCESS;
+	readonly payload: number;
+}
+
+export interface IErrorOrdersAction {
+	readonly type: typeof ORDER_ERROR;
+	readonly payload: string;
+}
+export interface ILoadingOrdersAction {
+	readonly type: typeof ORDER_LOADING;
+}
 
 export type TOrdersAction =
-	| {
-			type: 'ORDER_LOAD_SUCCESS';
-			payload: number;
-	  }
-	| {
-			type: 'ORDER_ERROR';
-			payload: string;
-	  }
-	| {
-			type: 'ORDER_LOADING';
-	  };
+	| ILoadSuccessOrdersAction
+	| IErrorOrdersAction
+	| ILoadingOrdersAction;
 
 export const createOrder =
 	(ids: string[]) => (dispatch: Dispatch<TOrdersAction>) => {

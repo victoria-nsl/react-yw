@@ -8,18 +8,20 @@ import {
 import { TEmailPasswordUser, TNameEmailUser, TUser } from '@/utils/types';
 import { Dispatch } from 'redux';
 
-export const SET_USER = 'SET_USER';
-export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED';
+export const SET_USER = 'SET_USER' as const;
+export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED' as const;
 
-export type TAuthAction =
-	| {
-			type: 'SET_USER';
-			payload: TNameEmailUser | null;
-	  }
-	| {
-			type: 'SET_IS_AUTH_CHECKED';
-			payload: boolean;
-	  };
+export interface ISetUserAuthAction {
+	readonly type: typeof SET_USER;
+	readonly payload: TNameEmailUser | null;
+}
+
+export interface ISetIsAuthCheckedAuthAction {
+	readonly type: typeof SET_IS_AUTH_CHECKED;
+	readonly payload: boolean;
+}
+
+export type TAuthAction = ISetUserAuthAction | ISetIsAuthCheckedAuthAction;
 
 export const registerUser =
 	(form: TUser) => (dispatch: Dispatch<TAuthAction>) => {
@@ -66,7 +68,7 @@ export const updateUser =
 			});
 	};
 
-export const logoutUser = () => (dispatch: Dispatch<TAuthAction>) => {
+export const logoutUser = () => (dispatch: Dispatch<ISetUserAuthAction>) => {
 	return logoutApi()
 		.then(() => {
 			dispatch({

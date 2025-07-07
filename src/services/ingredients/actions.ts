@@ -2,22 +2,28 @@ import { getIngredients } from '@/utils/api';
 import { TIngredient } from '@/utils/types';
 import { Dispatch } from 'redux';
 
-export const INGREDIENTS_LOAD_SUCCESS = 'INGREDIENTS_LOAD_SUCCESS';
-export const INGREDIENTS_LOADING = 'INGREDIENTS_LOADING';
-export const INGREDIENTS_ERROR = 'INGREDIENTS_ERROR';
+export const INGREDIENTS_LOAD_SUCCESS = 'INGREDIENTS_LOAD_SUCCESS' as const;
+export const INGREDIENTS_LOADING = 'INGREDIENTS_LOADING' as const;
+export const INGREDIENTS_ERROR = 'INGREDIENTS_ERROR' as const;
+
+export interface ILoadSuccessIngredientsAction {
+	readonly type: typeof INGREDIENTS_LOAD_SUCCESS;
+	readonly payload: TIngredient[];
+}
+
+export interface IErrorIngredientsAction {
+	readonly type: typeof INGREDIENTS_ERROR;
+	readonly payload: string;
+}
+
+export interface ILoadingIngredientsAction {
+	readonly type: typeof INGREDIENTS_LOADING;
+}
 
 export type TIngredientsAction =
-	| {
-			type: 'INGREDIENTS_LOAD_SUCCESS';
-			payload: TIngredient[];
-	  }
-	| {
-			type: 'INGREDIENTS_ERROR';
-			payload: string;
-	  }
-	| {
-			type: 'INGREDIENTS_LOADING';
-	  };
+	| ILoadSuccessIngredientsAction
+	| IErrorIngredientsAction
+	| ILoadingIngredientsAction;
 
 export const loadIngredients =
 	() => (dispatch: Dispatch<TIngredientsAction>) => {
