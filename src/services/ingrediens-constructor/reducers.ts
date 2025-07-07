@@ -9,7 +9,7 @@ import {
 	TConstructorIngredientsAction,
 } from './actions';
 
-const initialState = {
+const initialState: TIngredientsConstructorState = {
 	bun: null,
 	itemsConstructor: [],
 };

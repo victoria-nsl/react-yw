@@ -1,7 +1,7 @@
 import { TAuthState } from '@/utils/types';
 import { SET_USER, SET_IS_AUTH_CHECKED, TAuthAction } from './actions';
 
-const initialState = {
+const initialState: TAuthState = {
 	user: null,
 	isAuthChecked: false,
 };

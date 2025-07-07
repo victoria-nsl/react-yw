@@ -6,7 +6,7 @@ import {
 	TIngredientsAction,
 } from './actions';
 
-const initialState = {
+const initialState: TIngredientsState = {
 	items: [],
 	loading: false,
 	error: null,

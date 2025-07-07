@@ -6,7 +6,7 @@ import {
 	TOrdersAction,
 } from './actions';
 
-const initialState = {
+const initialState: TOrderState = {
 	orderId: null,
 	loading: false,
 	error: null,
