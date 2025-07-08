@@ -1,6 +1,6 @@
 import { getIngredients } from '@/utils/api';
 import { TIngredient } from '@/utils/types';
-import { Dispatch } from 'redux';
+import { TAppDispatch } from '../store';
 
 export const INGREDIENTS_LOAD_SUCCESS = 'INGREDIENTS_LOAD_SUCCESS' as const;
 export const INGREDIENTS_LOADING = 'INGREDIENTS_LOADING' as const;
@@ -25,22 +25,21 @@ export type TIngredientsAction =
 	| IErrorIngredientsAction
 	| ILoadingIngredientsAction;
 
-export const loadIngredients =
-	() => (dispatch: Dispatch<TIngredientsAction>) => {
-		dispatch({
-			type: INGREDIENTS_LOADING,
-		});
-		return getIngredients()
-			.then((res) => {
-				dispatch({
-					type: INGREDIENTS_LOAD_SUCCESS,
-					payload: res,
-				});
-			})
-			.catch((err) => {
-				dispatch({
-					type: INGREDIENTS_ERROR,
-					payload: err.message,
-				});
+export const loadIngredients = () => (dispatch: TAppDispatch) => {
+	dispatch({
+		type: INGREDIENTS_LOADING,
+	});
+	return getIngredients()
+		.then((res) => {
+			dispatch({
+				type: INGREDIENTS_LOAD_SUCCESS,
+				payload: res,
 			});
-	};
+		})
+		.catch((err) => {
+			dispatch({
+				type: INGREDIENTS_ERROR,
+				payload: err.message,
+			});
+		});
+};

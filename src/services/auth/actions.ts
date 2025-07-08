@@ -6,7 +6,7 @@ import {
 	updateUserApi,
 } from '@/utils/api';
 import { TEmailPasswordUser, TNameEmailUser, TUser } from '@/utils/types';
-import { Dispatch } from 'redux';
+import { TAppDispatch } from '../store';
 
 export const SET_USER = 'SET_USER' as const;
 export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED' as const;
@@ -23,23 +23,22 @@ export interface ISetIsAuthCheckedAuthAction {
 
 export type TAuthAction = ISetUserAuthAction | ISetIsAuthCheckedAuthAction;
 
-export const registerUser =
-	(form: TUser) => (dispatch: Dispatch<TAuthAction>) => {
-		return registerApi(form)
-			.then((res) => {
-				dispatch({
-					type: SET_USER,
-					payload: res.user,
-				});
-				dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
-			})
-			.catch((err) => {
-				console.log(err.message);
+export const registerUser = (form: TUser) => (dispatch: TAppDispatch) => {
+	return registerApi(form)
+		.then((res) => {
+			dispatch({
+				type: SET_USER,
+				payload: res.user,
 			});
-	};
+			dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
+		})
+		.catch((err) => {
+			console.log(err.message);
+		});
+};
 
 export const loginUser =
-	(form: TEmailPasswordUser) => (dispatch: Dispatch<TAuthAction>) => {
+	(form: TEmailPasswordUser) => (dispatch: TAppDispatch) => {
 		return loginApi(form)
 			.then((res) => {
 				dispatch({
@@ -53,22 +52,21 @@ export const loginUser =
 			});
 	};
 
-export const updateUser =
-	(form: TUser) => (dispatch: Dispatch<TAuthAction>) => {
-		return updateUserApi(form)
-			.then((res) => {
-				dispatch({
-					type: SET_USER,
-					payload: res.user,
-				});
-				dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
-			})
-			.catch((err) => {
-				console.log(err.message);
+export const updateUser = (form: TUser) => (dispatch: TAppDispatch) => {
+	return updateUserApi(form)
+		.then((res) => {
+			dispatch({
+				type: SET_USER,
+				payload: res.user,
 			});
-	};
+			dispatch({ type: SET_IS_AUTH_CHECKED, payload: true });
+		})
+		.catch((err) => {
+			console.log(err.message);
+		});
+};
 
-export const logoutUser = () => (dispatch: Dispatch<TAuthAction>) => {
+export const logoutUser = () => (dispatch: TAppDispatch) => {
 	return logoutApi()
 		.then(() => {
 			dispatch({
@@ -81,7 +79,7 @@ export const logoutUser = () => (dispatch: Dispatch<TAuthAction>) => {
 		});
 };
 
-export const checkUserAuth = () => (dispatch: Dispatch<TAuthAction>) => {
+export const checkUserAuth = () => (dispatch: TAppDispatch) => {
 	if (!localStorage.getItem('accessToken')) {
 		dispatch({
 			type: SET_IS_AUTH_CHECKED,

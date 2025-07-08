@@ -34,7 +34,7 @@ export type TAppActions =
 	| TConstructorIngredientsAction
 	| TOrdersAction;
 
-type TAppDispatch = ThunkDispatch<
+export type TAppDispatch = ThunkDispatch<
 	TRootState,
 	{ appApi: typeof appApi },
 	TAppActions
