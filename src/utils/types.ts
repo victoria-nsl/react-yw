@@ -30,8 +30,8 @@ export type TIngredientsCategoriesValues =
 
 // Временно, уточнить потом правильность
 const StatusOrder = {
-	create: 'Создан',
-	preparation: 'Готовится',
+	created: 'Создан',
+	pending: 'Готовится',
 	done: 'Выполнен',
 } as const;
 

@@ -3,7 +3,7 @@ import {
 	TIngredientsCategoriesKeys,
 	TIngredientsState,
 } from '@/utils/types';
-import { createSelector } from 'reselect';
+import { createAppSelector } from '../store';
 
 export type TIngredientsStore = {
 	ingredients: TIngredientsState;
@@ -16,17 +16,17 @@ export const getAllIngredients = (
 export const getIngredientsByCategory = (
 	category: TIngredientsCategoriesKeys
 ) =>
-	createSelector(
+	createAppSelector(
 		[(state) => state.ingredients.items],
-		(ingredients): TIngredient[] =>
+		(ingredients: TIngredient[]) =>
 			ingredients.filter(
 				(ingredient: TIngredient) => ingredient.type === category
 			)
 	);
 
 export const getIngredientById = (id: string) =>
-	createSelector(
+	createAppSelector(
 		[(state) => state.ingredients.items],
-		(ingredients): TIngredient =>
+		(ingredients: TIngredient[]) =>
 			ingredients.find((ingredient: TIngredient) => ingredient._id === id)
 	);

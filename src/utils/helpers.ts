@@ -9,9 +9,9 @@ export const isEscEvent = (evt: KeyboardEvent): boolean =>
 //Временно, уточнить названия ключей
 export const getNameStatus = (status: TStatusOrderKeys): TStatusOrderValues => {
 	switch (status) {
-		case 'create':
+		case 'created':
 			return 'Создан';
-		case 'preparation':
+		case 'pending':
 			return 'Готовится';
 		case 'done':
 			return 'Выполнен';

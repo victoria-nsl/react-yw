@@ -8,6 +8,7 @@ import {
 	useDispatch as dispatchHook,
 	useSelector as selectorHook,
 } from 'react-redux';
+import { createSelector } from 'reselect';
 import { TIngredientsAction } from './ingredients/actions';
 import { TConstructorIngredientsAction } from './ingrediens-constructor/actions';
 import { TOrdersAction } from './order/actions';
@@ -40,3 +41,5 @@ type TAppDispatch = ThunkDispatch<
 >;
 
 export const useDispatch = dispatchHook.withTypes<TAppDispatch>();
+
+export const createAppSelector = createSelector.withTypes<TRootState>();

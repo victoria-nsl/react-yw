@@ -68,7 +68,7 @@ export const updateUser =
 			});
 	};
 
-export const logoutUser = () => (dispatch: Dispatch<ISetUserAuthAction>) => {
+export const logoutUser = () => (dispatch: Dispatch<TAuthAction>) => {
 	return logoutApi()
 		.then(() => {
 			dispatch({

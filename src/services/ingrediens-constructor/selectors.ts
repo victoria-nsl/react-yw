@@ -2,7 +2,7 @@ import {
 	TConstructorIngredient,
 	TIngredientsConstructorState,
 } from '@/utils/types';
-import { createSelector } from 'reselect';
+import { createAppSelector } from '../store';
 
 export type TConstructorIngredientsStore = {
 	constructorIngredients: TIngredientsConstructorState;
@@ -20,12 +20,15 @@ export const getItemsConstructorIngredients = (
 	state: TConstructorIngredientsStore
 ): TConstructorIngredient[] => state.constructorIngredients.itemsConstructor;
 
-export const getIdsConstructorIngredients = createSelector(
+export const getIdsConstructorIngredients = createAppSelector(
 	[
 		(state) => state.constructorIngredients.bun,
 		(state) => state.constructorIngredients.itemsConstructor,
 	],
-	(bun, itemsConstructor): string[] => {
+	(
+		bun: TConstructorIngredient | null,
+		itemsConstructor: TConstructorIngredient[]
+	) => {
 		let ids: string[] = [];
 
 		if (itemsConstructor.length) {
@@ -45,12 +48,15 @@ export const getIdsConstructorIngredients = createSelector(
 	}
 );
 
-export const getTotalPrice = createSelector(
+export const getTotalPrice = createAppSelector(
 	[
 		(state) => state.constructorIngredients.bun,
 		(state) => state.constructorIngredients.itemsConstructor,
 	],
-	(bun, itemsConstructor): number => {
+	(
+		bun: TConstructorIngredient | null,
+		itemsConstructor: TConstructorIngredient[]
+	) => {
 		let totalPrice = 0;
 
 		if (itemsConstructor.length) {
@@ -70,12 +76,15 @@ export const getTotalPrice = createSelector(
 	}
 );
 
-export const getQuantityByIdIngredients = createSelector(
+export const getQuantityByIdIngredients = createAppSelector(
 	[
 		(state) => state.constructorIngredients.bun,
 		(state) => state.constructorIngredients.itemsConstructor,
 	],
-	(bun, itemsConstructor): Record<string, number> => {
+	(
+		bun: TConstructorIngredient | null,
+		itemsConstructor: TConstructorIngredient[]
+	) => {
 		const quantityByIdIngredients: Record<string, number> = {};
 
 		if (bun) quantityByIdIngredients[bun['_id']] = 2;
