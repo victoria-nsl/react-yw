@@ -189,6 +189,20 @@ export const orders: Array<TOrder> = [
 				__v: 0,
 				_id: '643d69a5c3f7b9001cfa093d',
 			},
+			{
+				calories: 77,
+				carbohydrates: 55,
+				fat: 5,
+				image: 'https://code.s3.yandex.net/react/code/sp_1.png',
+				image_large: 'https://code.s3.yandex.net/react/code/sp_1-large.png',
+				image_mobile: 'https://code.s3.yandex.net/react/code/sp_1-mobile.png',
+				name: 'Плоды Фалленианского дерева',
+				price: 874,
+				proteins: 20,
+				type: 'main',
+				__v: 0,
+				_id: '643d69a5c3f7b9001cfa0947',
+			},
 
 			{
 				calories: 3377,
