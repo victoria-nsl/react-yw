@@ -1,6 +1,5 @@
 .link {
 	display: block;
-	max-width: 844px;
 	padding: 24px;
 	color: rgb(242 242 243 / 100%);
 	text-decoration: none;
@@ -49,8 +48,4 @@
 	justify-content: center;
 	align-items: center;
 	gap: 8px;
-}
-
-.done {
-	color: #00cccc;
 }

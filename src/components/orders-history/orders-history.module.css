@@ -1,5 +1,5 @@
 .wrapper {
-	max-height: calc(100vh - 168px);
+	max-height: calc(100vh - 128px);
 	overflow-y: auto;
 }
 

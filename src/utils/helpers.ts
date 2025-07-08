@@ -6,7 +6,6 @@ const KEY_ESC = 'Esc';
 export const isEscEvent = (evt: KeyboardEvent): boolean =>
 	evt.key === KEY_ESCAPE || evt.key === KEY_ESC;
 
-//Временно, уточнить названия ключей
 export const getNameStatus = (status: TStatusOrderKeys): TStatusOrderValues => {
 	switch (status) {
 		case 'created':
@@ -165,7 +164,17 @@ export const orders: Array<TOrder> = [
 				__v: 0,
 				_id: '643d69a5c3f7b9001cfa094a',
 			},
+		],
+	},
 
+	{
+		createdAt: '2025-07-08T08:06:51.037Z',
+		number: 83700,
+		name: 'Флюоресцентный фалленианский экзо-плантаго галактический люминесцентный бургер',
+		_id: '686a2e9b5a54df001b6dc106',
+		price: 12000,
+		status: 'pending',
+		ingredients: [
 			{
 				calories: 643,
 				carbohydrates: 85,
@@ -180,6 +189,70 @@ export const orders: Array<TOrder> = [
 				__v: 0,
 				_id: '643d69a5c3f7b9001cfa093d',
 			},
+
+			{
+				calories: 3377,
+				carbohydrates: 420,
+				fat: 48,
+				image: 'https://code.s3.yandex.net/react/code/cheese.png',
+				image_large: 'https://code.s3.yandex.net/react/code/cheese-large.png',
+				image_mobile: 'https://code.s3.yandex.net/react/code/cheese-mobile.png',
+				name: 'Сыр с астероидной плесенью',
+				price: 4142,
+				proteins: 84,
+				type: 'main',
+				__v: 0,
+				_id: '643d69a5c3f7b9001cfa094a',
+			},
 		],
 	},
+
+	{
+		createdAt: '2025-07-01T08:06:51.037Z',
+		number: 83701,
+		name: 'Флюоресцентный фаллениаbnnbnbbнский экзо-плантаго галактический люминесцентный бургер',
+		_id: '686a2e9b5a54df001b6dc109',
+		price: 9000,
+		status: 'created',
+		ingredients: [
+			{
+				calories: 643,
+				carbohydrates: 85,
+				fat: 26,
+				image: 'https://code.s3.yandex.net/react/code/bun-01.png',
+				image_large: 'https://code.s3.yandex.net/react/code/bun-01-large.png',
+				image_mobile: 'https://code.s3.yandex.net/react/code/bun-01-mobile.png',
+				name: 'Флюоресцентная булка R2-D3',
+				price: 988,
+				proteins: 44,
+				type: 'bun',
+				__v: 0,
+				_id: '643d69a5c3f7b9001cfa093d',
+			},
+
+			{
+				calories: 3377,
+				carbohydrates: 420,
+				fat: 48,
+				image: 'https://code.s3.yandex.net/react/code/cheese.png',
+				image_large: 'https://code.s3.yandex.net/react/code/cheese-large.png',
+				image_mobile: 'https://code.s3.yandex.net/react/code/cheese-mobile.png',
+				name: 'Сыр с астероидной плесенью',
+				price: 4142,
+				proteins: 84,
+				type: 'main',
+				__v: 0,
+				_id: '643d69a5c3f7b9001cfa094a',
+			},
+		],
+	},
+];
+
+export const ordersDone = [
+	83691, 83692, 83693, 83694, 83695, 83696, 83697, 83698, 83699, 83700, 83701,
+	83702, 83703, 83704, 83705, 83706, 83707, 83708, 83709, 83710,
+];
+
+export const ordersPending = [
+	83711, 83712, 83713, 83714, 83715, 83716, 83717, 83718, 83719,
 ];

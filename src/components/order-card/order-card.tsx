@@ -26,7 +26,7 @@ export const OrderCard = ({ order }: TOrderCardProps): React.JSX.Element => {
 				</div>
 				<h2 className='text text_type_main-medium  mb-2'>{order.name}</h2>
 				<p
-					className={`${order.status === 'done' && styles.done} text text_type_main-small  mb-6`}>
+					className={`${order.status === 'done' && 'order_done'} text text_type_main-small  mb-6`}>
 					{getNameStatus(order.status as TStatusOrderKeys)}
 				</p>
 				<div className={styles.wrapper_block}>

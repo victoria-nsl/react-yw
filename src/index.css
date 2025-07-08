@@ -16,6 +16,10 @@ body {
 	}
 }
 
+.order_done {
+	color: #00cccc;
+}
+
 /* For pages with forms */
 
 .wrapper_page_form {

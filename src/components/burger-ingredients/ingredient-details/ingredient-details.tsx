@@ -11,17 +11,17 @@ export const IngredientDetails = (): React.JSX.Element => {
 		<div className={styles.card}>
 			<img
 				className='mb-4'
-				src={currentItem.image_large}
-				alt={`${currentItem.name}.`}
+				src={currentItem!.image_large}
+				alt={`${currentItem!.name}.`}
 			/>
-			<h2 className='text text_type_main-medium mb-8'>{currentItem.name}</h2>
+			<h2 className='text text_type_main-medium mb-8'>{currentItem!.name}</h2>
 			<ul className={styles.list}>
 				<li>
 					<h3 className='text text_type_main-default text_color_inactive mb-2'>
 						Калории,ккал
 					</h3>
 					<p className='text text_type_digits-default text_color_inactive mb-2'>
-						{currentItem.calories}
+						{currentItem!.calories}
 					</p>
 				</li>
 				<li>
@@ -29,7 +29,7 @@ export const IngredientDetails = (): React.JSX.Element => {
 						Белки, г
 					</h3>
 					<p className='text text_type_digits-default text_color_inactive'>
-						{currentItem.proteins}
+						{currentItem!.proteins}
 					</p>
 				</li>
 				<li>
@@ -37,7 +37,7 @@ export const IngredientDetails = (): React.JSX.Element => {
 						Жиры, г
 					</h3>
 					<p className='text text_type_digits-default text_color_inactive'>
-						{currentItem.fat}
+						{currentItem!.fat}
 					</p>
 				</li>
 				<li>
@@ -45,7 +45,7 @@ export const IngredientDetails = (): React.JSX.Element => {
 						Углеводы, г
 					</h3>
 					<p className='text text_type_digits-default text_color_inactive'>
-						{currentItem.carbohydrates}
+						{currentItem!.carbohydrates}
 					</p>
 				</li>
 			</ul>

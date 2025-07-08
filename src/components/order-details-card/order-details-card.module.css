@@ -1,16 +1,11 @@
 .wrapper {
 	width: 640px;
 	margin: 0 auto;
-	margin-top: 82px;
 	text-align: start;
 }
 
 .text_center {
 	text-align: center;
-}
-
-.done {
-	color: #00cccc;
 }
 
 .list_ingredients {

@@ -21,7 +21,8 @@ import { OrdersHistory } from '../orders-history/orders-history';
 import { Feed } from '@/pages/feed/feed';
 import { checkUserAuth } from '@/services/auth/actions';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route';
-import { OrderDetailsCard } from '../order-details-card/order-details-card';
+import { ProfileOrderPage } from '@/pages/profile-order-page/profile-order-page';
+import { FeedOrderPage } from '@/pages/feed-order-page/feed-order-page';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
@@ -43,7 +44,7 @@ export const App = (): React.JSX.Element => {
 		<div className={styles.app}>
 			<AppHeader />
 
-			<main className={`${styles.main} pt-10 pb-10 pl-5 pr-5`}>
+			<main className={`${styles.main} pt-10 pl-5 pr-5`}>
 				<div className={styles.inner_main}>
 					{loading && <Preloader />}
 					{error && (
@@ -79,9 +80,10 @@ export const App = (): React.JSX.Element => {
 								</Route>
 								<Route
 									path='/profile/orders/:id'
-									element={<OnlyAuth component={<OrderDetailsCard />} />}
+									element={<OnlyAuth component={<ProfileOrderPage />} />}
 								/>
 								<Route path='/feed' element={<Feed />} />
+								<Route path='/feed/:id' element={<FeedOrderPage />} />
 								<Route
 									path='/ingredients/:ingredientId'
 									element={<IngredientDetailsPage />}
