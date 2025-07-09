@@ -9,8 +9,8 @@ export const Feed = (): React.JSX.Element => {
 			<div className={styles.wrapper_blocks}>
 				<div className={`${styles.wrapper_cards} custom-scroll`}>
 					<ul className={styles.list}>
-						{orders.map((orderCard) => (
-							<OrderCard key={orderCard._id} order={orderCard} />
+						{orders.map((order) => (
+							<OrderCard key={order._id} order={order} />
 						))}
 					</ul>
 				</div>

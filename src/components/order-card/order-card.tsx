@@ -6,7 +6,7 @@ import {
 	FormattedDate,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ImageIngredient } from '../image-ingredient/image-ingredient';
-import iconCheese from '../../images/cheese.png';
+
 import { getNameStatus } from '@/utils/helpers';
 
 type TOrderCardProps = { order: TOrder };
@@ -34,7 +34,10 @@ export const OrderCard = ({ order }: TOrderCardProps): React.JSX.Element => {
 						{order.ingredients.length > 5 && (
 							<li
 								className={`${styles.item_ingredient} ${styles.item_ingredient_others}`}>
-								<ImageIngredient image={iconCheese} name='Другие ингредиенты' />
+								<ImageIngredient
+									image={order.ingredients[5].image}
+									name='Изображение шестого ингредиента бургера'
+								/>
 								<span className='text text_type_main-default'>
 									+{order.ingredients.length - 5}
 								</span>
