@@ -20,6 +20,13 @@ body {
 	color: #00cccc;
 }
 
+.wrapper_price {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+}
+
 /* For pages with forms */
 
 .wrapper_page_form {

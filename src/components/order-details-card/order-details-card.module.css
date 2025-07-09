@@ -8,7 +8,7 @@
 	text-align: center;
 }
 
-.list_ingredients {
+.list {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
@@ -20,30 +20,8 @@
 	list-style: none;
 }
 
-.item_ingredient {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 608px;
-}
-
 .wrapper_block {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-
-.wrapper_title {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	align-items: center;
-	gap: 16px;
-	width: 320px;
-}
-
-.wrapper_price {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 8px;
 }

@@ -31,7 +31,7 @@ export const OrderCard = ({ order }: TOrderCardProps): React.JSX.Element => {
 				</p>
 				<div className={styles.wrapper_block}>
 					<ul className={styles.list_ingredients}>
-						{order.ingredients.length > 5 && (
+						{order.ingredients.length >= 5 && (
 							<li
 								className={`${styles.item_ingredient} ${styles.item_ingredient_others}`}>
 								<ImageIngredient
@@ -56,7 +56,7 @@ export const OrderCard = ({ order }: TOrderCardProps): React.JSX.Element => {
 							))}
 					</ul>
 
-					<div className={styles.wrapper_price}>
+					<div className='wrapper_price'>
 						<span className='text text_type_digits-default'>{order.price}</span>
 						<CurrencyIcon type='primary' />
 					</div>

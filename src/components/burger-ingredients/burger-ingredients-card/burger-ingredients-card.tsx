@@ -45,7 +45,7 @@ export const BurgerIngredientsCard = ({
 						src={ingredient.image}
 						alt={`${ingredient.name}.`}
 					/>
-					<div className={`${styles.wrapper_price} pt-1 pb-1`}>
+					<div className='wrapper_price pt-1 pb-1'>
 						<span className='text text_type_digits-default'>
 							{ingredient.price}
 						</span>

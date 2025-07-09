@@ -5,8 +5,8 @@ import {
 	CurrencyIcon,
 	FormattedDate,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ImageIngredient } from '../image-ingredient/image-ingredient';
 import { useParams } from 'react-router-dom';
+import { OrderDetailsItem } from './order-details-item/order-details-item';
 
 export const OrderDetailsCard = (): React.JSX.Element => {
 	//Временно, пока нет реальных данных
@@ -28,25 +28,9 @@ export const OrderDetailsCard = (): React.JSX.Element => {
 
 			<h3 className='text text_type_main-medium  mb-6'>Состав: </h3>
 
-			<ul className={`${styles.list_ingredients} custom-scroll`}>
+			<ul className={`${styles.list} custom-scroll`}>
 				{order!.ingredients.map((ingredient) => (
-					<li className={styles.item_ingredient} key={ingredient._id}>
-						<div className={styles.wrapper_title}>
-							<ImageIngredient
-								image={ingredient.image}
-								name={ingredient.name}
-							/>
-							<span className='text text_type_main-default'>
-								{ingredient.name}
-							</span>
-						</div>
-						<div className={styles.wrapper_price}>
-							<span className='text text_type_digits-default'>
-								1 х {ingredient.price}
-							</span>
-							<CurrencyIcon type='primary' />
-						</div>
-					</li>
+					<OrderDetailsItem ingredient={ingredient} key={ingredient._id} />
 				))}
 			</ul>
 
@@ -54,7 +38,7 @@ export const OrderDetailsCard = (): React.JSX.Element => {
 				<span className='text text_type_main-default text_color_inactive'>
 					<FormattedDate date={new Date(order!.createdAt)} />
 				</span>
-				<div className={styles.wrapper_price}>
+				<div className='wrapper_price'>
 					<span className='text text_type_digits-default'>{order!.price}</span>
 					<CurrencyIcon type='primary' />
 				</div>

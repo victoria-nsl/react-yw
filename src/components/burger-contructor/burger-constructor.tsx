@@ -40,7 +40,7 @@ export const BurgerConstructor = (): React.JSX.Element => {
 		<section className={`${styles.burger_constructor} pb-2`}>
 			<BurgerConstructorOrder />
 			<div className={`${styles.result} mt-10 mr-4`}>
-				<div className={`${styles.wrapper_price} pt-1 pb-1`}>
+				<div className={`${styles.price} wrapper_price pt-1 pb-1`}>
 					<span className='text text_type_digits-medium'>{totalPrice}</span>
 					<CurrencyIcon type='primary' />
 				</div>
