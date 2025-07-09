@@ -1,5 +1,6 @@
+import { useMemo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { TOrder, TStatusOrderKeys } from '@/utils/types';
-import { Link } from 'react-router-dom';
 import styles from './order-card.module.css';
 import {
 	CurrencyIcon,
@@ -12,11 +13,18 @@ import { getNameStatus } from '@/utils/helpers';
 type TOrderCardProps = { order: TOrder };
 
 export const OrderCard = ({ order }: TOrderCardProps): React.JSX.Element => {
-	const orderId = order['_id'];
+	const id = order['_id'];
+	const location = useLocation();
+
+	const url = useMemo(
+		() =>
+			location.pathname === '/feed' ? `/feed/${id}` : `/profile/orders/${id}`,
+		[location.pathname, id]
+	);
 
 	return (
 		<li>
-			<Link to={orderId} className={styles.link}>
+			<Link to={url} state={{ background: location }} className={styles.link}>
 				<div className={`${styles.wrapper_block} mb-6`}>
 					<span className='text text_type_digits-default'>#{order.number}</span>
 
@@ -25,11 +33,13 @@ export const OrderCard = ({ order }: TOrderCardProps): React.JSX.Element => {
 					</span>
 				</div>
 				<h2 className='text text_type_main-medium  mb-2'>{order.name}</h2>
-				<p
-					className={`${order.status === 'done' && 'order_done'} text text_type_main-small  mb-6`}>
-					{getNameStatus(order.status as TStatusOrderKeys)}
-				</p>
-				<div className={styles.wrapper_block}>
+				{location.pathname !== '/feed' && (
+					<p
+						className={`${order.status === 'done' && 'order_done'} text text_type_main-small  `}>
+						{getNameStatus(order.status as TStatusOrderKeys)}
+					</p>
+				)}
+				<div className={`${styles.wrapper_block} mt-6`}>
 					<ul className={styles.list_ingredients}>
 						{order.ingredients.length >= 5 && (
 							<li
@@ -56,7 +66,7 @@ export const OrderCard = ({ order }: TOrderCardProps): React.JSX.Element => {
 							))}
 					</ul>
 
-					<div className='wrapper_price'>
+					<div className='wrapper_price ml-6'>
 						<span className='text text_type_digits-default'>{order.price}</span>
 						<CurrencyIcon type='primary' />
 					</div>
