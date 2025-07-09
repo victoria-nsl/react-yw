@@ -16,17 +16,6 @@ body {
 	}
 }
 
-.order_done {
-	color: #00cccc;
-}
-
-.wrapper_price {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 8px;
-}
-
 /* For pages with forms */
 
 .wrapper_page_form {
@@ -61,4 +50,17 @@ body {
 
 .wrapper_page_form .link:hover {
 	opacity: 0.8;
+}
+
+/* Other */
+
+.order_done {
+	color: #00cccc;
+}
+
+.wrapper_price {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
 }
