@@ -1,4 +1,4 @@
-import { ActionCreator, combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 import { ingredientsReducer } from './ingredients/reducer';
 import { constructorIngredientsReducer } from './ingrediens-constructor/reducers';
 import { orderReducer } from './order/reducer';
@@ -23,10 +23,6 @@ export const rootReducer = combineReducers({
 
 export type TRootState = ReturnType<typeof rootReducer>;
 
-export const store = configureStore({ reducer: rootReducer });
-
-export const useSelector = selectorHook.withTypes<TRootState>();
-
 export type TAppActions =
 	| TAuthAction
 	| TIngredientsAction
@@ -35,10 +31,17 @@ export type TAppActions =
 
 export type TAppDispatch = ThunkDispatch<TRootState, unknown, TAppActions>;
 
+export type AppThunk<TReturn = void> = ThunkAction<
+	TReturn,
+	TRootState,
+	unknown,
+	TAppActions
+>;
+
+export const store = configureStore({ reducer: rootReducer });
+
+export const useSelector = selectorHook.withTypes<TRootState>();
+
 export const useDispatch = dispatchHook.withTypes<TAppDispatch>();
 
 export const createAppSelector = createSelector.withTypes<TRootState>();
-
-export type AppThunk<TReturn = void> = ActionCreator<
-	ThunkAction<TReturn, TRootState, unknown, TAppActions>
->;

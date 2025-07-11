@@ -1,6 +1,6 @@
 import { getIngredients } from '@/utils/api';
 import { TIngredient } from '@/utils/types';
-import { TAppDispatch } from '../store';
+import { AppThunk } from '../store';
 
 export const INGREDIENTS_LOAD_SUCCESS = 'INGREDIENTS_LOAD_SUCCESS' as const;
 export const INGREDIENTS_LOADING = 'INGREDIENTS_LOADING' as const;
@@ -25,7 +25,7 @@ export type TIngredientsAction =
 	| IErrorIngredientsAction
 	| ILoadingIngredientsAction;
 
-export const loadIngredients = () => (dispatch: TAppDispatch) => {
+export const loadIngredients = (): AppThunk => (dispatch) => {
 	dispatch({
 		type: INGREDIENTS_LOADING,
 	});

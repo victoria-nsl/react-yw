@@ -1,5 +1,5 @@
 import { addOrder } from '@/utils/api';
-import { TAppDispatch } from '../store';
+import { AppThunk } from '../store';
 
 export const ORDER_LOAD_SUCCESS = 'ORDER_LOAD_SUCCESS' as const;
 export const ORDER_LOADING = 'ORDER_LOADING' as const;
@@ -23,21 +23,23 @@ export type TOrdersAction =
 	| IErrorOrdersAction
 	| ILoadingOrdersAction;
 
-export const createOrder = (ids: string[]) => (dispatch: TAppDispatch) => {
-	dispatch({
-		type: ORDER_LOADING,
-	});
-	return addOrder(ids)
-		.then((res) => {
-			dispatch({
-				type: ORDER_LOAD_SUCCESS,
-				payload: res.order.number,
-			});
-		})
-		.catch((err) => {
-			dispatch({
-				type: ORDER_ERROR,
-				payload: err.message,
-			});
+export const createOrder =
+	(ids: string[]): AppThunk =>
+	(dispatch) => {
+		dispatch({
+			type: ORDER_LOADING,
 		});
-};
+		return addOrder(ids)
+			.then((res) => {
+				dispatch({
+					type: ORDER_LOAD_SUCCESS,
+					payload: res.order.number,
+				});
+			})
+			.catch((err) => {
+				dispatch({
+					type: ORDER_ERROR,
+					payload: err.message,
+				});
+			});
+	};
