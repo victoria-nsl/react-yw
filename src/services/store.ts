@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
+import { ActionCreator, combineReducers } from 'redux';
 import { ingredientsReducer } from './ingredients/reducer';
 import { constructorIngredientsReducer } from './ingrediens-constructor/reducers';
 import { orderReducer } from './order/reducer';
-import { configureStore, ThunkDispatch } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { authReducer } from './auth/reducers';
 import {
 	useDispatch as dispatchHook,
@@ -13,7 +13,6 @@ import { TIngredientsAction } from './ingredients/actions';
 import { TConstructorIngredientsAction } from './ingrediens-constructor/actions';
 import { TOrdersAction } from './order/actions';
 import { TAuthAction } from './auth/actions';
-import * as appApi from '../utils/api';
 
 export const rootReducer = combineReducers({
 	ingredients: ingredientsReducer,
@@ -34,12 +33,12 @@ export type TAppActions =
 	| TConstructorIngredientsAction
 	| TOrdersAction;
 
-export type TAppDispatch = ThunkDispatch<
-	TRootState,
-	{ appApi: typeof appApi },
-	TAppActions
->;
+export type TAppDispatch = ThunkDispatch<TRootState, unknown, TAppActions>;
 
 export const useDispatch = dispatchHook.withTypes<TAppDispatch>();
 
 export const createAppSelector = createSelector.withTypes<TRootState>();
+
+export type AppThunk<TReturn = void> = ActionCreator<
+	ThunkAction<TReturn, TRootState, unknown, TAppActions>
+>;
