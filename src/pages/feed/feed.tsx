@@ -1,18 +1,15 @@
-import { ordersDone, orders, ordersPending } from '@/utils/helpers';
 import styles from './feed.module.css';
-import { OrderCard } from '@/components/order-card/order-card';
+import { OrderFeed } from '@/components/order-feed/order-feed';
+//Временно. Здесь получаем список заказов и отфильтрованные списки заказов (можно сделать в селекторах)
+import { ordersDone, ordersPending } from '@/utils/helpers';
 
 export const Feed = (): React.JSX.Element => {
 	return (
 		<div className={styles.wrapper}>
 			<h1 className=' text text_type_main-large mb-5'>Лента заказов</h1>
 			<div className={styles.wrapper_blocks}>
-				<div className={`${styles.wrapper_cards} custom-scroll`}>
-					<ul className={styles.list}>
-						{orders.map((order) => (
-							<OrderCard key={order._id} order={order} />
-						))}
-					</ul>
+				<div className={`${styles.wrapper_order_feed} custom-scroll`}>
+					<OrderFeed />;
 				</div>
 				<div className={`${styles.wrapper_info} custom-scroll`}>
 					<div className={`${styles.wrapper_lists} mb-15`}>

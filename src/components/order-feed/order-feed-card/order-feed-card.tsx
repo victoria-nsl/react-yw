@@ -1,18 +1,20 @@
 import { useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { TOrder, TStatusOrderKeys } from '@/utils/types';
-import styles from './order-card.module.css';
+import styles from './order-feed-card.module.css';
 import {
 	CurrencyIcon,
 	FormattedDate,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ImageIngredient } from '../image-ingredient/image-ingredient';
+import { ImageIngredient } from '../../image-ingredient/image-ingredient';
 
 import { getNameStatus } from '@/utils/helpers';
 
 type TOrderCardProps = { order: TOrder };
 
-export const OrderCard = ({ order }: TOrderCardProps): React.JSX.Element => {
+export const OrderFeedCard = ({
+	order,
+}: TOrderCardProps): React.JSX.Element => {
 	const id = order['_id'];
 	const location = useLocation();
 

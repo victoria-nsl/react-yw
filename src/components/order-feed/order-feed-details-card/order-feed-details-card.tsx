@@ -1,4 +1,4 @@
-import styles from './order-details-card.module.css';
+import styles from './order-feed-details-card.module.css';
 import { getNameStatus, orders } from '@/utils/helpers';
 import { TStatusOrderKeys } from '@/utils/types';
 import {
@@ -6,9 +6,9 @@ import {
 	FormattedDate,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useParams } from 'react-router-dom';
-import { OrderDetailsItem } from './order-details-item/order-details-item';
+import { OrderFeedDetailsItem } from './order-feed-details-item/order-feed-details-item';
 
-export const OrderDetailsCard = (): React.JSX.Element => {
+export const OrderFeedDetailsCard = (): React.JSX.Element => {
 	//Временно, пока нет реальных данных
 	const { id } = useParams();
 	const order = orders.find((item) => item._id === id);
@@ -30,7 +30,7 @@ export const OrderDetailsCard = (): React.JSX.Element => {
 
 			<ul className={`${styles.list} custom-scroll`}>
 				{order!.ingredients.map((ingredient) => (
-					<OrderDetailsItem ingredient={ingredient} key={ingredient._id} />
+					<OrderFeedDetailsItem ingredient={ingredient} key={ingredient._id} />
 				))}
 			</ul>
 

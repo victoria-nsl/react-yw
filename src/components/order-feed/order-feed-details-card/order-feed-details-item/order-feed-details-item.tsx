@@ -1,11 +1,11 @@
-import styles from './order-details-item.module.css';
+import styles from './order-feed-details-item.module.css';
 import { ImageIngredient } from '@/components/image-ingredient/image-ingredient';
 import { TIngredient } from '@/utils/types';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 type TOrderDetailsItemProps = { ingredient: TIngredient };
 
-export const OrderDetailsItem = ({
+export const OrderFeedDetailsItem = ({
 	ingredient,
 }: TOrderDetailsItemProps): React.JSX.Element => {
 	return (

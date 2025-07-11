@@ -23,7 +23,7 @@ import { checkUserAuth } from '@/services/auth/actions';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route';
 import { ProfileOrderPage } from '@/pages/profile-order-page/profile-order-page';
 import { FeedOrderPage } from '@/pages/feed-order-page/feed-order-page';
-import { OrderDetailsCard } from '../order-details-card/order-details-card';
+import { OrderFeedDetailsCard } from '../order-feed/order-feed-details-card/order-feed-details-card';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
@@ -108,7 +108,7 @@ export const App = (): React.JSX.Element => {
 										path='/feed/:id'
 										element={
 											<Modal header='' onClose={handleModalClose}>
-												<OrderDetailsCard />
+												<OrderFeedDetailsCard />
 											</Modal>
 										}
 									/>
@@ -116,7 +116,7 @@ export const App = (): React.JSX.Element => {
 										path='/profile/orders/:id'
 										element={
 											<Modal header='' onClose={handleModalClose}>
-												<OrderDetailsCard />
+												<OrderFeedDetailsCard />
 											</Modal>
 										}
 									/>

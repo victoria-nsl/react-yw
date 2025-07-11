@@ -10,20 +10,11 @@
 	gap: 60px;
 }
 
-.wrapper_cards {
+.wrapper_order_feed {
+	width: 584px;
 	max-height: calc(100vh - 188px);
 	overflow-y: auto;
 	text-align: start;
-}
-
-.list {
-	display: flex;
-	flex-direction: column;
-	gap: 24px;
-	width: 584px;
-	margin: 0;
-	padding: 0;
-	list-style: none;
 }
 
 .wrapper_info {

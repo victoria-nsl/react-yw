@@ -1,14 +1,5 @@
 .wrapper {
+	width: 860px;
 	max-height: calc(100vh - 128px);
 	overflow-y: auto;
-}
-
-.list {
-	display: flex;
-	flex-direction: column;
-	gap: 24px;
-	width: 844px;
-	margin: 0;
-	padding: 0;
-	list-style: none;
 }

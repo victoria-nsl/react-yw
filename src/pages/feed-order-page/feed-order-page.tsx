@@ -1,9 +1,9 @@
-import { OrderDetailsCard } from '@/components/order-details-card/order-details-card';
+import { OrderFeedDetailsCard } from '@/components/order-feed/order-feed-details-card/order-feed-details-card';
 
 export const FeedOrderPage = (): React.JSX.Element => {
 	return (
 		<div className='mt-20'>
-			<OrderDetailsCard />
+			<OrderFeedDetailsCard />
 		</div>
 	);
 };
