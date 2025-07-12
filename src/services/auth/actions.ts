@@ -6,22 +6,26 @@ import {
 	updateUserApi,
 } from '@/utils/api';
 import { TEmailPasswordUser, TNameEmailUser, TUser } from '@/utils/types';
+import { AppThunk } from '../store';
 
-export const SET_USER = 'SET_USER';
-export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED';
+export const SET_USER = 'SET_USER' as const;
+export const SET_IS_AUTH_CHECKED = 'SET_IS_AUTH_CHECKED' as const;
 
-export type TAuthAction =
-	| {
-			type: 'SET_USER';
-			payload?: TNameEmailUser | null;
-	  }
-	| {
-			type: 'SET_IS_AUTH_CHECKED';
-			payload?: boolean;
-	  };
+export interface ISetUserAuthAction {
+	readonly type: typeof SET_USER;
+	readonly payload: TNameEmailUser | null;
+}
+
+export interface ISetIsAuthCheckedAuthAction {
+	readonly type: typeof SET_IS_AUTH_CHECKED;
+	readonly payload: boolean;
+}
+
+export type TAuthAction = ISetUserAuthAction | ISetIsAuthCheckedAuthAction;
 
 export const registerUser =
-	(form: TUser) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TUser): AppThunk =>
+	(dispatch) => {
 		return registerApi(form)
 			.then((res) => {
 				dispatch({
@@ -36,7 +40,8 @@ export const registerUser =
 	};
 
 export const loginUser =
-	(form: TEmailPasswordUser) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TEmailPasswordUser): AppThunk =>
+	(dispatch) => {
 		return loginApi(form)
 			.then((res) => {
 				dispatch({
@@ -51,7 +56,8 @@ export const loginUser =
 	};
 
 export const updateUser =
-	(form: TUser) => (dispatch: (arg0: TAuthAction) => void) => {
+	(form: TUser): AppThunk =>
+	(dispatch) => {
 		return updateUserApi(form)
 			.then((res) => {
 				dispatch({
@@ -65,7 +71,7 @@ export const updateUser =
 			});
 	};
 
-export const logoutUser = () => (dispatch: (arg0: TAuthAction) => void) => {
+export const logoutUser = (): AppThunk => (dispatch) => {
 	return logoutApi()
 		.then(() => {
 			dispatch({
@@ -78,7 +84,7 @@ export const logoutUser = () => (dispatch: (arg0: TAuthAction) => void) => {
 		});
 };
 
-export const checkUserAuth = () => (dispatch: (arg0: TAuthAction) => void) => {
+export const checkUserAuth = (): AppThunk => (dispatch) => {
 	if (!localStorage.getItem('accessToken')) {
 		dispatch({
 			type: SET_IS_AUTH_CHECKED,

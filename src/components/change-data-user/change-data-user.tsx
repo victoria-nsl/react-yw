@@ -13,7 +13,7 @@ import {
 	SyntheticEvent,
 } from 'react';
 import styles from './change-data-user.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '@/services/store';
 import { updateUser } from '@/services/auth/actions';
 import { getAuth } from '@/services/auth/selectors';
 import { TUser } from '@/utils/types';
@@ -38,7 +38,7 @@ export const ChangeDataUser = (): React.JSX.Element => {
 
 	const update = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
-		// @ts-expect-error "Ignor"
+
 		dispatch(updateUser(form));
 		setVisibleButtons(false);
 	};

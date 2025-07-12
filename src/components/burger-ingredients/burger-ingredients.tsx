@@ -3,9 +3,7 @@ import styles from './burger-ingredients.module.css';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerIngredientsCategory } from './burger-ingredients-category/burger-ingredients-category';
-
-import { useSelector } from 'react-redux';
-
+import { useSelector } from '@/services/store';
 import { getIngredientsByCategory } from '@/services/ingredients/selectors';
 import { TIngredientsCategoriesKeys } from '@/utils/types';
 

@@ -5,7 +5,7 @@ import {
 	PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '@/services/store';
 import { loginUser } from '@/services/auth/actions';
 import { TEmailPasswordUser } from '@/utils/types';
 
@@ -18,7 +18,6 @@ export const Login = (): React.JSX.Element => {
 
 	const login = (evt: FormEvent<HTMLFormElement>): void => {
 		evt.preventDefault();
-		// @ts-expect-error "Ignor"
 		dispatch(loginUser(form));
 
 		if (localStorage.getItem('resetPassword'))

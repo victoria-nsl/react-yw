@@ -3,7 +3,7 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import styles from './app.module.css';
 import { AppHeader } from '@components/app-header/app-header.tsx';
 import { Preloader } from '../preloader/preloader';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '@/services/store';
 import { loadIngredients } from '@/services/ingredients/actions';
 import { getAllIngredients } from '@/services/ingredients/selectors';
 import { Home } from '@/pages/home/home';
@@ -21,6 +21,9 @@ import { OrdersHistory } from '../orders-history/orders-history';
 import { Feed } from '@/pages/feed/feed';
 import { checkUserAuth } from '@/services/auth/actions';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route';
+import { ProfileOrderPage } from '@/pages/profile-order-page/profile-order-page';
+import { FeedOrderPage } from '@/pages/feed-order-page/feed-order-page';
+import { OrderFeedDetailsCard } from '../order-feed/order-feed-details-card/order-feed-details-card';
 
 export const App = (): React.JSX.Element => {
 	const { loading, error, items } = useSelector(getAllIngredients);
@@ -30,9 +33,7 @@ export const App = (): React.JSX.Element => {
 	const background = location.state && location.state.background;
 
 	useEffect(() => {
-		// @ts-expect-error "Ignor"
 		dispatch(checkUserAuth());
-		// @ts-expect-error "Ignor"
 		dispatch(loadIngredients());
 	}, [dispatch]);
 
@@ -44,7 +45,7 @@ export const App = (): React.JSX.Element => {
 		<div className={styles.app}>
 			<AppHeader />
 
-			<main className={`${styles.main} pt-10 pb-10 pl-5 pr-5`}>
+			<main className={`${styles.main} pt-10 pl-5 pr-5`}>
 				<div className={styles.inner_main}>
 					{loading && <Preloader />}
 					{error && (
@@ -78,7 +79,12 @@ export const App = (): React.JSX.Element => {
 									<Route index element={<ChangeDataUser />} />
 									<Route path='orders' element={<OrdersHistory />} />
 								</Route>
+								<Route
+									path='/profile/orders/:id'
+									element={<OnlyAuth component={<ProfileOrderPage />} />}
+								/>
 								<Route path='/feed' element={<Feed />} />
+								<Route path='/feed/:id' element={<FeedOrderPage />} />
 								<Route
 									path='/ingredients/:ingredientId'
 									element={<IngredientDetailsPage />}
@@ -95,6 +101,22 @@ export const App = (): React.JSX.Element => {
 												header='Детали ингредиента'
 												onClose={handleModalClose}>
 												<IngredientDetails />
+											</Modal>
+										}
+									/>
+									<Route
+										path='/feed/:id'
+										element={
+											<Modal header='' onClose={handleModalClose}>
+												<OrderFeedDetailsCard />
+											</Modal>
+										}
+									/>
+									<Route
+										path='/profile/orders/:id'
+										element={
+											<Modal header='' onClose={handleModalClose}>
+												<OrderFeedDetailsCard />
 											</Modal>
 										}
 									/>

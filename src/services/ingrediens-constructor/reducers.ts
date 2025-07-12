@@ -1,4 +1,7 @@
-import { TConstructorIngredient } from '@/utils/types';
+import {
+	TConstructorIngredient,
+	TIngredientsConstructorState,
+} from '@/utils/types';
 import {
 	ADD_CONSTRUCTOR_INGREDIENTS,
 	DELETE_CONSTRUCTOR_INGREDIENTS,
@@ -6,7 +9,7 @@ import {
 	TConstructorIngredientsAction,
 } from './actions';
 
-const initialState = {
+const initialState: TIngredientsConstructorState = {
 	bun: null,
 	itemsConstructor: [],
 };
@@ -14,7 +17,7 @@ const initialState = {
 export const constructorIngredientsReducer = (
 	state = initialState,
 	action: TConstructorIngredientsAction
-) => {
+): TIngredientsConstructorState => {
 	switch (action.type) {
 		case ADD_CONSTRUCTOR_INGREDIENTS:
 			return {

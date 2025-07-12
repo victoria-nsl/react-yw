@@ -1,3 +1,5 @@
 .wrapper {
-	text-align: start;
+	width: 860px;
+	max-height: calc(100vh - 128px);
+	overflow-y: auto;
 }

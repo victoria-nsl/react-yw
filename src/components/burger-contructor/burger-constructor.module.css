@@ -13,14 +13,7 @@
 	margin-left: auto;
 }
 
-.wrapper_price {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 8px;
-}
-
-.wrapper_price svg {
+.price svg {
 	width: 33px;
 	height: 33px;
 }

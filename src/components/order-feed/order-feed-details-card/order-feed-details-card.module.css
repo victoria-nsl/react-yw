@@ -1,0 +1,27 @@
+.wrapper {
+	width: 640px;
+	margin: 0 auto;
+	text-align: start;
+}
+
+.text_center {
+	text-align: center;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	height: calc(100vh - 615px);
+	min-height: 150px;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	list-style: none;
+}
+
+.wrapper_block {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}

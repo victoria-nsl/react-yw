@@ -1,0 +1,14 @@
+.item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 608px;
+}
+
+.wrapper_title {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 16px;
+	width: 320px;
+}

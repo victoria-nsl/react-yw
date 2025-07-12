@@ -1,3 +1,40 @@
 .wrapper {
+	width: 1240px;
+	margin: 0 auto;
 	text-align: start;
+}
+
+.wrapper_blocks {
+	display: grid;
+	grid-template-columns: 608px 1fr;
+	gap: 60px;
+}
+
+.wrapper_order_feed {
+	width: 584px;
+	max-height: calc(100vh - 188px);
+	overflow-y: auto;
+	text-align: start;
+}
+
+.wrapper_info {
+	max-height: calc(100vh - 188px);
+	overflow-y: auto;
+	text-align: start;
+}
+
+.wrapper_lists {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 36px;
+}
+
+.list_orders {
+	display: flex;
+	flex-flow: column wrap;
+	row-gap: 8px;
+	max-height: 220px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }

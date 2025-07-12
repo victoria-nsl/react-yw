@@ -7,7 +7,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderDetails } from './order-details/order-details';
 import { Modal } from '../modal/modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '@/services/store';
 import {
 	getIdsConstructorIngredients,
 	getTotalPrice,
@@ -31,7 +31,7 @@ export const BurgerConstructor = (): React.JSX.Element => {
 			navigate('/login');
 		}
 		if (!ids.length) return;
-		// @ts-expect-error "Ignor"
+
 		dispatch(createOrder(ids));
 		setVisible(true);
 	}, [ids, dispatch, user, navigate]);
@@ -40,7 +40,7 @@ export const BurgerConstructor = (): React.JSX.Element => {
 		<section className={`${styles.burger_constructor} pb-2`}>
 			<BurgerConstructorOrder />
 			<div className={`${styles.result} mt-10 mr-4`}>
-				<div className={`${styles.wrapper_price} pt-1 pb-1`}>
+				<div className={`${styles.price} wrapper_price pt-1 pb-1`}>
 					<span className='text text_type_digits-medium'>{totalPrice}</span>
 					<CurrencyIcon type='primary' />
 				</div>

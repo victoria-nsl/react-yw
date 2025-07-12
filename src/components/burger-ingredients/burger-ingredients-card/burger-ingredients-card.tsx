@@ -4,7 +4,7 @@ import {
 	Counter,
 	CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
+import { useSelector } from '@/services/store';
 import { getQuantityByIdIngredients } from '@/services/ingrediens-constructor/selectors';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
@@ -45,7 +45,7 @@ export const BurgerIngredientsCard = ({
 						src={ingredient.image}
 						alt={`${ingredient.name}.`}
 					/>
-					<div className={`${styles.wrapper_price} pt-1 pb-1`}>
+					<div className='wrapper_price pt-1 pb-1'>
 						<span className='text text_type_digits-default'>
 							{ingredient.price}
 						</span>

@@ -1,5 +1,5 @@
 import { useDrag, useDrop } from 'react-dnd';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '@/services/store';
 import { useCallback, useRef } from 'react';
 
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element';
