@@ -1,6 +1,6 @@
 import styles from './order-feed-details-card.module.css';
 import { getNameStatus } from '@/utils/helpers';
-import { TStatusOrderKeys } from '@/utils/types';
+import { TIngredient, TStatusOrderKeys } from '@/utils/types';
 import {
 	CurrencyIcon,
 	FormattedDate,
@@ -12,19 +12,17 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from '@/services/store';
 import { getOrderByNumber } from '@/services/order/actions';
 import { Preloader } from '@/components/preloader/preloader';
+import { getAllIngredients } from '@/services/ingredients/selectors';
 
 export const OrderFeedDetailsCard = (): React.JSX.Element => {
+	const dispatch = useDispatch();
 	const { id } = useParams();
 	const { order } = useSelector(getOrder);
-	const dispatch = useDispatch();
+	const allIngredients = useSelector(getAllIngredients);
 
 	useEffect(() => {
 		dispatch(getOrderByNumber(+id!));
 	}, []);
-
-	if (!order) {
-		return <Preloader />;
-	}
 
 	const getQuantityByIdIngredients = (ids: string[]) => {
 		const quantityByIdIngredients: {
@@ -46,6 +44,25 @@ export const OrderFeedDetailsCard = (): React.JSX.Element => {
 
 		return quantityByIdIngredients;
 	};
+
+	const getTotalPrice = (ids: string[]) => {
+		let totalPrice = 0;
+
+		totalPrice += ids.reduce((acc: number, id: string) => {
+			const price =
+				allIngredients.items.find(
+					(ingredient: TIngredient) => ingredient._id === id
+				)?.price || 0;
+
+			return price! + acc;
+		}, 0);
+
+		return totalPrice;
+	};
+
+	if (!order) {
+		return <Preloader />;
+	}
 
 	return (
 		<div className={styles.wrapper}>
@@ -78,7 +95,9 @@ export const OrderFeedDetailsCard = (): React.JSX.Element => {
 					<FormattedDate date={new Date(order!.createdAt)} />
 				</span>
 				<div className='wrapper_price'>
-					{/* <span className='text text_type_digits-default'>{order!.price}</span> */}
+					<span className='text text_type_digits-default'>
+						{getTotalPrice(order!.ingredients)}
+					</span>
 					<CurrencyIcon type='primary' />
 				</div>
 			</div>
