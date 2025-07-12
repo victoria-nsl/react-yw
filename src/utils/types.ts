@@ -28,7 +28,6 @@ export type TIngredientsCategoriesKeys = keyof typeof IngredientsCategories;
 export type TIngredientsCategoriesValues =
 	(typeof IngredientsCategories)[TIngredientsCategoriesKeys];
 
-// Временно, уточнить потом правильность
 const StatusOrder = {
 	created: 'Создан',
 	pending: 'Готовится',
@@ -40,28 +39,19 @@ export type TStatusOrderKeys = keyof typeof StatusOrder;
 export type TStatusOrderValues = (typeof StatusOrder)[TStatusOrderKeys];
 
 export type TOrder = {
-	createdAt: string;
-	number: number;
-	name: string;
-	_id: string;
-	price: number;
-	status: string;
-	ingredients: TIngredient[];
-};
-
-export type TOrderByNumber = {
 	_id: string;
 	ingredients: string[];
-	owner: string;
-	status: string;
 	name: string;
+	status: string;
+	number: number;
 	createdAt: string;
 	updatedAt: string;
-	number: number;
-	__v: number;
 };
 
-// -------------------
+export type TOrderByNumber = TOrder & {
+	owner: string;
+	__v: number;
+};
 
 export type TUser = {
 	name: string;

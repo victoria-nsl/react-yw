@@ -1,11 +1,13 @@
+import { TOrder } from '@/utils/types';
 import { OrderFeedCard } from './order-feed-card/order-feed-card';
 import styles from './order-feed.module.css';
-//Временно
-import { orders } from '@/utils/helpers';
 
-//сюда в пропсах передается массив заказов с ленты заказов
+type TOrderFeedProps = {
+	orders: TOrder[];
+};
 
-export const OrderFeed = (): React.JSX.Element => {
+export const OrderFeed = ({ orders }: TOrderFeedProps): React.JSX.Element => {
+	console.log(orders);
 	return (
 		<ul className={styles.list}>
 			{orders.map((order) => (
