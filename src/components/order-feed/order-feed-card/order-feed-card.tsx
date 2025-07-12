@@ -15,13 +15,15 @@ type TOrderCardProps = { order: TOrder };
 export const OrderFeedCard = ({
 	order,
 }: TOrderCardProps): React.JSX.Element => {
-	const id = order['_id'];
+	const numberOrder = order.number;
 	const location = useLocation();
 
 	const url = useMemo(
 		() =>
-			location.pathname === '/feed' ? `/feed/${id}` : `/profile/orders/${id}`,
-		[location.pathname, id]
+			location.pathname === '/feed'
+				? `/feed/${numberOrder}`
+				: `/profile/orders/${numberOrder}`,
+		[location.pathname, numberOrder]
 	);
 
 	return (

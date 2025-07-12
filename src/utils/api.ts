@@ -4,6 +4,7 @@ import {
 	TEmailPasswordUser,
 	TResetUser,
 	TEmailUser,
+	TOrderByNumber,
 } from './types';
 
 const BURGER_API_URL = 'https://norma.nomoreparties.space/api';
@@ -25,6 +26,11 @@ export type TOrderResponse = {
 		number: number;
 	};
 	name: string;
+};
+
+export type TOrderByNumberResponse = {
+	success: boolean;
+	orders: TOrderByNumber[];
 };
 
 export type TAuthResponse = {
@@ -60,7 +66,7 @@ export const getIngredients = (): Promise<TIngredient[]> => {
 		});
 };
 
-export const addOrder = async (ids: string[]): Promise<TOrderResponse> => {
+export const addOrderApi = async (ids: string[]): Promise<TOrderResponse> => {
 	const data = await fetchWithRefresh<TOrderResponse>(
 		`${BURGER_API_URL}/orders`,
 		{
@@ -77,6 +83,19 @@ export const addOrder = async (ids: string[]): Promise<TOrderResponse> => {
 
 	if (data?.success) return data;
 	return Promise.reject(data);
+};
+
+export const getOrderByNumberApi = (
+	numberOrder: number
+): Promise<TOrderByNumber[]> => {
+	return fetch(`${BURGER_API_URL}/orders/${numberOrder}`)
+		.then(checkResponse<TOrderByNumberResponse>)
+		.then((data) => {
+			if (data?.success) {
+				return data.orders;
+			}
+			return Promise.reject(data);
+		});
 };
 
 export const forgotPasswordApi = (

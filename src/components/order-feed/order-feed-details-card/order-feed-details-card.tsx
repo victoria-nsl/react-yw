@@ -1,5 +1,5 @@
 import styles from './order-feed-details-card.module.css';
-import { getNameStatus, orders } from '@/utils/helpers';
+import { getNameStatus } from '@/utils/helpers';
 import { TStatusOrderKeys } from '@/utils/types';
 import {
 	CurrencyIcon,
@@ -7,11 +7,45 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useParams } from 'react-router-dom';
 import { OrderFeedDetailsItem } from './order-feed-details-item/order-feed-details-item';
+import { getOrder } from '@/services/order/selectors';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from '@/services/store';
+import { getOrderByNumber } from '@/services/order/actions';
+import { Preloader } from '@/components/preloader/preloader';
 
 export const OrderFeedDetailsCard = (): React.JSX.Element => {
-	//Временно, пока нет реальных данных
 	const { id } = useParams();
-	const order = orders.find((item) => item._id === id);
+	const { order } = useSelector(getOrder);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getOrderByNumber(+id!));
+	}, []);
+
+	if (!order) {
+		return <Preloader />;
+	}
+
+	const getQuantityByIdIngredients = (ids: string[]) => {
+		const quantityByIdIngredients: {
+			ingredientId: string;
+			quantity: number;
+		}[] = [];
+
+		if (ids.length) {
+			ids.forEach((id) => {
+				if (quantityByIdIngredients.find((item) => item.ingredientId === id)) {
+					quantityByIdIngredients.find(
+						(item) => item.ingredientId === id
+					)!.quantity += 1;
+				} else {
+					quantityByIdIngredients.push({ ingredientId: id, quantity: 1 });
+				}
+			});
+		}
+
+		return quantityByIdIngredients;
+	};
 
 	return (
 		<div className={styles.wrapper}>
@@ -29,9 +63,14 @@ export const OrderFeedDetailsCard = (): React.JSX.Element => {
 			<h3 className='text text_type_main-medium  mb-6'>Состав: </h3>
 
 			<ul className={`${styles.list} custom-scroll`}>
-				{order!.ingredients.map((ingredient) => (
-					<OrderFeedDetailsItem ingredient={ingredient} key={ingredient._id} />
-				))}
+				{getQuantityByIdIngredients(order!.ingredients).map(
+					(quantityByIdIngredient, index) => (
+						<OrderFeedDetailsItem
+							quantityByIdIngredient={quantityByIdIngredient}
+							key={index}
+						/>
+					)
+				)}
 			</ul>
 
 			<div className={`${styles.wrapper_block} mt-10`}>
@@ -39,7 +78,7 @@ export const OrderFeedDetailsCard = (): React.JSX.Element => {
 					<FormattedDate date={new Date(order!.createdAt)} />
 				</span>
 				<div className='wrapper_price'>
-					<span className='text text_type_digits-default'>{order!.price}</span>
+					{/* <span className='text text_type_digits-default'>{order!.price}</span> */}
 					<CurrencyIcon type='primary' />
 				</div>
 			</div>

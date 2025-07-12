@@ -49,6 +49,18 @@ export type TOrder = {
 	ingredients: TIngredient[];
 };
 
+export type TOrderByNumber = {
+	_id: string;
+	ingredients: string[];
+	owner: string;
+	status: string;
+	name: string;
+	createdAt: string;
+	updatedAt: string;
+	number: number;
+	__v: number;
+};
+
 // -------------------
 
 export type TUser = {
@@ -93,4 +105,5 @@ export type TOrderState = {
 	loading: boolean;
 	error: string | null;
 	orderId: number | null;
+	order: TOrderByNumber | null;
 };

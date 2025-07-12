@@ -3,6 +3,7 @@ import {
 	ORDER_LOAD_SUCCESS,
 	ORDER_LOADING,
 	ORDER_ERROR,
+	ORDER_BY_NUMBER,
 	TOrdersAction,
 } from './actions';
 
@@ -10,6 +11,7 @@ const initialState: TOrderState = {
 	orderId: null,
 	loading: false,
 	error: null,
+	order: null,
 };
 
 export const orderReducer = (
@@ -34,6 +36,11 @@ export const orderReducer = (
 				...state,
 				orderId: action.payload!,
 				loading: false,
+			};
+		case ORDER_BY_NUMBER:
+			return {
+				...state,
+				order: action.payload!,
 			};
 		default:
 			return state;
