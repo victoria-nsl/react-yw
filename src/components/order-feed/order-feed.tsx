@@ -7,11 +7,10 @@ type TOrderFeedProps = {
 };
 
 export const OrderFeed = ({ orders }: TOrderFeedProps): React.JSX.Element => {
-	console.log(orders);
 	return (
 		<ul className={styles.list}>
 			{orders.map((order) => (
-				<OrderFeedCard key={order._id} order={order} />
+				<OrderFeedCard key={order.number} order={order} />
 			))}
 		</ul>
 	);

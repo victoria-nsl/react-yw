@@ -6,10 +6,10 @@ import {
 	CurrencyIcon,
 	FormattedDate,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-//import { ImageIngredient } from '../../image-ingredient/image-ingredient';
 import { getNameStatus } from '@/utils/helpers';
 import { useSelector } from '@/services/store';
 import { getAllIngredients } from '@/services/ingredients/selectors';
+import { OrderFeedItem } from './order-feed-item/order-feed-item';
 
 type TOrderCardProps = { order: TOrder };
 
@@ -19,6 +19,7 @@ export const OrderFeedCard = ({
 	const numberOrder = order.number;
 	const location = useLocation();
 	const allIngredients = useSelector(getAllIngredients);
+	const ingredientsWithImage = order.ingredients.slice(0, 6).reverse();
 
 	const url = useMemo(
 		() =>
@@ -62,29 +63,14 @@ export const OrderFeedCard = ({
 				)}
 				<div className={`${styles.wrapper_block} mt-6`}>
 					<ul className={styles.list_ingredients}>
-						{/* {order.ingredients.length >= 5 && (
-							<li
-								className={`${styles.item_ingredient} ${styles.item_ingredient_others}`}>
-								<ImageIngredient
-									image={order.ingredients[5].image}
-									name='Изображение шестого ингредиента бургера'
-								/>
-								<span className='text text_type_main-default'>
-									+{order.ingredients.length - 5}
-								</span>
-							</li>
-						)}
-						{order.ingredients
-							.slice(0, 5)
-							.reverse()
-							.map((ingredient) => (
-								<li className={styles.item_ingredient} key={ingredient._id}>
-									<ImageIngredient
-										image={ingredient.image}
-										name={ingredient.name}
-									/>
-								</li>
-							))} */}
+						{ingredientsWithImage.map((ingredient, index) => (
+							<OrderFeedItem
+								ingredientId={ingredient}
+								total={order.ingredients.length}
+								number={index}
+								key={index}
+							/>
+						))}
 					</ul>
 
 					<div className='wrapper_price ml-6'>
