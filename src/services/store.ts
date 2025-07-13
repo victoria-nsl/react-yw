@@ -13,11 +13,15 @@ import { TIngredientsAction } from './ingredients/actions';
 import { TConstructorIngredientsAction } from './ingrediens-constructor/actions';
 import { TOrdersAction } from './order/actions';
 import { TAuthAction } from './auth/actions';
+import { TOrderFeedAction } from './order-feed/actions';
+import { wsOrderFeedReducer } from './order-feed/reducers';
+import { orderFeedMiddleware } from './order-feed/middleware';
 
 export const rootReducer = combineReducers({
 	ingredients: ingredientsReducer,
 	constructorIngredients: constructorIngredientsReducer,
 	order: orderReducer,
+	wsOrderFeed: wsOrderFeedReducer,
 	auth: authReducer,
 });
 
@@ -27,7 +31,8 @@ export type TAppActions =
 	| TAuthAction
 	| TIngredientsAction
 	| TConstructorIngredientsAction
-	| TOrdersAction;
+	| TOrdersAction
+	| TOrderFeedAction;
 
 export type TAppDispatch = ThunkDispatch<TRootState, unknown, TAppActions>;
 
@@ -38,7 +43,11 @@ export type AppThunk<TReturn = void> = ThunkAction<
 	TAppActions
 >;
 
-export const store = configureStore({ reducer: rootReducer });
+export const store = configureStore({
+	reducer: rootReducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat(orderFeedMiddleware),
+});
 
 export const useSelector = selectorHook.withTypes<TRootState>();
 

@@ -1,21 +1,40 @@
+import {
+	wsConnectOrderFeed,
+	wsDisconnectOrderFeed,
+} from '@/services/order-feed/actions';
 import styles from './feed.module.css';
 import { OrderFeed } from '@/components/order-feed/order-feed';
+import { useDispatch, useSelector } from '@/services/store';
 
-import { ordersTest } from '@/utils/helpers';
+import { useEffect } from 'react';
+import { getOrderFeedInfo } from '@/services/order-feed/selectors';
+
+export const FEED_ORDER_SERVER_URL =
+	'wss://norma.nomoreparties.space/orders/all';
+
 export const Feed = (): React.JSX.Element => {
-	//Временно. Здесь получаем список заказов и отфильтрованные списки заказов (можно сделать в селекторах)
-	const orders = ordersTest;
-	const allorders = orders.orders;
-	const ordersDone = orders.orders
+	const ordersInfo = useSelector(getOrderFeedInfo);
+
+	const allorders = ordersInfo.orders;
+	const ordersDone = ordersInfo.orders
 		.filter((order) => order.status === 'done')
 		.map((order) => order.number)
 		.slice(0, 14);
-	const ordersPending = orders.orders
+	const ordersPending = ordersInfo.orders
 		.filter((order) => order.status === 'pending')
 		.map((order) => order.number)
 		.slice(0, 14);
-	const total = orders.total;
-	const totalToday = orders.totalToday;
+	const total = ordersInfo.total;
+	const totalToday = ordersInfo.totalToday;
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(wsConnectOrderFeed(FEED_ORDER_SERVER_URL));
+
+		return () => {
+			dispatch(wsDisconnectOrderFeed());
+		};
+	}, []);
 
 	return (
 		<div className={styles.wrapper}>

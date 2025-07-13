@@ -6,6 +6,12 @@ const IngredientsCategories = {
 	sauce: 'Соусы',
 } as const;
 
+export enum WebsocketStatus {
+	CONNECTING = 'CONNECTING...',
+	ONLINE = 'ONLINE',
+	OFFLINE = 'OFFLINE',
+}
+
 export type TIngredient = {
 	_id: string;
 	name: string;
@@ -39,8 +45,8 @@ export type TStatusOrderKeys = keyof typeof StatusOrder;
 export type TStatusOrderValues = (typeof StatusOrder)[TStatusOrderKeys];
 
 export type TOrder = {
-	_id: string;
 	ingredients: string[];
+	_id: string;
 	name: string;
 	status: string;
 	number: number;
@@ -51,6 +57,13 @@ export type TOrder = {
 export type TOrderByNumber = TOrder & {
 	owner: string;
 	__v: number;
+};
+
+export type TOrderFeedInfo = {
+	success: boolean;
+	orders: TOrder[];
+	total: number;
+	totalToday: number;
 };
 
 export type TUser = {
@@ -96,4 +109,10 @@ export type TOrderState = {
 	error: string | null;
 	orderId: number | null;
 	order: TOrderByNumber | null;
+};
+
+export type TWsOrderFeedState = {
+	status: WebsocketStatus;
+	messages: TOrderFeedInfo;
+	error: string | null;
 };
