@@ -55,6 +55,9 @@ export const createOrder =
 export const getOrderByNumber =
 	(numberOrder: number): AppThunk =>
 	(dispatch) => {
+		dispatch({
+			type: ORDER_LOADING,
+		});
 		return getOrderByNumberApi(numberOrder)
 			.then((res) => {
 				dispatch({

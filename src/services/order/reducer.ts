@@ -40,6 +40,7 @@ export const orderReducer = (
 		case ORDER_BY_NUMBER:
 			return {
 				...state,
+				loading: false,
 				order: action.payload!,
 			};
 		default:
