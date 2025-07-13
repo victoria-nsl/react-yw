@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import { getOrderFeedInfo } from '@/services/order-feed/selectors';
 
 export const FEED_ORDER_SERVER_URL =
-	'wss://norma.nomoreparties.space/orders/all';
+	'ws://norma.nomoreparties.space/orders/all';
 
 export const Feed = (): React.JSX.Element => {
 	const ordersInfo = useSelector(getOrderFeedInfo);
