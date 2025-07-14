@@ -1,11 +1,9 @@
-import { TOrderFeedInfo, TWsOrderFeedState } from '@/utils/types';
+import { TRootState } from '../store';
 
-export type TOrderFeedStore = {
-	wsOrderFeedMy: TWsOrderFeedState;
-};
+export const getOrderFeedMy = (state: TRootState) => state.wsOrderFeedMy;
 
-export const getOrderFeedMy = (state: TOrderFeedStore): TWsOrderFeedState =>
-	state.wsOrderFeedMy;
-
-export const getOrderFeedMyInfo = (state: TOrderFeedStore): TOrderFeedInfo =>
+export const getOrderFeedMyInfo = (state: TRootState) =>
 	state.wsOrderFeedMy.messages;
+
+export const getOrdersMy = (state: TRootState) =>
+	state.wsOrderFeedMy.messages.orders;

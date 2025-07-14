@@ -12,25 +12,23 @@ import { useDispatch, useSelector } from '@/services/store';
 import { getOrderByNumber } from '@/services/order/actions';
 import { Preloader } from '@/components/preloader/preloader';
 import { getAllIngredients } from '@/services/ingredients/selectors';
+import { getOrdersMy } from '@/services/order-feed-my/selectors';
+import { getOrders } from '@/services/order-feed/selectors';
+import { getOrder } from '@/services/order/selectors';
 
 export const OrderFeedDetailsCard = (): React.JSX.Element => {
 	const dispatch = useDispatch();
 	const allIngredients = useSelector(getAllIngredients);
 	const { id } = useParams();
 	const order = useSelector((state) => {
-		let order = state.wsOrderFeed.messages.orders.find(
-			(order) => order.number === +id!
-		);
+		let order = getOrders(state).find((order) => order.number === +id!);
 		if (order) return order;
 
-		order = state.wsOrderFeedMy.messages.orders.find(
-			(order) => order.number === +id!
-		);
+		order = getOrdersMy(state).find((order) => order.number === +id!);
 		if (order) return order;
 
-		return state.order.order && state.order.order.number === +id!
-			? state.order.order
-			: null;
+		order = getOrder(state)!;
+		return order && order.number === +id! ? order : null;
 	});
 
 	useEffect(() => {

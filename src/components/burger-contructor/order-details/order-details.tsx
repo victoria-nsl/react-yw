@@ -1,11 +1,11 @@
 import styles from './order-details.module.css';
 import iconDone from '../../../images/done.png';
 import { useSelector } from '@/services/store';
-import { getOrder } from '@/services/order/selectors';
+import { getOrderInfo } from '@/services/order/selectors';
 import { Preloader } from '@/components/preloader/preloader';
 
 export const OrderDetails = (): React.JSX.Element => {
-	const { loading, error, orderId } = useSelector(getOrder);
+	const { loading, error, orderId } = useSelector(getOrderInfo);
 
 	return (
 		<div className={`${styles.card} pb-20 pt-4`}>

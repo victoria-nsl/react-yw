@@ -1,7 +1,5 @@
-import { TOrderState } from '@/utils/types';
+import { TRootState } from '../store';
 
-export type TOrderStore = {
-	order: TOrderState;
-};
+export const getOrderInfo = (state: TRootState) => state.order;
 
-export const getOrder = (state: TOrderStore): TOrderState => state.order;
+export const getOrder = (state: TRootState) => state.order.order;

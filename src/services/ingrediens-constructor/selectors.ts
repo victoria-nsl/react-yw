@@ -1,24 +1,14 @@
-import {
-	TConstructorIngredient,
-	TIngredientsConstructorState,
-} from '@/utils/types';
-import { createAppSelector } from '../store';
+import { TConstructorIngredient } from '@/utils/types';
+import { createAppSelector, TRootState } from '../store';
 
-export type TConstructorIngredientsStore = {
-	constructorIngredients: TIngredientsConstructorState;
-};
+export const getAllConstructorIngredients = (state: TRootState) =>
+	state.constructorIngredients;
 
-export const getAllConstructorIngredients = (
-	state: TConstructorIngredientsStore
-): TIngredientsConstructorState => state.constructorIngredients;
+export const getBunConstructorIngredients = (state: TRootState) =>
+	state.constructorIngredients.bun;
 
-export const getBunConstructorIngredients = (
-	state: TConstructorIngredientsStore
-): TConstructorIngredient | null => state.constructorIngredients.bun;
-
-export const getItemsConstructorIngredients = (
-	state: TConstructorIngredientsStore
-): TConstructorIngredient[] => state.constructorIngredients.itemsConstructor;
+export const getItemsConstructorIngredients = (state: TRootState) =>
+	state.constructorIngredients.itemsConstructor;
 
 export const getIdsConstructorIngredients = createAppSelector(
 	[
@@ -32,9 +22,7 @@ export const getIdsConstructorIngredients = createAppSelector(
 		let ids: string[] = [];
 
 		if (itemsConstructor.length) {
-			const idsItems = itemsConstructor.map(
-				(item: TConstructorIngredient) => item._id
-			);
+			const idsItems = itemsConstructor.map((item) => item._id);
 
 			ids = [...idsItems];
 		}
@@ -60,12 +48,9 @@ export const getTotalPrice = createAppSelector(
 		let totalPrice = 0;
 
 		if (itemsConstructor.length) {
-			totalPrice += itemsConstructor.reduce(
-				(acc: number, item: TConstructorIngredient) => {
-					return item.price + acc;
-				},
-				0
-			);
+			totalPrice += itemsConstructor.reduce((acc, item) => {
+				return item.price + acc;
+			}, 0);
 		}
 
 		if (bun) {
@@ -89,7 +74,7 @@ export const getQuantityByIdIngredients = createAppSelector(
 
 		if (bun) quantityByIdIngredients[bun['_id']] = 2;
 		if (itemsConstructor.length) {
-			itemsConstructor.forEach((item: TConstructorIngredient) => {
+			itemsConstructor.forEach((item) => {
 				if (quantityByIdIngredients[item['_id']]) {
 					quantityByIdIngredients[item['_id']] =
 						quantityByIdIngredients[item['_id']] + 1;
