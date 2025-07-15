@@ -31,6 +31,7 @@ export const App = (): React.JSX.Element => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const background = location.state && location.state.background;
+	const numberOrder = location.state && location.state.numberOrder;
 
 	useEffect(() => {
 		dispatch(checkUserAuth());
@@ -107,7 +108,10 @@ export const App = (): React.JSX.Element => {
 									<Route
 										path='/feed/:id'
 										element={
-											<Modal header='' onClose={handleModalClose}>
+											<Modal
+												header={`#${numberOrder}`}
+												textType='text_type_main-medium'
+												onClose={handleModalClose}>
 												<OrderFeedDetailsCard />
 											</Modal>
 										}
@@ -115,7 +119,10 @@ export const App = (): React.JSX.Element => {
 									<Route
 										path='/profile/orders/:id'
 										element={
-											<Modal header='' onClose={handleModalClose}>
+											<Modal
+												header={`#${numberOrder}`}
+												textType='text_type_main-medium'
+												onClose={handleModalClose}>
 												<OrderFeedDetailsCard />
 											</Modal>
 										}

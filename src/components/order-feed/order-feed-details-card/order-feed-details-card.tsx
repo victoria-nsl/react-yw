@@ -76,11 +76,6 @@ export const OrderFeedDetailsCard = (): React.JSX.Element => {
 			{!order && <Preloader />}
 			{order && (
 				<>
-					<div
-						className={`${styles.text_center} text text_type_digits-default mb-10`}>
-						#{order!.number}
-					</div>
-
 					<h2 className='text text_type_main-medium  mb-2'>{order!.name}</h2>
 					<p
 						className={`${order!.status === 'done' && 'order_done'} text text_type_main-small  mb-15`}>

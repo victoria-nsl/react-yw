@@ -2,11 +2,8 @@
 	width: 640px;
 	min-height: 480px;
 	margin: 0 auto;
+	margin-top: 20px;
 	text-align: start;
-}
-
-.text_center {
-	text-align: center;
 }
 
 .list {

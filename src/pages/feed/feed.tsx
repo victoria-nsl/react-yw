@@ -41,7 +41,7 @@ export const Feed = (): React.JSX.Element => {
 			<h1 className=' text text_type_main-large mb-5'>Лента заказов</h1>
 			<div className={styles.wrapper_blocks}>
 				<div className={`${styles.wrapper_order_feed} custom-scroll`}>
-					<OrderFeed orders={allorders} />;
+					<OrderFeed orders={allorders} />
 				</div>
 				<div className={`${styles.wrapper_info} custom-scroll`}>
 					<div className={`${styles.wrapper_lists} mb-15`}>

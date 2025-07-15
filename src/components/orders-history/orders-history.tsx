@@ -31,7 +31,7 @@ export const OrdersHistory = (): React.JSX.Element => {
 
 	return (
 		<div className={`${styles.wrapper} custom-scroll`}>
-			<OrderFeed orders={allorders} />;
+			<OrderFeed orders={allorders} />
 		</div>
 	);
 };

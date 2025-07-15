@@ -46,7 +46,10 @@ export const OrderFeedCard = ({
 
 	return (
 		<li>
-			<Link to={url} state={{ background: location }} className={styles.link}>
+			<Link
+				to={url}
+				state={{ background: location, numberOrder }}
+				className={styles.link}>
 				<div className={`${styles.wrapper_block} mb-6`}>
 					<span className='text text_type_digits-default'>#{order.number}</span>
 
