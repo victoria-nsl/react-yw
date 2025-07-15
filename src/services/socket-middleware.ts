@@ -1,5 +1,6 @@
 import { Middleware } from '@reduxjs/toolkit';
 import { TRootState } from './store';
+import { refreshTokenApi } from '@/utils/api';
 
 export type TWsActions = {
 	connect: string;
@@ -15,7 +16,8 @@ export type TWsActions = {
 const RECONNECT_PERIOD = 3000;
 
 export const socketMiddleware = (
-	wsActions: TWsActions
+	wsActions: TWsActions,
+	withTokenRefresh: boolean
 ): Middleware<object, TRootState> => {
 	return (store) => {
 		let socket: WebSocket | null = null;
@@ -61,8 +63,38 @@ export const socketMiddleware = (
 
 				socket.onmessage = (event) => {
 					const { data } = event;
+
 					try {
 						const parsedData = JSON.parse(data);
+
+						if (
+							withTokenRefresh &&
+							parsedData.message === 'Invalid or missing token'
+						) {
+							refreshTokenApi()
+								.then((refreshedData) => {
+									const wssUrl = new URL(url);
+									wssUrl.searchParams.set(
+										'token',
+										refreshedData.accessToken.replace('Bearer ', '')
+									);
+									dispatch({
+										type: connect,
+										payload: wssUrl.toString(),
+									});
+								})
+								.catch((error) => {
+									dispatch({
+										type: onError,
+										payload: (error as Error).message,
+									});
+								});
+
+							dispatch({
+								type: disconnect,
+							});
+							return;
+						}
 
 						dispatch({ type: onMessage, payload: parsedData });
 					} catch (error) {
