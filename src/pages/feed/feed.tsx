@@ -7,15 +7,15 @@ import { OrderFeed } from '@/components/order-feed/order-feed';
 import { useDispatch, useSelector } from '@/services/store';
 
 import { useEffect } from 'react';
-import { getOrderFeedInfo } from '@/services/order-feed/selectors';
+import { getOrderFeedInfo, getOrders } from '@/services/order-feed/selectors';
 
 export const FEED_ORDER_SERVER_URL =
 	'ws://norma.nomoreparties.space/orders/all';
 
 export const Feed = (): React.JSX.Element => {
 	const ordersInfo = useSelector(getOrderFeedInfo);
+	const allorders = useSelector(getOrders);
 
-	const allorders = ordersInfo.orders;
 	const ordersDone = ordersInfo.orders
 		.filter((order) => order.status === 'done')
 		.map((order) => order.number)
