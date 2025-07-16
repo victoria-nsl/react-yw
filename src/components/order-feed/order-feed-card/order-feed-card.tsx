@@ -16,17 +16,20 @@ type TOrderCardProps = { order: TOrder };
 export const OrderFeedCard = ({
 	order,
 }: TOrderCardProps): React.JSX.Element => {
-	const numberOrder = order.number;
 	const location = useLocation();
 	const allIngredients = useSelector(getAllIngredients);
-	const ingredientsWithImage = order.ingredients.slice(0, 6).reverse();
+
+	const ingredientsWithImage = useMemo(
+		() => order.ingredients.slice(0, 6).reverse(),
+		[order.ingredients]
+	);
 
 	const url = useMemo(
 		() =>
 			location.pathname === '/feed'
-				? `/feed/${numberOrder}`
-				: `/profile/orders/${numberOrder}`,
-		[location.pathname, numberOrder]
+				? `/feed/${order.number}`
+				: `/profile/orders/${order.number}`,
+		[location.pathname, order.number]
 	);
 
 	const getTotalPrice = (ids: string[]) => {
@@ -48,7 +51,7 @@ export const OrderFeedCard = ({
 		<li>
 			<Link
 				to={url}
-				state={{ background: location, numberOrder }}
+				state={{ background: location, numberOrder: order.number }}
 				className={styles.link}>
 				<div className={`${styles.wrapper_block} mb-6`}>
 					<span className='text text_type_digits-default'>#{order.number}</span>

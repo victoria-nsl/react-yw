@@ -7,26 +7,21 @@ import { OrderFeed } from '@/components/order-feed/order-feed';
 import { useDispatch, useSelector } from '@/services/store';
 
 import { useEffect } from 'react';
-import { getOrderFeedInfo, getOrders } from '@/services/order-feed/selectors';
+import {
+	getNumdersOrdersByStatus,
+	getOrderFeedInfo,
+	getOrders,
+} from '@/services/order-feed/selectors';
 
 export const FEED_ORDER_SERVER_URL =
 	'ws://norma.nomoreparties.space/orders/all';
 
 export const Feed = (): React.JSX.Element => {
+	const dispatch = useDispatch();
 	const ordersInfo = useSelector(getOrderFeedInfo);
 	const allorders = useSelector(getOrders);
-
-	const ordersDone = ordersInfo.orders
-		.filter((order) => order.status === 'done')
-		.map((order) => order.number)
-		.slice(0, 14);
-	const ordersPending = ordersInfo.orders
-		.filter((order) => order.status === 'pending')
-		.map((order) => order.number)
-		.slice(0, 14);
-	const total = ordersInfo.total;
-	const totalToday = ordersInfo.totalToday;
-	const dispatch = useDispatch();
+	const ordersDone = useSelector(getNumdersOrdersByStatus('done'));
+	const ordersPending = useSelector(getNumdersOrdersByStatus('pending'));
 
 	useEffect(() => {
 		dispatch(wsConnectOrderFeed(FEED_ORDER_SERVER_URL));
@@ -72,10 +67,12 @@ export const Feed = (): React.JSX.Element => {
 					<h3 className='text text_type_main-medium'>
 						Выполнено за все время:
 					</h3>
-					<p className='text text_type_digits-large mb-15'>{total}</p>
+					<p className='text text_type_digits-large mb-15'>
+						{ordersInfo.total}
+					</p>
 
 					<h3 className='text text_type_main-medium'>Выполнено за сегодня:</h3>
-					<p className='text text_type_digits-large'>{totalToday}</p>
+					<p className='text text_type_digits-large'>{ordersInfo.totalToday}</p>
 				</div>
 			</div>
 		</div>

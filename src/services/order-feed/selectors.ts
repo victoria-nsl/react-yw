@@ -1,4 +1,4 @@
-import { TOrder } from '@/utils/types';
+import { TOrder, TStatusOrderKeys } from '@/utils/types';
 import { createAppSelector, TRootState } from '../store';
 
 export const getOrderFeed = (state: TRootState) => state.wsOrderFeed;
@@ -18,3 +18,11 @@ export const getOrders = createAppSelector(
 		);
 	}
 );
+
+export const getNumdersOrdersByStatus = (status: TStatusOrderKeys) =>
+	createAppSelector([(state) => getOrders(state)], (orders: TOrder[]) => {
+		return orders
+			.filter((order) => order.status === status)
+			.map((order) => order.number)
+			.slice(0, 14);
+	});

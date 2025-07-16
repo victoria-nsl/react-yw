@@ -59,14 +59,15 @@ export const OrderFeedDetailsCard = (): React.JSX.Element => {
 	const getTotalPrice = (ids: string[]) => {
 		let totalPrice = 0;
 
-		totalPrice += ids.reduce((acc: number, id: string) => {
-			const price =
-				allIngredients.items.find(
-					(ingredient: TIngredient) => ingredient._id === id
-				)?.price || 0;
+		if (ids.length)
+			totalPrice += ids.reduce((acc: number, id: string) => {
+				const price =
+					allIngredients.items.find(
+						(ingredient: TIngredient) => ingredient._id === id
+					)?.price || 0;
 
-			return price! + acc;
-		}, 0);
+				return price! + acc;
+			}, 0);
 
 		return totalPrice;
 	};

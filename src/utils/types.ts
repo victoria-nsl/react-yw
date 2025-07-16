@@ -6,6 +6,12 @@ const IngredientsCategories = {
 	sauce: 'Соусы',
 } as const;
 
+const StatusOrder = {
+	created: 'Создан',
+	pending: 'Готовится',
+	done: 'Выполнен',
+} as const;
+
 export enum WebsocketStatus {
 	CONNECTING = 'CONNECTING...',
 	ONLINE = 'ONLINE',
@@ -33,12 +39,6 @@ export type TIngredientsCategoriesKeys = keyof typeof IngredientsCategories;
 
 export type TIngredientsCategoriesValues =
 	(typeof IngredientsCategories)[TIngredientsCategoriesKeys];
-
-const StatusOrder = {
-	created: 'Создан',
-	pending: 'Готовится',
-	done: 'Выполнен',
-} as const;
 
 export type TStatusOrderKeys = keyof typeof StatusOrder;
 
