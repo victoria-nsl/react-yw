@@ -32,7 +32,7 @@ export const OrderFeedDetailsCard = (): React.JSX.Element => {
 	});
 
 	useEffect(() => {
-		dispatch(getOrderByNumber(+id!));
+		if (!order) dispatch(getOrderByNumber(+id!));
 	}, []);
 
 	const getQuantityByIdIngredients = (ids: string[]) => {
