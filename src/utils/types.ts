@@ -112,7 +112,6 @@ export type TOrderState = {
 };
 
 export type TWsOrderFeedState = {
-	status: WebsocketStatus;
 	messages: TOrderFeedInfo;
 	error: string | null;
 };

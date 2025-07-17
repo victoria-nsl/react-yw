@@ -1,4 +1,4 @@
-import { Middleware } from '@reduxjs/toolkit';
+import { isAction, Middleware } from '@reduxjs/toolkit';
 import { TRootState } from './store';
 import { refreshTokenApi } from '@/utils/api';
 
@@ -13,11 +13,18 @@ export type TWsActions = {
 	onMessage: string;
 };
 
+export type TWsSendAction =
+	| string
+	| SharedArrayBuffer
+	| ArrayBuffer
+	| Blob
+	| ArrayBufferView;
+
 const RECONNECT_PERIOD = 3000;
 
 export const socketMiddleware = (
 	wsActions: TWsActions,
-	withTokenRefresh: boolean
+	withTokenRefresh: boolean = false
 ): Middleware<object, TRootState> => {
 	return (store) => {
 		let socket: WebSocket | null = null;
@@ -37,9 +44,14 @@ export const socketMiddleware = (
 		let reconnectId = 0;
 
 		return (next) => (action) => {
+			if (!isAction(action)) {
+				return;
+			}
 			if (action.type === connect) {
-				socket = new WebSocket(action.payload);
-				url = action.payload;
+				socket = new WebSocket(
+					(action as { type: string; payload: string }).payload
+				);
+				url = (action as { type: string; payload: string }).payload;
 				isConnected = true;
 				onConnecting && dispatch({ type: onConnecting });
 
@@ -107,7 +119,16 @@ export const socketMiddleware = (
 
 			if (action.type === sendMessage && socket) {
 				try {
-					socket.send(JSON.stringify(action.payload));
+					socket.send(
+						JSON.stringify(
+							(
+								action as {
+									type: string;
+									payload: TWsSendAction;
+								}
+							).payload
+						)
+					);
 				} catch (error) {
 					dispatch({ type: onError, payload: (error as Error).message });
 				}
@@ -115,11 +136,11 @@ export const socketMiddleware = (
 				return;
 			}
 
-			if (action.type === disconnect) {
+			if (action.type === disconnect && socket) {
+				isConnected = false;
 				clearTimeout(reconnectId);
 				reconnectId = 0;
-				isConnected = false;
-				socket?.close();
+				socket.close();
 				socket = null;
 
 				return;

@@ -3,9 +3,6 @@ import { TOrderFeedInfo } from '@/utils/types';
 export const WS_ORDER_FEED_CONNECT = 'WS_ORDER_FEED_CONNECT';
 export const WS_ORDER_FEED_DISCONNECT = 'WS_ORDER_FEED_DISCONNECT';
 
-export const WS_ORDER_FEED_CONNECTING = 'WS_ORDER_FEED_CONNECTING';
-export const WS_ORDER_FEED_OPEN = 'WS_ORDER_FEED_OPEN';
-export const WS_ORDER_FEED_CLOSE = 'WS_ORDER_FEED_CLOSE';
 export const WS_ORDER_FEED_ERROR = 'WS_ORDER_FEED_ERROR';
 export const WS_ORDER_FEED_GET_MESSAGE = 'WS_ORDER_FEED_GET_MESSAGE';
 
@@ -16,18 +13,6 @@ export interface IConnectOrderFeedAction {
 
 export interface IDisconnectOrderFeedAction {
 	readonly type: typeof WS_ORDER_FEED_DISCONNECT;
-}
-
-export interface IConnectingOrderFeedAction {
-	readonly type: typeof WS_ORDER_FEED_CONNECTING;
-}
-
-export interface IOpenOrderFeedAction {
-	readonly type: typeof WS_ORDER_FEED_OPEN;
-}
-
-export interface ICloseOrderFeedAction {
-	readonly type: typeof WS_ORDER_FEED_CLOSE;
 }
 
 export interface IErrorOrderFeedAction {
@@ -43,9 +28,6 @@ export interface IGetMessageOrderFeedAction {
 export type TOrderFeedAction =
 	| IConnectOrderFeedAction
 	| IDisconnectOrderFeedAction
-	| IConnectingOrderFeedAction
-	| IOpenOrderFeedAction
-	| ICloseOrderFeedAction
 	| IErrorOrderFeedAction
 	| IGetMessageOrderFeedAction;
 

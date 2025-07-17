@@ -1,15 +1,11 @@
-import { TWsOrderFeedState, WebsocketStatus } from '@/utils/types';
+import { TWsOrderFeedState } from '@/utils/types';
 import {
-	WS_ORDER_FEED_MY_CONNECTING,
-	WS_ORDER_FEED_MY_OPEN,
-	WS_ORDER_FEED_MY_CLOSE,
 	WS_ORDER_FEED_MY_ERROR,
 	WS_ORDER_FEED_MY_GET_MESSAGE,
 	TOrderFeedMyAction,
 } from './actions';
 
 const initialState: TWsOrderFeedState = {
-	status: WebsocketStatus.OFFLINE,
 	messages: {
 		success: false,
 		orders: [],
@@ -24,27 +20,6 @@ export const wsOrderFeedMyReducer = (
 	action: TOrderFeedMyAction
 ): TWsOrderFeedState => {
 	switch (action.type) {
-		case WS_ORDER_FEED_MY_CONNECTING:
-			return {
-				...state,
-				error: null,
-				status: WebsocketStatus.CONNECTING,
-			};
-
-		case WS_ORDER_FEED_MY_OPEN:
-			return {
-				...state,
-				error: null,
-				status: WebsocketStatus.ONLINE,
-			};
-
-		case WS_ORDER_FEED_MY_CLOSE:
-			return {
-				...state,
-				error: null,
-				status: WebsocketStatus.OFFLINE,
-			};
-
 		case WS_ORDER_FEED_MY_ERROR:
 			return {
 				...state,
