@@ -16,5 +16,5 @@ export const getIngredientById = (id: string) =>
 	createAppSelector(
 		[(state) => state.ingredients.items],
 		(ingredients: TIngredient[]) =>
-			ingredients.find((ingredient) => ingredient._id === id)
+			ingredients.find((ingredient) => ingredient._id === id)!
 	);
