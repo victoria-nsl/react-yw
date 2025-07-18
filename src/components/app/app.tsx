@@ -50,9 +50,7 @@ export const App = (): React.JSX.Element => {
 				<div className={styles.inner_main}>
 					{loading && <Preloader />}
 					{error && (
-						<p className={`${styles.error} text text_type_main-medium`}>
-							Произошла ошибка
-						</p>
+						<p className='error text text_type_main-medium'>Произошла ошибка</p>
 					)}
 					{!loading && !error && items.length && (
 						<>

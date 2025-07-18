@@ -16,9 +16,7 @@ export const OrderDetails = (): React.JSX.Element => {
 				</>
 			)}
 			{error && (
-				<p className={`${styles.error} text text_type_main-medium`}>
-					Произошла ошибка
-				</p>
+				<p className='error text text_type_main-medium'>Произошла ошибка</p>
 			)}
 			{!loading && !error && orderId && (
 				<>
