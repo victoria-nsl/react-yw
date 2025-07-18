@@ -7,13 +7,17 @@ import {
 	wsConnectOrderFeedMy,
 	wsDisconnectOrderFeedMy,
 } from '@/services/order-feed-my/actions';
-import { getOrdersMy } from '@/services/order-feed-my/selectors';
+import {
+	getOrderFeedMy,
+	getOrdersMy,
+} from '@/services/order-feed-my/selectors';
 
 export const FEED_ORDER_MY_SERVER_URL =
 	'wss://norma.nomoreparties.space/orders';
 
 export const OrdersHistory = (): React.JSX.Element => {
 	const dispatch = useDispatch();
+	const { messages } = useSelector(getOrderFeedMy);
 	const allorders = useSelector(getOrdersMy);
 
 	useEffect(() => {
@@ -31,7 +35,7 @@ export const OrdersHistory = (): React.JSX.Element => {
 
 	return (
 		<div className={`${styles.wrapper} custom-scroll`}>
-			<OrderFeed orders={allorders} />
+			{messages.success && <OrderFeed orders={allorders} />}
 		</div>
 	);
 };
