@@ -11,6 +11,7 @@ import {
 	getOrderFeedMy,
 	getOrdersMy,
 } from '@/services/order-feed-my/selectors';
+import { Preloader } from '../preloader/preloader';
 
 export const FEED_ORDER_MY_SERVER_URL =
 	'wss://norma.nomoreparties.space/orders';
@@ -19,6 +20,7 @@ export const OrdersHistory = (): React.JSX.Element => {
 	const dispatch = useDispatch();
 	const { messages } = useSelector(getOrderFeedMy);
 	const allorders = useSelector(getOrdersMy);
+	const { error } = useSelector(getOrderFeedMy);
 
 	useEffect(() => {
 		const accessToken = localStorage
@@ -33,9 +35,13 @@ export const OrdersHistory = (): React.JSX.Element => {
 		};
 	}, []);
 
+	if (error || !messages.success) {
+		return <Preloader />;
+	}
+
 	return (
 		<div className={`${styles.wrapper} custom-scroll`}>
-			{messages.success && <OrderFeed orders={allorders} />}
+			<OrderFeed orders={allorders} />
 		</div>
 	);
 };
