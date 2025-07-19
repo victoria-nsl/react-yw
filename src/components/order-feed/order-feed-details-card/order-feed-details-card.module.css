@@ -1,0 +1,29 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 640px;
+	min-height: 550px;
+	margin: 0 auto;
+	margin-top: 20px;
+	text-align: start;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	height: 310px;
+	min-height: 150px;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	list-style: none;
+}
+
+.wrapper_block {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: auto;
+	padding-top: 40px;
+}

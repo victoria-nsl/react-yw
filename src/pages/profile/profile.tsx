@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import styles from './profile.module.css';
 import { logoutUser } from '@/services/auth/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '@/services/store';
 import { MouseEvent } from 'react';
 
 export const Profile = (): React.JSX.Element => {
@@ -10,14 +10,14 @@ export const Profile = (): React.JSX.Element => {
 
 	const logout = (evt: MouseEvent): void => {
 		evt.preventDefault();
-		// @ts-expect-error "Ignor"
+
 		dispatch(logoutUser());
 	};
 
 	return (
 		<div className={styles.wrapper}>
 			<div>
-				<div className={`${styles.menu} mb-20`}>
+				<div className={`${styles.menu} mb-20 mt-20`}>
 					<NavLink
 						to='/profile'
 						end

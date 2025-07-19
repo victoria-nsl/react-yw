@@ -11,12 +11,14 @@ type TModalProps = {
 	header: string;
 	children: ReactNode;
 	onClose: () => void;
+	textType?: string;
 };
 
 export const Modal = ({
 	header,
 	children,
 	onClose,
+	textType = 'text_type_main-large',
 }: TModalProps): React.JSX.Element => {
 	const closeModalEsc = (evt: KeyboardEvent): void => {
 		if (isEscEvent(evt)) {
@@ -37,7 +39,7 @@ export const Modal = ({
 		<div className={styles.modal}>
 			<div className={styles.modal_card}>
 				<div className={styles.modal_header}>
-					<p className='text text_type_main-large'>{header}</p>
+					<p className={`text ${textType}`}>{header}</p>
 					<button onClick={onClose}>
 						<CloseIcon type='primary' />
 					</button>

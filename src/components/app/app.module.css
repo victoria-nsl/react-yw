@@ -13,10 +13,5 @@
 }
 
 .inner_main {
-	height: 100%;
 	text-align: center;
-}
-
-.error {
-	color: #d02c20;
 }

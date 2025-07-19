@@ -6,6 +6,18 @@ const IngredientsCategories = {
 	sauce: 'Соусы',
 } as const;
 
+const StatusOrder = {
+	created: 'Создан',
+	pending: 'Готовится',
+	done: 'Выполнен',
+} as const;
+
+export enum WebsocketStatus {
+	CONNECTING = 'CONNECTING...',
+	ONLINE = 'ONLINE',
+	OFFLINE = 'OFFLINE',
+}
+
 export type TIngredient = {
 	_id: string;
 	name: string;
@@ -27,6 +39,32 @@ export type TIngredientsCategoriesKeys = keyof typeof IngredientsCategories;
 
 export type TIngredientsCategoriesValues =
 	(typeof IngredientsCategories)[TIngredientsCategoriesKeys];
+
+export type TStatusOrderKeys = keyof typeof StatusOrder;
+
+export type TStatusOrderValues = (typeof StatusOrder)[TStatusOrderKeys];
+
+export type TOrder = {
+	ingredients: string[];
+	_id: string;
+	name: string;
+	status: string;
+	number: number;
+	createdAt: string;
+	updatedAt: string;
+};
+
+export type TOrderByNumber = TOrder & {
+	owner: string;
+	__v: number;
+};
+
+export type TOrderFeedInfo = {
+	success: boolean;
+	orders: TOrder[];
+	total: number;
+	totalToday: number;
+};
 
 export type TUser = {
 	name: string;
@@ -50,32 +88,30 @@ export type DragCollectedProps = {
 	opacity: boolean;
 };
 
-export type TUserState = {
-	auth: {
-		user: TNameEmailUser;
-		isAuthChecked: boolean;
-	};
+export type TAuthState = {
+	user: TNameEmailUser | null;
+	isAuthChecked: boolean;
 };
 
 export type TIngredientsState = {
-	ingredients: {
-		loading: boolean;
-		error: boolean;
-		items: TIngredient[];
-	};
+	loading: boolean;
+	error: string | null;
+	items: TIngredient[];
 };
 
 export type TIngredientsConstructorState = {
-	constructorIngredients: {
-		bun: TConstructorIngredient;
-		itemsConstructor: TConstructorIngredient[];
-	};
+	bun: TConstructorIngredient | null;
+	itemsConstructor: TConstructorIngredient[];
 };
 
 export type TOrderState = {
-	order: {
-		loading: boolean;
-		error: boolean;
-		orderId: number;
-	};
+	loading: boolean;
+	error: string | null;
+	orderId: number | null;
+	order: TOrderByNumber | null;
+};
+
+export type TWsOrderFeedState = {
+	messages: TOrderFeedInfo;
+	error: string | null;
 };

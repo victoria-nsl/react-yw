@@ -1,11 +1,11 @@
 import styles from './order-details.module.css';
 import iconDone from '../../../images/done.png';
-import { useSelector } from 'react-redux';
-import { getOrder } from '@/services/order/selectors';
+import { useSelector } from '@/services/store';
+import { getOrderInfo } from '@/services/order/selectors';
 import { Preloader } from '@/components/preloader/preloader';
 
 export const OrderDetails = (): React.JSX.Element => {
-	const { loading, error, orderId } = useSelector(getOrder);
+	const { loading, error, orderId } = useSelector(getOrderInfo);
 
 	return (
 		<div className={`${styles.card} pb-20 pt-4`}>
@@ -16,9 +16,7 @@ export const OrderDetails = (): React.JSX.Element => {
 				</>
 			)}
 			{error && (
-				<p className={`${styles.error} text text_type_main-medium`}>
-					Произошла ошибка
-				</p>
+				<p className='error text text_type_main-medium'>Произошла ошибка</p>
 			)}
 			{!loading && !error && orderId && (
 				<>

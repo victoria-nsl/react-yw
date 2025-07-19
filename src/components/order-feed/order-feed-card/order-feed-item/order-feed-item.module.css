@@ -1,0 +1,14 @@
+.item_ingredient {
+	position: relative;
+}
+
+.item_ingredient:not(:last-child) {
+	margin-left: -16px;
+}
+
+.item_ingredient span {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

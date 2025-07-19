@@ -1,7 +1,7 @@
-import { TUserState } from '@/utils/types';
+import { TRootState } from '../store';
 
-export const getAuth = (state: TUserState) => state.auth;
+export const getAuth = (state: TRootState) => state.auth;
 
-export const getIsAuthChecked = (state: TUserState) => state.auth.isAuthChecked;
+export const getIsAuthChecked = (state: TRootState) => state.auth.isAuthChecked;
 
-export const getUser = (state: TUserState) => state.auth.user;
+export const getUser = (state: TRootState) => state.auth.user;

@@ -1,0 +1,25 @@
+.link {
+	display: block;
+	padding: 24px;
+	color: rgb(242 242 243 / 100%);
+	text-decoration: none;
+	background: #1c1c21;
+	border-radius: 40px;
+	box-shadow:
+		0 4px 8px rgb(0 0 0 / 4%),
+		0 0 2px rgb(0 0 0 / 6%),
+		0 0 1px rgb(0 0 0 / 4%);
+}
+
+.wrapper_block {
+	display: flex;
+	justify-content: space-between;
+}
+
+.list_ingredients {
+	display: inline-flex;
+	flex-direction: row-reverse;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
