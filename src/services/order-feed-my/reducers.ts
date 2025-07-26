@@ -5,7 +5,7 @@ import {
 	TOrderFeedMyAction,
 } from './actions';
 
-const initialState: TWsOrderFeedState = {
+export const initialState: TWsOrderFeedState = {
 	messages: {
 		success: false,
 		orders: [],

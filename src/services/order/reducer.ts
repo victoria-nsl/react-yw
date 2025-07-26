@@ -7,7 +7,7 @@ import {
 	TOrdersAction,
 } from './actions';
 
-const initialState: TOrderState = {
+export const initialState: TOrderState = {
 	orderId: null,
 	loading: false,
 	error: null,

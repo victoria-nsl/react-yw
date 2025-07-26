@@ -10,7 +10,7 @@ import {
 	DELETE_ALL_CONSTRUCTOR_INGREDIENTS,
 } from './actions';
 
-const initialState: TIngredientsConstructorState = {
+export const initialState: TIngredientsConstructorState = {
 	bun: null,
 	itemsConstructor: [],
 };
