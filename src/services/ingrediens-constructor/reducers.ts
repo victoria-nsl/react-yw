@@ -7,6 +7,7 @@ import {
 	DELETE_CONSTRUCTOR_INGREDIENTS,
 	UPDATE_CONSTRUCTOR_INGREDIENTS,
 	TConstructorIngredientsAction,
+	DELETE_ALL_CONSTRUCTOR_INGREDIENTS,
 } from './actions';
 
 const initialState: TIngredientsConstructorState = {
@@ -34,6 +35,12 @@ export const constructorIngredientsReducer = (
 				itemsConstructor: state.itemsConstructor.filter(
 					(item: TConstructorIngredient) => item.id !== action.payload.id
 				),
+			};
+		case DELETE_ALL_CONSTRUCTOR_INGREDIENTS:
+			return {
+				...state,
+				bun: null,
+				itemsConstructor: [],
 			};
 
 		case UPDATE_CONSTRUCTOR_INGREDIENTS:

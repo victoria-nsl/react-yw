@@ -67,21 +67,22 @@ export const getIngredients = (): Promise<TIngredient[]> => {
 };
 
 export const addOrderApi = async (ids: string[]): Promise<TOrderResponse> => {
-	const data = await fetchWithRefresh<TOrderResponse>(
-		`${BURGER_API_URL}/orders`,
-		{
+	const accessToken = localStorage.getItem('accessToken');
+
+	const data =
+		accessToken &&
+		(await fetchWithRefresh<TOrderResponse>(`${BURGER_API_URL}/orders`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8',
-				authorization: localStorage.getItem('accessToken')!,
+				authorization: accessToken,
 			},
 			body: JSON.stringify({
 				ingredients: ids,
 			}),
-		}
-	);
+		}));
 
-	if (data?.success) return data;
+	if (data && data.success) return data;
 	return Promise.reject(data);
 };
 

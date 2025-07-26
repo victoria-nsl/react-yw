@@ -4,6 +4,8 @@ export const ADD_CONSTRUCTOR_INGREDIENTS =
 	'ADD_CONSTRUCTOR_INGREDIENTS' as const;
 export const DELETE_CONSTRUCTOR_INGREDIENTS =
 	'DELETE_CONSTRUCTOR_INGREDIENTS' as const;
+export const DELETE_ALL_CONSTRUCTOR_INGREDIENTS =
+	'DELETE_ALL_CONSTRUCTOR_INGREDIENTS' as const;
 export const UPDATE_CONSTRUCTOR_INGREDIENTS =
 	'UPDATE_CONSTRUCTOR_INGREDIENTS' as const;
 
@@ -16,6 +18,10 @@ export interface IDeleteConstructorIngredientsAction {
 	readonly payload: TConstructorIngredient;
 }
 
+export interface IDeleteAllConstructorIngredientsAction {
+	readonly type: typeof DELETE_ALL_CONSTRUCTOR_INGREDIENTS;
+}
+
 export interface IUpdateConstructorIngredientsAction {
 	readonly type: typeof UPDATE_CONSTRUCTOR_INGREDIENTS;
 	readonly payload: TConstructorIngredient[];
@@ -24,6 +30,7 @@ export interface IUpdateConstructorIngredientsAction {
 export type TConstructorIngredientsAction =
 	| IAddConstructorIngredientsAction
 	| IDeleteConstructorIngredientsAction
+	| IDeleteAllConstructorIngredientsAction
 	| IUpdateConstructorIngredientsAction;
 
 export const addConstructorIngredient = (
