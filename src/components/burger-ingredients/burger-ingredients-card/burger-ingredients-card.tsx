@@ -43,6 +43,8 @@ export const BurgerIngredientsCard = ({
 				className={styles.link}>
 				<div className={`${styles.wrapper_image} pl-4 pr-4`}>
 					<img
+						width='239'
+						height='120'
 						ref={refIngredient}
 						src={ingredient.image}
 						alt={`${ingredient.name}.`}
