@@ -49,13 +49,13 @@ const ingredients = [
 ];
 
 describe('ingredients reducer', () => {
-	it('correct initialization', () => {
+	it('should return the initial state', () => {
 		const state = ingredientsReducer(undefined, { type: '' });
 
 		expect(state).toEqual(initialState);
 	});
 
-	it('loading ingredients', () => {
+	it('should handle INGREDIENTS_LOADING', () => {
 		const action = {
 			type: types.INGREDIENTS_LOADING,
 		};
@@ -65,7 +65,7 @@ describe('ingredients reducer', () => {
 		expect(state).toEqual({ ...initialState, loading: true });
 	});
 
-	it('error loading ingredients', () => {
+	it('should handle INGREDIENTS_ERROR', () => {
 		const prevState = { ...initialState, loading: true };
 
 		const action = {
@@ -82,7 +82,7 @@ describe('ingredients reducer', () => {
 		});
 	});
 
-	it('load success ingredients', () => {
+	it('should handle INGREDIENTS_LOAD_SUCCESS', () => {
 		const prevState = { ...initialState, loading: true };
 
 		const action = {

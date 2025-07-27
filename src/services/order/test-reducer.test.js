@@ -85,13 +85,13 @@ const orderByNumber = {
 };
 
 describe('order reducer', () => {
-	it('correct initialization', () => {
+	it('should return the initial state', () => {
 		const state = orderReducer(undefined, { type: '' });
 
 		expect(state).toEqual(initialState);
 	});
 
-	it('loading order', () => {
+	it('should handle ORDER_LOADING', () => {
 		const action = {
 			type: types.ORDER_LOADING,
 		};
@@ -101,7 +101,7 @@ describe('order reducer', () => {
 		expect(state).toEqual({ ...initialState, loading: true });
 	});
 
-	it('error loading order', () => {
+	it('should handle ORDER_ERROR', () => {
 		const prevState = { ...initialState, loading: true };
 
 		const action = {
@@ -118,7 +118,7 @@ describe('order reducer', () => {
 		});
 	});
 
-	it('load success order', () => {
+	it('should handle ORDER_LOAD_SUCCESS', () => {
 		const prevState = { ...initialState, loading: true };
 
 		const action = {
@@ -135,7 +135,7 @@ describe('order reducer', () => {
 		});
 	});
 
-	it('get order by number', () => {
+	it('should handle ORDER_BY_NUMBER', () => {
 		const prevState = { ...initialState, loading: true };
 
 		const action = {

@@ -15,13 +15,13 @@ const user = {
 };
 
 describe('auth reducer', () => {
-	it('correct initialization', () => {
+	it('should return the initial state', () => {
 		const state = authReducer(undefined, { type: '' });
 
 		expect(state).toEqual(initialState);
 	});
 
-	it('set user', () => {
+	it('should handle SET_USER', () => {
 		const action = {
 			type: types.SET_USER,
 			payload: user,
@@ -35,7 +35,7 @@ describe('auth reducer', () => {
 		});
 	});
 
-	it('check user auth', () => {
+	it('should handle SET_IS_AUTH_CHECKED', () => {
 		const action = {
 			type: types.SET_IS_AUTH_CHECKED,
 			payload: true,

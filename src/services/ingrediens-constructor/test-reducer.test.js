@@ -105,13 +105,13 @@ const ingredientsEnd = [
 ];
 
 describe('ingredients-constructor reducer', () => {
-	it('correct initialization', () => {
+	it('should return the initial state', () => {
 		const state = constructorIngredientsReducer(undefined, { type: '' });
 
 		expect(state).toEqual(initialState);
 	});
 
-	it('adding ingredient(bun) to the constructor', () => {
+	it('should handle ADD_CONSTRUCTOR_INGREDIENTS, add  bun', () => {
 		const action = {
 			type: types.ADD_CONSTRUCTOR_INGREDIENTS,
 			payload: ingredientBun,
@@ -125,7 +125,7 @@ describe('ingredients-constructor reducer', () => {
 		});
 	});
 
-	it('adding ingredient(not bun) to the constructor', () => {
+	it('should handle ADD_CONSTRUCTOR_INGREDIENTS, add not bun', () => {
 		const prevState = { ...initialState, bun: ingredientBun };
 
 		const action = {
@@ -142,7 +142,7 @@ describe('ingredients-constructor reducer', () => {
 		});
 	});
 
-	it('removing ingredient(bun) from constructor', () => {
+	it('should handle DELETE_CONSTRUCTOR_INGREDIENTS', () => {
 		const prevState = {
 			...initialState,
 			bun: ingredientBun,
@@ -163,7 +163,7 @@ describe('ingredients-constructor reducer', () => {
 		});
 	});
 
-	it('removing all ingredients from constructor', () => {
+	it('should handle DELETE_ALL_CONSTRUCTOR_INGREDIENTS', () => {
 		const prevState = {
 			...initialState,
 			bun: ingredientBun,
@@ -183,7 +183,7 @@ describe('ingredients-constructor reducer', () => {
 		});
 	});
 
-	it('changing the order of ingredients in the constructor', () => {
+	it('should handle UPDATE_CONSTRUCTOR_INGREDIENTS', () => {
 		const prevState = {
 			...initialState,
 			bun: ingredientBun,

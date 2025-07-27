@@ -40,13 +40,13 @@ const orderFeed = {
 };
 
 describe('order-feed reducer', () => {
-	it('correct initialization', () => {
+	it('should return the initial state', () => {
 		const state = wsOrderFeedReducer(undefined, { type: '' });
 
 		expect(state).toEqual(initialState);
 	});
 
-	it('error loading order feed', () => {
+	it('should handle WS_ORDER_FEED_ERROR', () => {
 		const action = {
 			type: types.WS_ORDER_FEED_ERROR,
 			payload: 'Server error',
@@ -60,7 +60,7 @@ describe('order-feed reducer', () => {
 		});
 	});
 
-	it('get order feed', () => {
+	it('should handle WS_ORDER_FEED_GET_MESSAGE', () => {
 		const action = {
 			type: types.WS_ORDER_FEED_GET_MESSAGE,
 			payload: orderFeed,
