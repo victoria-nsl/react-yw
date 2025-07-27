@@ -34,7 +34,9 @@ export const BurgerIngredientsCard = ({
 	});
 
 	return (
-		<li className={`${styles.card}  ${opacity && styles.opacity_view}`}>
+		<li
+			data-testid='drag_ingredient'
+			className={`${styles.card}  ${opacity && styles.opacity_view}`}>
 			<Link
 				to={`/ingredients/${ingredientId}`}
 				state={{ background: location }}

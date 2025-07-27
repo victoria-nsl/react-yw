@@ -42,9 +42,9 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 	);
 
 	return (
-		<div ref={dropTarget} className={styles.order}>
+		<div data-testid='drop_container' ref={dropTarget} className={styles.order}>
 			{bun && (
-				<div className='pr-2'>
+				<div data-testid='ingredient-constructor-bun-up' className='pr-2'>
 					<ConstructorElement
 						type='top'
 						isLocked={true}
@@ -57,7 +57,9 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 			{!bun && (
 				<div className={`${styles.empty} ${styles.top}`}>Выберите булку</div>
 			)}
-			<ul className={`${styles.list} custom-scroll`}>
+			<ul
+				data-testid='ingredients-constructor'
+				className={`${styles.list} custom-scroll`}>
 				{itemsConstructor.map((item, index) => (
 					<BurgerConstructorIngredientCard
 						key={item.id}
@@ -73,7 +75,7 @@ export const BurgerConstructorOrder = (): React.JSX.Element => {
 			</ul>
 
 			{bun && (
-				<div className='pr-2'>
+				<div className='pr-2' data-testid='ingredient-constructor-bun-down'>
 					<ConstructorElement
 						type='bottom'
 						isLocked={true}
