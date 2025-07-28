@@ -43,13 +43,11 @@ describe('drag and drop ingredients into the constructor', () => {
 		cy.get('@ingredientSauce').find('img').trigger('dragstart');
 		cy.get('@container').trigger('drop');
 
-		cy.get('@container')
-			.find('[data-testid=ingredients-constructor]')
+		cy.get('[data-testid=ingredients-constructor]')
 			.contains('Хрустящие минеральные кольца')
 			.should('exist');
 
-		cy.get('@container')
-			.find('[data-testid=ingredients-constructor]')
+		cy.get('[data-testid=ingredients-constructor]')
 			.contains('Соус традиционный галактический')
 			.should('exist');
 	});
@@ -66,10 +64,9 @@ describe('drag and drop ingredients into the constructor', () => {
 		cy.get('@ingredientСutlet').find('img').trigger('dragstart');
 		cy.get('@container').trigger('drop');
 
-		cy.get('@container')
-			.find('[data-testid=ingredients-constructor]')
-			.contains('Биокотлета из марсианской Магнолии')
-			.should('exist');
+		cy.get(
+			'[data-testid=ingredients-constructor] li:contains("Биокотлета из марсианской Магнолии")'
+		).should('length', 2);
 
 		cy.get('@ingredientСutlet')
 			.find('[class^=counter]')
