@@ -18,8 +18,8 @@ describe('opening/closing a modal window with a description of the ingredient', 
 		cy.get('[data-testid=modal]').as('modal');
 
 		cy.get('@modal').should('exist');
-		cy.get('@modal').contains('Детали ингредиента');
-		cy.get('@modal').contains('Хрустящие минеральные кольца');
+		cy.get('@modal').contains('Детали ингредиента').should('exist');
+		cy.get('@modal').contains('Хрустящие минеральные кольца').should('exist');
 	});
 
 	it('closing the modal window  by clicking on the cross', () => {

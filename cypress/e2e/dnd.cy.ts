@@ -19,11 +19,11 @@ describe('drag and drop ingredients into the constructor', () => {
 		cy.get('@bun').find('img').trigger('dragstart');
 		cy.get('@container').trigger('drop');
 
-		cy.get('@container')
-			.find('[data-testid=ingredient-constructor-bun-up]')
+		cy.get('[data-testid=ingredient-constructor-bun-up]')
+			.contains('Краторная булка N-200i')
 			.should('exist');
-		cy.get('@container')
-			.find('[data-testid=ingredient-constructor-bun-down]')
+		cy.get('[data-testid=ingredient-constructor-bun-down]')
+			.contains('Краторная булка N-200i')
 			.should('exist');
 	});
 
