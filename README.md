@@ -1,4 +1,4 @@
-Stellar Burger
+# Stellar Burger
 
 Учебный проект на React
 
