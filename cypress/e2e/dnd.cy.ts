@@ -17,7 +17,9 @@ describe('drag and drop ingredients into the constructor', () => {
 		cy.get('@container').contains('Краторная булка N-200i').should('not.exist');
 
 		cy.get('@bun').find('img').trigger('dragstart');
+		cy.wait(500);
 		cy.get('@container').trigger('drop');
+		cy.wait(500);
 
 		cy.get('[data-testid=ingredient-constructor-bun-up]')
 			.contains('Краторная булка N-200i')
@@ -34,14 +36,18 @@ describe('drag and drop ingredients into the constructor', () => {
 			.as('ingredientRings');
 
 		cy.get('@ingredientRings').find('img').trigger('dragstart');
+		cy.wait(500);
 		cy.get('@container').trigger('drop');
+		cy.wait(500);
 
 		cy.get('[data-testid=drag_ingredient]')
 			.contains('Соус традиционный галактический')
 			.as('ingredientSauce');
 
 		cy.get('@ingredientSauce').find('img').trigger('dragstart');
+		cy.wait(500);
 		cy.get('@container').trigger('drop');
+		cy.wait(500);
 
 		cy.get('[data-testid=ingredients-constructor]')
 			.contains('Хрустящие минеральные кольца')
@@ -59,10 +65,14 @@ describe('drag and drop ingredients into the constructor', () => {
 			.as('ingredientСutlet');
 
 		cy.get('@ingredientСutlet').find('img').trigger('dragstart');
+		cy.wait(500);
 		cy.get('@container').trigger('drop');
+		cy.wait(500);
 
 		cy.get('@ingredientСutlet').find('img').trigger('dragstart');
+		cy.wait(500);
 		cy.get('@container').trigger('drop');
+		cy.wait(500);
 
 		cy.get(
 			'[data-testid=ingredients-constructor] li:contains("Биокотлета из марсианской Магнолии")'

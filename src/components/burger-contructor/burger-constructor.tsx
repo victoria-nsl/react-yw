@@ -45,6 +45,7 @@ export const BurgerConstructor = (): React.JSX.Element => {
 					<CurrencyIcon type='primary' />
 				</div>
 				<Button
+					data-testid='button_order'
 					htmlType='button'
 					type='primary'
 					size='medium'
