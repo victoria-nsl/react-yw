@@ -20,6 +20,10 @@ describe('opening/closing a modal window with a description of the ingredient', 
 		cy.get('@modal').should('exist');
 		cy.get('@modal').contains('Детали ингредиента').should('exist');
 		cy.get('@modal').contains('Хрустящие минеральные кольца').should('exist');
+		cy.get('@modal').contains('808').should('exist');
+		cy.get('@modal').contains('689').should('exist');
+		cy.get('@modal').contains('609').should('exist');
+		cy.get('@modal').contains('986').should('exist');
 	});
 
 	it('closing the modal window  by clicking on the cross', () => {
