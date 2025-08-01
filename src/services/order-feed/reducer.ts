@@ -1,11 +1,11 @@
 import { TWsOrderFeedState } from '@/utils/types';
 import {
-	WS_ORDER_FEED_MY_ERROR,
-	WS_ORDER_FEED_MY_GET_MESSAGE,
-	TOrderFeedMyAction,
+	WS_ORDER_FEED_ERROR,
+	WS_ORDER_FEED_GET_MESSAGE,
+	TOrderFeedAction,
 } from './actions';
 
-const initialState: TWsOrderFeedState = {
+export const initialState: TWsOrderFeedState = {
 	messages: {
 		success: false,
 		orders: [],
@@ -15,18 +15,18 @@ const initialState: TWsOrderFeedState = {
 	error: null,
 };
 
-export const wsOrderFeedMyReducer = (
+export const wsOrderFeedReducer = (
 	state = initialState,
-	action: TOrderFeedMyAction
+	action: TOrderFeedAction
 ): TWsOrderFeedState => {
 	switch (action.type) {
-		case WS_ORDER_FEED_MY_ERROR:
+		case WS_ORDER_FEED_ERROR:
 			return {
 				...state,
 				error: action.payload,
 			};
 
-		case WS_ORDER_FEED_MY_GET_MESSAGE:
+		case WS_ORDER_FEED_GET_MESSAGE:
 			return {
 				...state,
 				error: null,

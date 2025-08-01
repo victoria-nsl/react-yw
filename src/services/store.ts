@@ -1,24 +1,25 @@
 import { combineReducers } from 'redux';
-import { ingredientsReducer } from './ingredients/reducer';
-import { constructorIngredientsReducer } from './ingrediens-constructor/reducers';
-import { orderReducer } from './order/reducer';
 import { configureStore, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { authReducer } from './auth/reducers';
 import {
 	useDispatch as dispatchHook,
 	useSelector as selectorHook,
 } from 'react-redux';
 import { createSelector } from 'reselect';
+
 import { TIngredientsAction } from './ingredients/actions';
 import { TConstructorIngredientsAction } from './ingrediens-constructor/actions';
 import { TOrdersAction } from './order/actions';
 import { TAuthAction } from './auth/actions';
-import { TOrderFeedAction } from './order-feed/actions';
-import { wsOrderFeedReducer } from './order-feed/reducers';
-import { orderFeedMiddleware } from './order-feed/middleware';
 import { TOrderFeedMyAction } from './order-feed-my/actions';
-import { wsOrderFeedMyReducer } from './order-feed-my/reducers';
+import { TOrderFeedAction } from './order-feed/actions';
+import { wsOrderFeedReducer } from './order-feed/reducer';
+import { ingredientsReducer } from './ingredients/reducer';
+import { orderReducer } from './order/reducer';
+import { wsOrderFeedMyReducer } from './order-feed-my/reducer';
+import { constructorIngredientsReducer } from './ingrediens-constructor/reducer';
+import { authReducer } from './auth/reducer';
 import { orderFeedMyMiddleware } from './order-feed-my/middleware';
+import { orderFeedMiddleware } from './order-feed/middleware';
 
 export const rootReducer = combineReducers({
 	ingredients: ingredientsReducer,

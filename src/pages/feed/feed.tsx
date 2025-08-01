@@ -16,7 +16,7 @@ import {
 import { Preloader } from '@/components/preloader/preloader';
 
 export const FEED_ORDER_SERVER_URL =
-	'ws://norma.nomoreparties.space/orders/all';
+	'wss://norma.nomoreparties.space/orders/all';
 
 export const Feed = (): React.JSX.Element => {
 	const dispatch = useDispatch();

@@ -8,6 +8,10 @@ export const ModalOverlay = ({
 	onClose,
 }: TModalOverlayProps): React.JSX.Element => {
 	return (
-		<div className={styles.overlay} onClick={onClose} aria-hidden='true'></div>
+		<div
+			data-testid='modal-overlay'
+			className={styles.overlay}
+			onClick={onClose}
+			aria-hidden='true'></div>
 	);
 };

@@ -36,7 +36,7 @@ export const Modal = ({
 	}, []);
 
 	return createPortal(
-		<div className={styles.modal}>
+		<div data-testid='modal' className={styles.modal}>
 			<div className={styles.modal_card}>
 				<div className={styles.modal_header}>
 					<p className={`text ${textType}`}>{header}</p>

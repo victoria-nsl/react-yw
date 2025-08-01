@@ -1,6 +1,7 @@
 import { addOrderApi, getOrderByNumberApi } from '@/utils/api';
 import { AppThunk } from '../store';
 import { TOrderByNumber } from '@/utils/types';
+import { DELETE_ALL_CONSTRUCTOR_INGREDIENTS } from '../ingrediens-constructor/actions';
 
 export const ORDER_LOAD_SUCCESS = 'ORDER_LOAD_SUCCESS' as const;
 export const ORDER_LOADING = 'ORDER_LOADING' as const;
@@ -42,6 +43,9 @@ export const createOrder =
 				dispatch({
 					type: ORDER_LOAD_SUCCESS,
 					payload: res.order.number,
+				});
+				dispatch({
+					type: DELETE_ALL_CONSTRUCTOR_INGREDIENTS,
 				});
 			})
 			.catch((err) => {

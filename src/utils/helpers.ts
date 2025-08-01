@@ -16,3 +16,8 @@ export const getNameStatus = (status: TStatusOrderKeys): TStatusOrderValues => {
 			return 'Выполнен';
 	}
 };
+
+export const dragIngredient = '[data-testid=drag_ingredient]';
+export const container = '[data-testid=drop_container]';
+export const ingredientsСonstructor = '[data-testid=ingredients-constructor]';
+export const modal = '[data-testid=modal]';
