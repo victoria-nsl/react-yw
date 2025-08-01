@@ -1,3 +1,10 @@
+import {
+	container,
+	ingredientsСonstructor,
+	modal,
+	dragIngredient,
+} from './../../src/utils/helpers';
+
 /// <reference types="cypress" />
 
 describe('make an order', () => {
@@ -14,29 +21,27 @@ describe('make an order', () => {
 			'refreshToken',
 			JSON.stringify('test-refreshToken')
 		);
-		cy.visit('http://localhost:5173/');
+		cy.visit('');
 	});
 
 	it('sending an order and receiving order information', () => {
-		cy.get('[data-testid=drag_ingredient]')
+		cy.get(dragIngredient)
 			.contains('Мясо бессмертных моллюсков Protostomia')
 			.find('img')
 			.trigger('dragstart');
 		cy.wait(500);
 
-		cy.get('[data-testid=drop_container]').trigger('drop');
+		cy.get(container).trigger('drop');
 		cy.wait(500);
 
-		cy.get('[data-testid=ingredients-constructor]')
+		cy.get(ingredientsСonstructor)
 			.contains('Мясо бессмертных моллюсков Protostomia')
 			.should('exist');
 
 		cy.get('[data-testid=button_order]').click();
 
-		cy.get('[data-testid=modal]').as('modal');
-
-		cy.get('@modal').should('exist');
-		cy.get('@modal').contains('85373').should('exist');
-		cy.get('@modal').contains('идентификатор заказа').should('exist');
+		cy.get(modal).should('exist');
+		cy.get(modal).contains('85373').should('exist');
+		cy.get(modal).contains('идентификатор заказа').should('exist');
 	});
 });
